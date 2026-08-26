@@ -200,7 +200,7 @@ button{transition:all .2s ease}
                         <i class="fas fa-exclamation-triangle w-5 text-center text-red-500"></i> <span class="text-left text-sm">PeG > PoG</span>
                     </button>
 
-                    <p class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-6">Sistem</p>
+                    <p id="label-setting" class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-6">Sistem</p>
                     <button onclick="navigate('setting')" id="nav-setting" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white rounded-xl font-semibold transition-all border border-transparent">
                         <i class="fas fa-cog w-5 text-center"></i> <span>Pengaturan</span>
                     </button>
@@ -416,6 +416,30 @@ button{transition:all .2s ease}
                                     <button onclick="showToast('Fitur Restore membutuhkan hak akses SuperAdmin.')" class="flex items-center gap-2 px-5 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-900/20 dark:hover:bg-red-900/40 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-lg font-medium shadow-sm"><i class="fas fa-sync-alt"></i> Restore Data</button>
                                 </div>
                             </div>
+                            <hr class="border-gray-200 dark:border-gray-700">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider mb-3">Manajemen Pengguna</h4>
+                                <div class="bg-gray-50 dark:bg-gray-800/50 p-5 rounded-xl border border-gray-200 dark:border-gray-700">
+                                    <form id="form-add-user" onsubmit="handleAddUser(event)" class="space-y-4">
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username Baru</label>
+                                                <input type="text" id="new-username" required autocomplete="off" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] focus:border-[#00A2B9] outline-none transition-all">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+                                                <input type="password" id="new-password" required autocomplete="new-password" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] focus:border-[#00A2B9] outline-none transition-all">
+                                            </div>
+                                        </div>
+                                        <button type="submit" id="btn-add-user" class="flex items-center justify-center gap-2 px-5 py-2.5 bg-[#00A2B9] hover:bg-[#007A8C] text-white rounded-lg font-medium shadow-sm transition-transform transform hover:-translate-y-0.5 active:translate-y-0 text-sm whitespace-nowrap">
+                                            <i class="fas fa-user-plus"></i> Tambah Pengguna
+                                        </button>
+                                    </form>
+                                    <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 text-xs rounded-lg border border-blue-200 dark:border-blue-800">
+                                        <i class="fas fa-info-circle mr-1"></i> <strong>Informasi Koneksi:</strong> Sesuai standar, form ini menggunakan enkripsi SHA-256 secara otomatis pada password sebelum dikirim ke database. Agar tersimpan secara real-time ke Google Sheets, baca instruksi implementasi Google Apps Script Web App.
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -454,7 +478,23 @@ button{transition:all .2s ease}
             if (sessionStorage.getItem('isLoggedIn') === 'true') {
                 document.getElementById('login-page').style.display = 'none';
                 document.getElementById('main-app').classList.remove('hidden');
+                applyRolePermissions();
                 loadAllData();
+            }
+        }
+
+        function applyRolePermissions() {
+            const currentUser = sessionStorage.getItem('username');
+            const navSetting = document.getElementById('nav-setting');
+            const labelSetting = document.getElementById('label-setting');
+            
+            // Hanya user dengan username 'admin' yang bisa melihat pengaturan
+            if (currentUser !== 'admin') {
+                if (navSetting) navSetting.style.display = 'none';
+                if (labelSetting) labelSetting.style.display = 'none';
+            } else {
+                if (navSetting) navSetting.style.display = 'flex';
+                if (labelSetting) labelSetting.style.display = 'block';
             }
         }
 
@@ -503,10 +543,12 @@ button{transition:all .2s ease}
 
                 if (isValid) {
                     sessionStorage.setItem('isLoggedIn', 'true');
+                    sessionStorage.setItem('username', user.toLowerCase());
                     document.getElementById('login-page').style.opacity = '0';
                     setTimeout(() => {
                         document.getElementById('login-page').style.display = 'none';
                         document.getElementById('main-app').classList.remove('hidden');
+                        applyRolePermissions();
                         loadAllData();
                     }, 300);
                 } else {
@@ -524,7 +566,62 @@ button{transition:all .2s ease}
 
         function handleLogout() {
             sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('username');
             location.reload();
+        }
+
+        async function handleAddUser(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-add-user');
+            const user = document.getElementById('new-username').value.trim();
+            const pass = document.getElementById('new-password').value;
+            
+            if(!user || !pass) return;
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+            btn.disabled = true;
+
+            try {
+                // 1. Enkripsi password menggunakan SHA-256 untuk keamanan data di Spreadsheet
+                const hashedPassword = await hashPassword(pass);
+                
+                // 2. Tentukan URL endpoint Web App Google Apps Script Anda di sini.
+                const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-u5r8TqJdtLBK4MXI0lZCUctfwI_-YmeOcaef4ccrUfBl1odDsvK2oXi-lPjNr-ZrBw/exec"; 
+                
+                if (APP_SCRIPT_URL && APP_SCRIPT_URL.trim() !== "") {
+                    const formData = new FormData();
+                    formData.append('username', user);
+                    formData.append('password', hashedPassword);
+                    
+                    await fetch(APP_SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData,
+                        mode: 'no-cors' // Mode no-cors dibutuhkan jika web app script tidak mengatur CORS headers
+                    });
+                    
+                    showToast('Data user berhasil dikirim ke Spreadsheet!');
+                    document.getElementById('form-add-user').reset();
+                } else {
+                    // Mode Simulasi jika URL belum dipasang
+                    setTimeout(() => {
+                        console.log(`[SIMULASI POST KE SHEETS]`);
+                        console.log(`Target Sheet ID: 1YIp30Qn6lugeDEDUvf3ZwPQTtVcYk7LJisUBfHtaFI8`);
+                        console.log(`Data Tersimpan -> Username: ${user}, Password (SHA-256): ${hashedPassword}`);
+                        
+                        showToast(`Simulasi Sukses! User baru disiapkan (Cek Console F12).`);
+                        document.getElementById('form-add-user').reset();
+                        btn.innerHTML = '<i class="fas fa-user-plus"></i> Tambah Pengguna';
+                        btn.disabled = false;
+                    }, 1000);
+                    return; // Keluar agar tombol tidak ke-reset dua kali
+                }
+            } catch (error) {
+                console.error("Error adding user:", error);
+                showToast('Terjadi kesalahan saat menyimpan data.');
+            }
+            
+            btn.innerHTML = '<i class="fas fa-user-plus"></i> Tambah Pengguna';
+            btn.disabled = false;
         }
 
         async function fetchSheetJSON(sheetName) {
@@ -2484,6 +2581,12 @@ button{transition:all .2s ease}
         }
 
         function navigate(pageId) {
+            // Blokir akses jika user bukan admin mencoba masuk ke pengaturan
+            if (pageId === 'setting' && sessionStorage.getItem('username') !== 'admin') {
+                showToast('Akses ditolak: Hanya Admin yang dapat mengakses Pengaturan.');
+                return;
+            }
+
             ['dashboard', 'mobility', 'ftk', 'kalijabat', 'kalijabata', 'kalijabatpu', 'kalijabatmdnpu', 'pegpog', 'setting'].forEach(id => {
                 const pageEl = document.getElementById(`page-${id}`);
                 const navEl = document.getElementById(`nav-${id}`);
