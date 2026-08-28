@@ -129,10 +129,11 @@
         <!-- Kerangka Flex Layout (Responsif & Rapi) -->
         <div class="flex h-screen bg-gray-50 dark:bg-pln-dark overflow-hidden w-full relative">
             
+            <!-- Mobile Overlay -->
             <div id="sidebar-overlay" class="fixed inset-0 bg-gray-900/50 dark:bg-black/60 z-30 hidden lg:hidden backdrop-blur-sm transition-opacity" onclick="toggleSidebar()"></div>
 
             <!-- Sidebar -->
-            <aside id="sidebar" class="w-72 bg-white dark:bg-pln-cardDark shadow-xl border-r border-gray-200 dark:border-gray-800 flex flex-col transition-transform duration-300 transform -translate-x-full lg:translate-x-0 absolute lg:relative z-40 h-full">
+            <aside id="sidebar" class="w-72 flex-shrink-0 bg-white dark:bg-pln-cardDark shadow-xl border-r border-gray-200 dark:border-gray-800 flex flex-col transition-transform duration-300 transform -translate-x-full lg:translate-x-0 absolute lg:relative z-40 h-full">
                 <!-- Brand Logo -->
                 <div class="h-20 flex flex-shrink-0 items-center justify-center border-b border-gray-100 dark:border-gray-800 bg-white/50 dark:bg-gray-800/20 backdrop-blur-sm">
                     <img src="https://lh3.googleusercontent.com/d/1cbMrh6uqQMaK8Xk7REsf9PRdN6qbmMQJ" alt="PLN Logo" class="h-10 mr-3 drop-shadow-sm">
@@ -191,7 +192,7 @@
             </aside>
 
             <!-- Main Content Area -->
-            <div class="flex-1 flex flex-col h-screen w-full relative">
+            <div class="flex-1 flex flex-col h-screen min-w-0 relative">
                 <!-- Top Header -->
                 <header class="h-20 bg-white/90 dark:bg-pln-cardDark/90 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-800 flex flex-shrink-0 items-center justify-between px-4 sm:px-6 lg:px-8 z-20">
                     <div class="flex items-center gap-3">
