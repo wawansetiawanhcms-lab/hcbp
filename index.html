@@ -30,6 +30,7 @@
     </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
@@ -51,7 +52,7 @@
 
     <style id="pln-modern-theme">
         :root{--pln-blue:#005BAC;--pln-blue2:#0072CE;--pln-green:#00A651;--pln-teal:#00A8A8;--pln-cyan:#00B8D9;--ink:#16324F;--muted:#64748B;--bg:#F4F8FC;--card:#FFFFFF;--line:#E2EAF2}
-        body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#f7fbff 0%,#eef6fb 100%)!important;color:var(--ink)!important}
+        body{background:linear-gradient(135deg,#f7fbff 0%,#eef6fb 100%)!important;color:var(--ink)!important}
         #login-page{background:radial-gradient(circle at 15% 20%,rgba(0,166,81,.12),transparent 32%),linear-gradient(135deg,#f8fcff,#edf7f8)!important}
         #login-page>div{border:1px solid rgba(0,91,172,.12)!important;border-radius:24px!important;box-shadow:0 24px 60px rgba(0,67,105,.14)!important}
         #login-page h2{color:var(--pln-blue)!important;letter-spacing:-.02em}
@@ -69,13 +70,17 @@
         #page-title{color:var(--pln-blue)!important;font-weight:750!important}
         #theme-toggle{border:1px solid var(--line)!important;background:#f6f9fc!important}
         #main-app .flex-1.overflow-y-auto{background:linear-gradient(180deg,#f7fbff,#f2f7fa)!important;padding:26px!important}
-        #page-dashboard>div>div,#page-dashboard>div>div>div,#page-dashboard .bg-white,#page-mobility .bg-white,#page-ftk .bg-white,#page-setting .bg-white{border:1px solid rgba(20,76,110,.09)!important;border-radius:16px!important;box-shadow:0 8px 24px rgba(35,75,100,.055)!important}
-        #page-dashboard .bg-white:hover,#page-mobility .bg-white:hover,#page-ftk .bg-white:hover{box-shadow:0 12px 30px rgba(35,75,100,.09)!important;transform:translateY(-1px);transition:.2s ease}
-        #page-dashboard h3,#page-mobility h3,#page-ftk h3,#page-setting h3{color:var(--ink)!important}
-        #page-dashboard .text-2xl.font-bold{color:var(--pln-blue)!important}
-        #page-dashboard .w-12.h-12{border-radius:12px!important}
+        
+        /* CSS Untuk Box & Efek Hover */
+        #page-dashboard>div>div,#page-dashboard>div>div>div,#page-dashboard .bg-white,
+        #page-mobility .bg-white,#page-ftk .bg-white,#page-setting .bg-white,
+        #page-fnp .bg-white, #page-kalijabat .bg-white, #page-kalijabata .bg-white,
+        #page-kalijabatpu .bg-white, #page-kalijabatmdnpu .bg-white, #page-pegpog .bg-white {
+            border:1px solid rgba(20,76,110,.09)!important;border-radius:16px!important;box-shadow:0 8px 24px rgba(35,75,100,.055)!important
+        }
+        
         table thead{background:linear-gradient(90deg,var(--pln-blue),#0074C8)!important;color:#fff!important}
-        table thead th{color:#fff!important;border-color:rgba(255,255,255,.18)!important;font-size:11px!important;letter-spacing:.06em!important; font-weight: bold!important;}
+        table thead th{color:#fff!important;border-color:rgba(255,255,255,.18)!important;font-size:11px!important;letter-spacing:.06em!important; background-color: transparent !important;} /* Force transparent bg to fix readability */
         table tbody tr:hover{background:rgba(0,91,172,.045)!important}
         button{transition:all .2s ease}
         .bg-green-600{background:linear-gradient(90deg,#008F45,var(--pln-green))!important}
@@ -98,151 +103,166 @@
             <form id="login-form" onsubmit="handleLogin(event)" class="space-y-5">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
-                    <input type="text" id="login-username" required autocomplete="username" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] outline-none">
+                    <input type="text" id="login-username" required autocomplete="username" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] focus:border-[#00A2B9] outline-none transition-all">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
-                    <input type="password" id="login-password" required autocomplete="current-password" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] outline-none">
+                    <input type="password" id="login-password" required autocomplete="current-password" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] focus:border-[#00A2B9] outline-none transition-all">
                 </div>
-                <button type="submit" id="btn-login" class="w-full bg-[#00A2B9] text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-transform transform hover:-translate-y-0.5 flex justify-center items-center gap-2">
-                    <i class="fas fa-sign-in-alt"></i> <span>Login</span>
+                <button type="submit" id="btn-login" class="w-full bg-[#00A2B9] hover:bg-[#007A8C] text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-transform transform hover:-translate-y-0.5 active:translate-y-0 flex justify-center items-center gap-2">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
                 </button>
             </form>
         </div>
     </div>
 
     <div id="main-app" class="hidden">
+        
+        <!-- Loader Screen -->
         <div id="loader" class="fixed inset-0 z-[120] flex flex-col items-center justify-center bg-white dark:bg-pln-dark">
             <img src="https://lh3.googleusercontent.com/d/1cbMrh6uqQMaK8Xk7REsf9PRdN6qbmMQJ" alt="PLN Logo" class="h-20 mb-6 animate-pulse">
             <div class="w-16 h-16 border-4 border-gray-200 border-t-pln-cyan rounded-full animate-spin"></div>
             <p class="mt-4 text-lg font-medium text-pln-green">Mensinkronisasi Data Human Capital...</p>
         </div>
 
+        <!-- Kerangka Flex Layout (Responsif & Rapi) -->
         <div class="flex h-screen bg-gray-50 dark:bg-pln-dark overflow-hidden w-full relative">
+            
             <div id="sidebar-overlay" class="fixed inset-0 bg-gray-900/50 dark:bg-black/60 z-30 hidden lg:hidden backdrop-blur-sm transition-opacity" onclick="toggleSidebar()"></div>
 
-            <aside id="sidebar" class="w-72 bg-white dark:bg-pln-cardDark shadow-xl border-r border-gray-200 flex flex-col transition-transform duration-300 transform -translate-x-full lg:translate-x-0 absolute lg:relative z-40 h-full">
-                <div class="h-20 flex items-center justify-center border-b border-gray-100 bg-white/50">
+            <!-- Sidebar -->
+            <aside id="sidebar" class="w-72 bg-white dark:bg-pln-cardDark shadow-xl border-r border-gray-200 dark:border-gray-800 flex flex-col transition-transform duration-300 transform -translate-x-full lg:translate-x-0 absolute lg:relative z-40 h-full">
+                <!-- Brand Logo -->
+                <div class="h-20 flex flex-shrink-0 items-center justify-center border-b border-gray-100 dark:border-gray-800 bg-white/50 dark:bg-gray-800/20 backdrop-blur-sm">
                     <img src="https://lh3.googleusercontent.com/d/1cbMrh6uqQMaK8Xk7REsf9PRdN6qbmMQJ" alt="PLN Logo" class="h-10 mr-3 drop-shadow-sm">
                     <div>
-                        <h1 class="text-xl font-extrabold text-pln-green tracking-tight">MHC</h1>
-                        <p class="text-xs text-gray-500 font-semibold tracking-wider">HUMAN CAPITAL</p>
+                        <h1 class="text-xl font-extrabold text-pln-green dark:text-pln-cyan tracking-tight">MHC</h1>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-semibold tracking-wider">HUMAN CAPITAL</p>
                     </div>
                 </div>
                 
+                <!-- Navigation Menu -->
                 <nav class="flex-1 overflow-y-auto px-4 py-6 space-y-1 custom-scrollbar">
                     <p class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-4 first:mt-0">Monitoring Utama</p>
-                    <button onclick="navigate('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-3 bg-pln-green/10 text-pln-darkGreen rounded-xl font-bold transition-all">
+                    <button onclick="navigate('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-3 bg-pln-green/10 text-pln-darkGreen dark:bg-pln-green/20 dark:text-pln-cyan rounded-xl font-bold transition-all border border-transparent">
                         <i class="fas fa-chart-pie w-5 text-center"></i> <span>Dashboard</span>
                     </button>
-                    <button onclick="navigate('mobility')" id="nav-mobility" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-semibold transition-all">
+                    <button onclick="navigate('mobility')" id="nav-mobility" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white rounded-xl font-semibold transition-all border border-transparent">
                         <i class="fas fa-people-arrows w-5 text-center"></i> <span>Monev Mobility</span>
                     </button>
-                    <button onclick="navigate('ftk')" id="nav-ftk" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-semibold transition-all">
+                    <button onclick="navigate('ftk')" id="nav-ftk" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white rounded-xl font-semibold transition-all border border-transparent">
                         <i class="fas fa-chart-bar w-5 text-center"></i> <span>Monev FTK</span>
+                    </button>
+                    <button onclick="navigate('fnp')" id="nav-fnp" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white rounded-xl font-semibold transition-all border border-transparent">
+                        <i class="fas fa-balance-scale w-5 text-center"></i> <span>Monev FnP</span>
                     </button>
 
                     <p class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-6">Analisa Jabatan</p>
-                    <button onclick="navigate('kalijabat')" id="nav-kalijabat" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-semibold transition-all">
+                    <button onclick="navigate('kalijabat')" id="nav-kalijabat" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white rounded-xl font-semibold transition-all border border-transparent">
                         <i class="fas fa-layer-group w-5 text-center"></i> <span class="text-left text-sm">Kali Jabat SPVD</span>
                     </button>
-                    <button onclick="navigate('kalijabata')" id="nav-kalijabata" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-semibold transition-all">
+                    <button onclick="navigate('kalijabata')" id="nav-kalijabata" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white rounded-xl font-semibold transition-all border border-transparent">
                         <i class="fas fa-sitemap w-5 text-center"></i> <span class="text-left text-sm">Kali Jabat SPVA NPU</span>
                     </button>
-                    <button onclick="navigate('kalijabatpu')" id="nav-kalijabatpu" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-semibold transition-all">
+                    <button onclick="navigate('kalijabatpu')" id="nav-kalijabatpu" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white rounded-xl font-semibold transition-all border border-transparent">
                         <i class="fas fa-network-wired w-5 text-center"></i> <span class="text-left text-sm">Kali Jabat SPVA PU</span>
                     </button>
-                    <button onclick="navigate('kalijabatmdnpu')" id="nav-kalijabatmdnpu" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-semibold transition-all">
+                    <button onclick="navigate('kalijabatmdnpu')" id="nav-kalijabatmdnpu" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white rounded-xl font-semibold transition-all border border-transparent">
                         <i class="fas fa-project-diagram w-5 text-center"></i> <span class="text-left text-sm">Kali Jabat MDNPU</span>
                     </button>
 
-                    <button onclick="navigate('pegpog')" id="nav-pegpog" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-semibold transition-all">
+                    <button onclick="navigate('pegpog')" id="nav-pegpog" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white rounded-xl font-semibold transition-all border border-transparent">
                         <i class="fas fa-exclamation-triangle w-5 text-center text-red-500"></i> <span class="text-left text-sm">PeG > PoG</span>
                     </button>
 
-                    <p id="label-sistem" class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-6">Sistem</p>
-                    <button onclick="navigate('setting')" id="nav-setting" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-semibold transition-all">
+                    <p id="nav-heading-system" class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-6">Sistem</p>
+                    <button onclick="navigate('setting')" id="nav-setting" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white rounded-xl font-semibold transition-all border border-transparent">
                         <i class="fas fa-cog w-5 text-center"></i> <span>Pengaturan</span>
                     </button>
                 </nav>
 
-                <div class="p-4 border-t border-gray-100 bg-gray-50/50">
-                    <button onclick="handleLogout()" class="w-full flex justify-center items-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 py-3 rounded-xl font-bold transition-colors shadow-sm">
+                <!-- Logout Button at bottom -->
+                <div class="p-4 border-t border-gray-100 dark:border-gray-800 flex-shrink-0 bg-gray-50/50 dark:bg-gray-800/20">
+                    <button onclick="handleLogout()" class="w-full flex justify-center items-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-900/20 dark:hover:bg-red-900/40 dark:text-red-400 py-3 rounded-xl font-bold transition-colors shadow-sm border border-red-100 dark:border-red-800/30">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </button>
                 </div>
             </aside>
 
+            <!-- Main Content Area -->
             <div class="flex-1 flex flex-col h-screen w-full relative">
-                <header class="h-20 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-200 flex items-center justify-between px-4 sm:px-6 lg:px-8 z-20">
+                <!-- Top Header -->
+                <header class="h-20 bg-white/90 dark:bg-pln-cardDark/90 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-800 flex flex-shrink-0 items-center justify-between px-4 sm:px-6 lg:px-8 z-20">
                     <div class="flex items-center gap-3">
-                        <button onclick="toggleSidebar()" class="lg:hidden p-2 -ml-2 text-gray-500 hover:bg-gray-100 rounded-lg">
+                        <button onclick="toggleSidebar()" class="lg:hidden p-2 -ml-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg focus:outline-none transition-colors">
                             <i class="fas fa-bars text-xl"></i>
                         </button>
-                        <h2 id="page-title" class="text-lg sm:text-xl lg:text-2xl font-extrabold text-gray-800 truncate">Dashboard Utama</h2>
+                        <h2 id="page-title" class="text-lg sm:text-xl lg:text-2xl font-extrabold text-gray-800 dark:text-white tracking-tight truncate">Dashboard Utama</h2>
                     </div>
                     <div class="flex items-center gap-3">
-                        <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 shadow-sm">
+                        <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors border border-gray-200 dark:border-gray-700 shadow-sm focus:outline-none">
                             <i class="fas fa-moon" id="theme-icon"></i>
                         </button>
                     </div>
                 </header>
 
-                <div class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 lg:p-8 w-full bg-gray-50">
+                <!-- Scrollable Content -->
+                <div class="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 lg:p-8 w-full bg-gray-50 dark:bg-pln-dark">
                 
                 <div id="page-dashboard" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl"><i class="fas fa-users"></i></div>
-                            <div><p class="text-sm text-gray-500">Total Pegawai</p><h4 class="text-2xl font-bold" id="stat-total">-</h4></div>
+                        <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xl"><i class="fas fa-users"></i></div>
+                            <div><p class="text-sm text-gray-500 dark:text-gray-400">Total Pegawai</p><h4 class="text-2xl font-bold" id="stat-total">-</h4></div>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xl"><i class="fas fa-user-clock"></i></div>
-                            <div><p class="text-sm text-gray-500">Pensiun Umur 55 Thn</p><h4 class="text-2xl font-bold" id="stat-pensiun">-</h4></div>
+                        <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-red-600 dark:text-red-400 text-xl"><i class="fas fa-user-clock"></i></div>
+                            <div><p class="text-sm text-gray-500 dark:text-gray-400">Pensiun Umur 55 Thn</p><h4 class="text-2xl font-bold" id="stat-pensiun">-</h4></div>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xl"><i class="fas fa-building"></i></div>
-                            <div><p class="text-sm text-gray-500">Total Unit</p><h4 class="text-2xl font-bold" id="stat-unit">-</h4></div>
+                        <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 text-xl"><i class="fas fa-building"></i></div>
+                            <div><p class="text-sm text-gray-500 dark:text-gray-400">Total Unit</p><h4 class="text-2xl font-bold" id="stat-unit">-</h4></div>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-xl"><i class="fas fa-graduation-cap"></i></div>
-                            <div><p class="text-sm text-gray-500">Mayoritas Pend.</p><h4 class="text-xl font-bold" id="stat-pend">-</h4></div>
+                        <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 text-xl"><i class="fas fa-graduation-cap"></i></div>
+                            <div><p class="text-sm text-gray-500 dark:text-gray-400">Mayoritas Pend.</p><h4 class="text-xl font-bold" id="stat-pend">-</h4></div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                            <h3 class="text-lg font-semibold mb-4 text-gray-800">Jumlah Pegawai Per Unit</h3>
+                        <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Jumlah Pegawai Per Unit (Kolom Kode BA)</h3>
                             <div class="chart-container" style="height: 300px;"><canvas id="chartUnit"></canvas></div>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                            <h3 class="text-lg font-semibold mb-4 text-gray-800">Jumlah Pegawai Per Masa Jabatan</h3>
+                        <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Jumlah Pegawai Per Masa Jabatan (Kolom AQ)</h3>
                             <div class="chart-container" style="height: 300px;"><canvas id="chartMasaJabat"></canvas></div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                            <h3 class="text-lg font-semibold mb-4 text-gray-800">Pendidikan</h3>
+                        <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Pendidikan (Kolom Pendidikan)</h3>
                             <div class="chart-container" style="height: 250px;"><canvas id="chartPendidikan"></canvas></div>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                            <h3 class="text-lg font-semibold mb-4 text-gray-800">Kelompok Usia</h3>
+                        <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Kelompok Usia</h3>
                             <div class="chart-container" style="height: 250px;"><canvas id="chartUsia"></canvas></div>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                            <h3 class="text-lg font-semibold mb-4 text-gray-800">Komposisi Gender</h3>
+                        <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Komposisi Gender (Kolom P)</h3>
                             <div class="chart-container" style="height: 250px;"><canvas id="chartGender"></canvas></div>
                         </div>
                     </div>
 
-                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-red-600"><i class="fas fa-exclamation-triangle mr-2"></i>Daftar Pegawai Usia 55 Tahun (Persiapan Pensiun)</h3>
+                            <h3 class="text-lg font-semibold text-red-600 dark:text-red-400"><i class="fas fa-exclamation-triangle mr-2"></i>Daftar Pegawai Usia 55 Tahun (Persiapan Pensiun 56 Thn)</h3>
                         </div>
-                        <div class="overflow-x-auto rounded-xl border border-gray-200 max-h-96 custom-scrollbar">
-                            <table class="w-full text-sm text-left text-gray-500">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-100 sticky top-0">
+                        <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 max-h-96">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <thead class="text-xs uppercase sticky top-0">
                                     <tr>
                                         <th class="px-6 py-3">Nama Pegawai</th>
                                         <th class="px-6 py-3">Unit</th>
@@ -256,36 +276,42 @@
                 </div>
 
                 <div id="page-mobility" class="hidden space-y-6">
-                    <h3 class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">7 Grafik Lama Jabatan Berdasarkan Unit</h3>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="mobilityChartsContainer"></div>
+                    <div class="bg-pln-green/10 dark:bg-pln-green/5 border border-pln-green/20 p-4 rounded-xl mb-6">
+                        <p class="text-sm text-pln-darkGreen dark:text-pln-cyan">
+                            <i class="fas fa-info-circle mr-1"></i> Monitoring Jabatan Manajerial berdasarkan Unit & Masa Jabatan. Klik Bar pada Grafik untuk mem-filter data tabel!
+                        </p>
+                    </div>
 
-                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 mt-6" id="mobilityDetailSection">
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">7 Grafik Lama Jabatan Berdasarkan Unit</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="mobilityChartsContainer"></div>
+
+                    <div id="mobilityDetailSection" class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 mt-6">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                             <div>
-                                <h3 class="text-lg font-bold text-gray-800" id="mobilityTableTitle">Rincian Masa Jabatan Manajerial</h3>
-                                <p class="text-sm text-gray-500" id="mobilityTableSubtitle">Semua data pegawai manajerial</p>
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-white" id="mobilityTableTitle">Rincian Masa Jabatan Manajerial</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400" id="mobilityTableSubtitle">Semua data pegawai manajerial</p>
                             </div>
-                            <div class="flex flex-wrap items-center gap-3">
-                                <button onclick="resetMobilityFilter()" id="btnResetMobility" class="hidden flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-500 hover:bg-gray-600 text-white rounded-xl font-medium shadow-sm transition-transform transform hover:-translate-y-0.5 active:translate-y-0 text-sm whitespace-nowrap">
-                                    <i class="fas fa-undo"></i> Reset Filter
+                            <div class="flex flex-wrap gap-2">
+                                <button id="btnResetMobility" onclick="resetMobilityFilter()" class="hidden px-4 py-2.5 bg-gray-500 hover:bg-gray-600 text-white rounded-xl font-medium shadow-md transition-transform transform hover:-translate-y-0.5 text-sm">
+                                    <i class="fas fa-sync-alt"></i> Reset Filter
                                 </button>
                                 <button onclick="exportMobilityToExcel()" class="flex items-center justify-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium shadow-md transition-transform transform hover:-translate-y-0.5 active:translate-y-0 text-sm whitespace-nowrap">
                                     <i class="fas fa-file-excel text-lg"></i> Unduh Excel (.xlsx)
                                 </button>
                             </div>
                         </div>
-                        <div class="overflow-x-auto rounded-xl border border-gray-200 max-h-[500px] custom-scrollbar shadow-inner">
-                            <table class="w-full text-sm text-left text-gray-500 whitespace-nowrap">
+                        <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 max-h-[500px] custom-scrollbar shadow-inner">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 whitespace-nowrap">
                                 <thead class="text-xs uppercase sticky top-0 shadow-md z-10">
                                     <tr>
-                                        <th class="px-6 py-4 font-bold border-r border-gray-200 tracking-wider">Nama Pegawai</th>
-                                        <th class="px-6 py-4 font-bold border-r border-gray-200 tracking-wider">Jabatan</th>
-                                        <th class="px-6 py-4 font-bold border-r border-gray-200 tracking-wider">Unit</th>
+                                        <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600 tracking-wider">Nama Pegawai</th>
+                                        <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600 tracking-wider">Jabatan</th>
+                                        <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600 tracking-wider">Unit</th>
                                         <th class="px-6 py-4 font-bold text-center tracking-wider">Lama Menjabat</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tableMobilityBody" class="divide-y divide-gray-200"></tbody>
+                                <tbody id="tableMobilityBody" class="divide-y divide-gray-200 dark:divide-gray-700"></tbody>
                             </table>
                         </div>
                     </div>
@@ -304,119 +330,184 @@
                     </div>
 
                     <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
-                        <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-4 mb-6">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                             <div>
                                 <h3 class="text-lg font-bold text-gray-800 dark:text-white">Tabel FTK UID Lampung</h3>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Sumber data dari Sheet "up" kolom A sampai E.</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Pilih rentang filter di bawah ini lalu klik Cari.</p>
                             </div>
-                            
-                            <!-- Fitur Pencarian Ganda -->
-                            <div class="flex flex-wrap items-center gap-3 w-full xl:w-auto justify-start xl:justify-end">
-                                <div class="flex items-center gap-2">
-                                    <select id="filterFTKUnit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pln-cyan focus:border-pln-cyan block p-2.5 dark:bg-gray-800 dark:border-gray-700 dark:text-white font-semibold outline-none transition-colors shadow-sm cursor-pointer">
-                                        <option value="all">Semua Unit</option>
-                                        <option value="UP">Unit Pelaksana (UP)</option>
-                                        <option value="ULP">Unit Layanan (ULP)</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="flex items-center gap-2">
-                                    <select id="filterFTKPct" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pln-cyan focus:border-pln-cyan block p-2.5 dark:bg-gray-800 dark:border-gray-700 dark:text-white font-semibold outline-none transition-colors shadow-sm cursor-pointer">
-                                        <option value="all">Semua Prosentase</option>
-                                        <option value="<75">x &lt; 75%</option>
-                                        <option value="75-90">75% &le; x &le; 90%</option>
-                                        <option value="90-100">90% &le; x &le; 100%</option>
-                                        <option value=">100">x &gt; 100%</option>
-                                    </select>
-                                </div>
-
-                                <button onclick="applyFTKFilter()" class="flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium shadow-sm transition-transform transform hover:-translate-y-0.5 active:translate-y-0 text-sm whitespace-nowrap">
+                            <button onclick="exportFTKToExcel()" class="flex items-center justify-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium shadow-md transition-transform transform hover:-translate-y-0.5 active:translate-y-0 text-sm whitespace-nowrap">
+                                <i class="fas fa-file-excel text-lg"></i> Unduh Excel (.xlsx)
+                            </button>
+                        </div>
+                        
+                        <!-- Search Filters FTK -->
+                        <div class="flex flex-col md:flex-row gap-4 mb-6 bg-gray-50 dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+                            <div class="flex-1">
+                                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Nama Unit</label>
+                                <select id="filterFTKUnit" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none">
+                                    <option value="all">Semua Unit</option>
+                                    <option value="up">Unit Pelaksana (UP)</option>
+                                    <option value="ulp">Unit Layanan (ULP)</option>
+                                </select>
+                            </div>
+                            <div class="flex-1">
+                                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Prosentase FTK</label>
+                                <select id="filterFTKPct" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white outline-none">
+                                    <option value="all">Semua Prosentase</option>
+                                    <option value="<75">x &lt; 75%</option>
+                                    <option value="75-90">75% &le; x &le; 90%</option>
+                                    <option value="90-100">90% &le; x &le; 100%</option>
+                                    <option value=">100">x &gt; 100%</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button onclick="applyFTKFilter()" class="w-full md:w-auto px-6 py-2.5 bg-[#00A2B9] hover:bg-[#007A8C] text-white font-bold rounded-xl shadow-md transition-transform transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
                                     <i class="fas fa-search"></i> Cari
-                                </button>
-                                
-                                <button onclick="exportFTKToExcel()" class="flex items-center justify-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium shadow-sm transition-transform transform hover:-translate-y-0.5 active:translate-y-0 text-sm whitespace-nowrap">
-                                    <i class="fas fa-file-excel text-lg"></i> Unduh Excel
                                 </button>
                             </div>
                         </div>
+
                         <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 max-h-[500px] custom-scrollbar">
                             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                                <thead id="tableFTKHead" class="text-xs uppercase sticky top-0 shadow-sm z-10">
+                            <thead id="tableFTKHead" class="text-xs uppercase sticky top-0 shadow-sm z-10">
+                            </thead>
+                            <tbody id="tableFTKBody"></tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-fnp" class="hidden space-y-6">
+                    <div class="bg-pln-green/10 dark:bg-pln-green/5 border border-pln-green/20 p-4 rounded-xl mb-6">
+                        <p class="text-sm text-pln-darkGreen dark:text-pln-cyan">
+                            <i class="fas fa-info-circle mr-1"></i> Monitoring evaluasi Fit and Proper (FnP) berdasarkan Status dan Jenjang Proyeksi.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Perbandingan Rata-rata Nilai Evaluasi berdasarkan Status</h3>
+                            <div class="chart-container" style="height: 350px;"><canvas id="chartStatusFnp"></canvas></div>
+                        </div>
+                        <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Distribusi Talent Ready berdasarkan Jenjang Proyeksi dan Status</h3>
+                            <div class="chart-container" style="height: 350px;"><canvas id="chartJenjangFnp"></canvas></div>
+                        </div>
+                    </div>
+
+                    <!-- Tabel Daftar Pegawai FnP (Tampil berdasarkan filter grafik) -->
+                    <div id="fnpDetailSection" class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 mt-6">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-white" id="fnpTableTitle">Daftar Pegawai FnP</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400" id="fnpTableSubtitle">Semua data Talent Ready</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <button id="btnResetFnp" onclick="resetFnpFilter()" class="hidden px-4 py-2.5 bg-gray-500 hover:bg-gray-600 text-white rounded-xl font-medium shadow-md transition-transform transform hover:-translate-y-0.5 text-sm">
+                                    <i class="fas fa-sync-alt"></i> Reset Filter
+                                </button>
+                                <button onclick="exportFnpToExcel()" class="flex items-center justify-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium shadow-md transition-transform transform hover:-translate-y-0.5 active:translate-y-0 text-sm whitespace-nowrap">
+                                    <i class="fas fa-file-excel text-lg"></i> Unduh Excel (.xlsx)
+                                </button>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 max-h-[500px] custom-scrollbar shadow-inner">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-300 sticky top-0 shadow-md z-10">
+                                    <tr>
+                                        <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600 text-center w-16">No</th>
+                                        <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600">NIP</th>
+                                        <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600">Nama</th>
+                                        <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600">Jabatan Saat Ini</th>
+                                        <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600">Unit</th>
+                                        <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600">Jenjang Proyeksi</th>
+                                        <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600">Jabatan Proyeksi</th>
+                                        <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600 text-center">Nilai</th>
+                                        <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600 text-center">Status</th>
+                                        <th class="px-6 py-4 font-bold">Tanggal</th>
+                                    </tr>
                                 </thead>
-                                <tbody id="tableFTKBody"></tbody>
+                                <tbody id="tableFnpBody" class="divide-y divide-gray-200 dark:divide-gray-700"></tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-            <div id="page-kalijabat" class="hidden space-y-6"></div>
-            <div id="page-kalijabata" class="hidden space-y-6"></div>
-            <div id="page-kalijabatpu" class="hidden space-y-6"></div>
-            <div id="page-kalijabatmdnpu" class="hidden space-y-6"></div>
-            <div id="page-pegpog" class="hidden space-y-6"></div>
-
-            <div id="page-setting" class="hidden max-w-4xl mx-auto space-y-6">
+                <!-- Kali Jabat SPVD Page -->
+                <div id="page-kalijabat" class="hidden space-y-6">
+                    <!-- Konten digenerate oleh proses JS -->
+                </div>
                 
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div class="p-6 border-b border-gray-200 bg-gray-50">
-                        <h3 class="text-xl font-bold text-gray-800">Manajemen Pengguna</h3>
-                        <p class="text-sm text-gray-500 mt-1">Tambah akun baru untuk mengakses Dashboard MHC. Data akan disimpan otomatis ke Google Spreadsheet.</p>
-                    </div>
-                    <div class="p-6">
-                        <form id="form-add-user" onsubmit="handleAddUser(event)" class="space-y-4 max-w-md">
+                <!-- Kali Jabat SPVA NPU Page -->
+                <div id="page-kalijabata" class="hidden space-y-6">
+                    <!-- Konten digenerate oleh proses JS -->
+                </div>
+                
+                <!-- Kali Jabat SPVA PU Page -->
+                <div id="page-kalijabatpu" class="hidden space-y-6">
+                    <!-- Konten digenerate oleh proses JS -->
+                </div>
+                
+                <!-- Kali Jabat MDNPU Page -->
+                <div id="page-kalijabatmdnpu" class="hidden space-y-6">
+                    <!-- Konten digenerate oleh proses JS -->
+                </div>
+
+                <!-- PeG > PoG Page -->
+                <div id="page-pegpog" class="hidden space-y-6">
+                    <!-- Konten digenerate oleh proses JS -->
+                </div>
+
+                <div id="page-setting" class="hidden max-w-4xl mx-auto space-y-6">
+                    <div class="bg-white dark:bg-pln-cardDark rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+                        <div class="p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Manajemen Data & Keamanan</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Kelola akses, ekspor, backup, dan generate laporan analisa mendalam.</p>
+                        </div>
+                        <div class="p-6 space-y-8">
+                            
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1">Username Baru</label>
-                                <input type="text" id="new-username" required class="w-full px-4 py-2 rounded-xl border border-gray-300 bg-gray-50 text-gray-900 focus:ring-2 focus:ring-[#00A2B9] outline-none">
+                                <h4 class="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider mb-4"><i class="fas fa-users-cog text-pln-cyan mr-2"></i> Tambah Pengguna Baru</h4>
+                                <form id="form-add-user" onsubmit="handleAddUser(event)" class="bg-gray-50 dark:bg-gray-800/40 p-5 rounded-xl border border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row items-end gap-4">
+                                    <div class="w-full">
+                                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-2">Username Baru</label>
+                                        <input type="text" id="new-username" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] outline-none">
+                                    </div>
+                                    <div class="w-full">
+                                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-2">Password Baru</label>
+                                        <input type="password" id="new-password" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] outline-none">
+                                    </div>
+                                    <button type="submit" id="btn-add-user" class="w-full sm:w-auto whitespace-nowrap bg-[#00A2B9] hover:bg-[#007A8C] text-white font-bold py-2.5 px-6 rounded-lg shadow-sm transition-transform transform hover:-translate-y-0.5">
+                                        <i class="fas fa-user-plus"></i> Simpan
+                                    </button>
+                                </form>
+                                <p class="text-xs text-gray-500 mt-3">*User yang ditambahkan akan disinkronisasikan ke Sheet "user".</p>
                             </div>
+
+                            <hr class="border-gray-200 dark:border-gray-700">
+
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-1">Password</label>
-                                <input type="password" id="new-password" required class="w-full px-4 py-2 rounded-xl border border-gray-300 bg-gray-50 text-gray-900 focus:ring-2 focus:ring-[#00A2B9] outline-none">
+                                <h4 class="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider mb-3">Ekspor Data & Sistem</h4>
+                                <div class="flex flex-wrap gap-4">
+                                    <button onclick="showToast('Mengunduh Excel Data Pegawai...')" class="flex items-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium shadow-sm"><i class="fas fa-file-excel"></i> Simpan Data Excel</button>
+                                    <button onclick="showToast('Menyiapkan Laporan Analisis Mendalam...')" class="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium shadow-sm"><i class="fas fa-file-pdf"></i> Cetak Laporan Analisis</button>
+                                    <button onclick="showToast('Membuat file Backup .sql...')" class="flex items-center gap-2 px-5 py-2.5 bg-gray-800 hover:bg-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 text-white rounded-lg font-medium shadow-sm"><i class="fas fa-database"></i> Backup Sistem</button>
+                                </div>
                             </div>
-                            <button type="submit" id="btn-add-user" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium shadow-sm transition-transform transform hover:-translate-y-0.5 flex items-center gap-2">
-                                <i class="fas fa-user-plus"></i> Tambah User
-                            </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div class="p-6 border-b border-gray-200 bg-gray-50">
-                        <h3 class="text-xl font-bold text-gray-800">Manajemen Data & Laporan</h3>
-                        <p class="text-sm text-gray-500 mt-1">Kelola ekspor, backup, dan generate laporan analisa mendalam.</p>
-                    </div>
-                    <div class="p-6 space-y-8">
-                        <div>
-                            <h4 class="text-sm font-bold text-gray-800 uppercase tracking-wider mb-3">Ekspor Data</h4>
-                            <div class="flex flex-wrap gap-4">
-                                <button onclick="showToast('Mengunduh Excel Data Pegawai...')" class="flex items-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium shadow-sm"><i class="fas fa-file-excel"></i> Simpan Data Excel</button>
-                                <button onclick="showToast('Menyiapkan Laporan Analisis Mendalam...')" class="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium shadow-sm"><i class="fas fa-file-pdf"></i> Cetak Laporan Analisis</button>
-                            </div>
-                        </div>
-                        <hr class="border-gray-200">
-                        <div>
-                            <h4 class="text-sm font-bold text-gray-800 uppercase tracking-wider mb-3">Sistem & Keamanan</h4>
-                            <div class="flex flex-wrap gap-4">
-                                <button onclick="showToast('Membuat file Backup .sql...')" class="flex items-center gap-2 px-5 py-2.5 bg-gray-800 hover:bg-gray-900 text-white rounded-lg font-medium shadow-sm"><i class="fas fa-database"></i> Backup Sistem</button>
-                                <button onclick="showToast('Fitur Restore membutuhkan hak akses SuperAdmin.')" class="flex items-center gap-2 px-5 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-lg font-medium shadow-sm"><i class="fas fa-sync-alt"></i> Restore Data</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-
-            </div>
-            <div id="toast" class="fixed bottom-4 right-4 bg-gray-900 text-white px-6 py-3 rounded-xl shadow-2xl transform transition-transform translate-y-20 opacity-0 z-[110] flex items-center gap-3 font-medium">
-                <i class="fas fa-info-circle text-pln-cyan"></i>
-                <span id="toastMsg">Pesan di sini</span>
+                <div id="toast" class="fixed bottom-4 right-4 bg-gray-900 text-white px-6 py-3 rounded-xl shadow-2xl transform transition-transform translate-y-20 opacity-0 z-[110] flex items-center gap-3 font-medium">
+                    <i class="fas fa-info-circle text-pln-cyan"></i>
+                    <span id="toastMsg">Pesan di sini</span>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         const SHEET_ID = '1YIp30Qn6lugeDEDUvf3ZwPQTtVcYk7LJisUBfHtaFI8';
-        // Tentukan URL Web App Google Apps Script Anda di sini.
-        const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxlA1I4vj3jHmv7JgGEiBML0mwzWKDIxXvrjIqZl90gu0cN6qz1gFWgil4pegWVA1rN1w/exec";
-
         let rawPegawai = [];
         let rawFTK = [];
         let rawKalijabat = [];
@@ -428,10 +519,20 @@
         let rawKalijabatMsb = [];
         let rawRjabMsb = [];
         let rawAnomali = [];
+        let rawStatusFnp = [];
+        let rawJenjangFnp = [];
+        let rawTalentReady = [];
         let chartInstances = {};
-        
-        let allMobilityData = []; 
+
+        // Variabel global untuk FTK dan Mobility
+        let allFTKData = [];
+        let currentFTKData = [];
+        let allMobilityData = [];
         window.currentMobilityData = [];
+        
+        // Variabel global untuk FnP
+        let allFnpData = [];
+        window.currentFnpData = [];
 
         Chart.register(ChartDataLabels);
 
@@ -440,27 +541,27 @@
             checkLoginStatus();
         };
 
-        function applyRolePermissions() {
-            const username = sessionStorage.getItem('username');
-            const navSetting = document.getElementById('nav-setting');
-            const labelSistem = document.getElementById('label-sistem');
-            
-            // Jika belum login atau login BUKAN sebagai admin, sembunyikan menu pengaturan
-            if (username && username.toLowerCase() !== 'admin') {
-                if (navSetting) navSetting.style.display = 'none';
-                if (labelSistem) labelSistem.style.display = 'none';
-            } else {
-                if (navSetting) navSetting.style.display = 'flex';
-                if (labelSistem) labelSistem.style.display = 'block';
-            }
-        }
-
         function checkLoginStatus() {
             if (sessionStorage.getItem('isLoggedIn') === 'true') {
                 document.getElementById('login-page').style.display = 'none';
                 document.getElementById('main-app').classList.remove('hidden');
                 applyRolePermissions();
                 loadAllData();
+            }
+        }
+
+        // Membatasi Akses Menu Pengaturan
+        function applyRolePermissions() {
+            const currentUser = sessionStorage.getItem('username');
+            const settingNav = document.getElementById('nav-setting');
+            const sysHeading = document.getElementById('nav-heading-system');
+
+            if (currentUser !== 'admin') {
+                if(settingNav) settingNav.style.display = 'none';
+                if(sysHeading) sysHeading.style.display = 'none';
+            } else {
+                if(settingNav) settingNav.style.display = 'flex';
+                if(sysHeading) sysHeading.style.display = 'block';
             }
         }
 
@@ -507,8 +608,7 @@
 
                 if (isValid) {
                     sessionStorage.setItem('isLoggedIn', 'true');
-                    sessionStorage.setItem('username', user.toLowerCase()); // Simpan username
-                    
+                    sessionStorage.setItem('username', user.toLowerCase());
                     document.getElementById('login-page').style.opacity = '0';
                     setTimeout(() => {
                         document.getElementById('login-page').style.display = 'none';
@@ -535,7 +635,6 @@
             location.reload();
         }
 
-        // Fitur Tambah User
         async function handleAddUser(e) {
             e.preventDefault();
             const btn = document.getElementById('btn-add-user');
@@ -543,44 +642,42 @@
             const pass = document.getElementById('new-password').value;
             
             if(!user || !pass) return;
-
+            
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
             btn.disabled = true;
-
+            
             try {
                 const hashedPassword = await hashPassword(pass);
+                // URL API Google Apps Script untuk POST
+                const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxlA1I4vj3jHmv7JgGEiBML0mwzWKDIxXvrjIqZl90gu0cN6qz1gFWgil4pegWVA1rN1w/exec"; 
                 
-                if (APP_SCRIPT_URL !== "") {
-                    const formData = new FormData();
-                    formData.append('username', user);
-                    formData.append('password', hashedPassword);
-                    
-                    const response = await fetch(APP_SCRIPT_URL, {
-                        method: 'POST',
-                        body: formData
+                const formData = new FormData();
+                formData.append('username', user);
+                formData.append('password', hashedPassword);
+                
+                fetch(APP_SCRIPT_URL, { method: 'POST', body: formData })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            showToast('User berhasil ditambahkan ke Spreadsheet!');
+                            document.getElementById('form-add-user').reset();
+                        } else {
+                            showToast('Gagal menambahkan user. Cek console.');
+                        }
+                    })
+                    .catch(err => {
+                        showToast('Gagal memanggil API. Web Apps Script mungkin belum di-deploy Anyone.');
+                        console.error(err);
+                    })
+                    .finally(() => {
+                        btn.innerHTML = '<i class="fas fa-user-plus"></i> Simpan';
+                        btn.disabled = false;
                     });
-                    
-                    const result = await response.json();
-                    
-                    if(result.status === 'success') {
-                        showToast('User berhasil ditambahkan ke Spreadsheet!');
-                        document.getElementById('form-add-user').reset();
-                    } else {
-                        showToast('Gagal menambahkan: ' + result.message);
-                    }
-                } else {
-                    showToast('URL Apps Script belum diisi. Simulasi simpan lokal.');
-                    document.getElementById('form-add-user').reset();
-                }
-            } catch(error) {
-                console.error("Error Add User:", error);
-                // Karena CORS sering memblokir response meskipun data terkirim, kita anggap sukses jika request jalan.
-                showToast('Permintaan dikirim. Cek Spreadsheet Anda.');
-                document.getElementById('form-add-user').reset();
+            } catch(e) {
+                showToast('Terjadi kesalahan.');
+                btn.innerHTML = '<i class="fas fa-user-plus"></i> Simpan';
+                btn.disabled = false;
             }
-
-            btn.innerHTML = '<i class="fas fa-user-plus"></i> Tambah User';
-            btn.disabled = false;
         }
 
         async function fetchSheetJSON(sheetName) {
@@ -612,7 +709,7 @@
 
         async function loadAllData() {
             try {
-                const [pegawaiData, ftkData, kalijabatData, kalijabatAData, rjabData, rjabAData, kalijabatMulData, rjabMulData, kalijabatMsbData, rjabMsbData, anomaliData] = await Promise.all([
+                const [pegawaiData, ftkData, kalijabatData, kalijabatAData, rjabData, rjabAData, kalijabatMulData, rjabMulData, kalijabatMsbData, rjabMsbData, anomaliData, statusFnpData, jenjangFnpData, talentReadyData] = await Promise.all([
                     fetchSheetJSON('data pegawai'),
                     fetchSheetJSON('up'),
                     fetchSheetJSON('kalijabat'),
@@ -623,7 +720,10 @@
                     fetchSheetJSON('rjabmul'),
                     fetchSheetJSON('kalijabatmsb'),
                     fetchSheetJSON('rjabmsb'),
-                    fetchSheetJSON('anomali')
+                    fetchSheetJSON('anomali'),
+                    fetchSheetJSON('Statusfnp'),
+                    fetchSheetJSON('Jenjangfnp'),
+                    fetchSheetJSON('TALENT READY')
                 ]);
                 
                 rawPegawai = pegawaiData || [];
@@ -637,6 +737,9 @@
                 rawKalijabatMsb = kalijabatMsbData || [];
                 rawRjabMsb = rjabMsbData || [];
                 rawAnomali = anomaliData || [];
+                rawStatusFnp = statusFnpData || [];
+                rawJenjangFnp = jenjangFnpData || [];
+                rawTalentReady = talentReadyData || [];
                 
                 document.getElementById('loader').style.opacity = '0';
                 setTimeout(() => {
@@ -645,12 +748,27 @@
                         processDashboardData();
                         processMobilityData();
                     }
-                    if(rawFTK.length > 0) processFTKData();
-                    if(rawKalijabat.length > 0) processKalijabatData();
-                    if(rawKalijabatA.length > 0) processKalijabatAData();
-                    if(rawKalijabatMul.length > 0) processKalijabatPUData();
-                    if(rawKalijabatMsb.length > 0) processKalijabatMDNPUData();
-                    if(rawAnomali.length > 0) processPegPogData();
+                    if(rawFTK.length > 0) {
+                        processFTKData();
+                    }
+                    if(rawKalijabat.length > 0) {
+                        processKalijabatData();
+                    }
+                    if(rawKalijabatA.length > 0) {
+                        processKalijabatAData();
+                    }
+                    if(rawKalijabatMul.length > 0) {
+                        processKalijabatPUData();
+                    }
+                    if(rawKalijabatMsb.length > 0) {
+                        processKalijabatMDNPUData();
+                    }
+                    if(rawAnomali.length > 0) {
+                        processPegPogData();
+                    }
+                    if(rawStatusFnp.length > 0 || rawJenjangFnp.length > 0) {
+                        processFnpData();
+                    }
                 }, 300);
             } catch (error) {
                 console.error("Terjadi error saat load data utama:", error);
@@ -678,9 +796,9 @@
                 const idxKelUsia = getColIdx(headers, 'kelompok usia', 6);
                 const idxNama = getColIdx(headers, 'nama', 1);
                 
-                const COL_P = 15;  
-                const COL_AL = 37; 
-                const COL_AQ = 42; 
+                const COL_P = 15;  // Gender
+                const COL_AL = 37; // Usia
+                const COL_AQ = 42; // Masa Jabatan
                 
                 let unitCount = {}, pendCount = {}, kelUsiaCount = {}, masaCount = {}, genderCount = {};
                 let totalPegawai = 0, pensiunList = [];
@@ -737,8 +855,8 @@
                     tbody.innerHTML = '';
                     pensiunList.sort((a,b) => b.usia - a.usia).forEach(p => {
                         let tr = document.createElement('tr');
-                        tr.className = 'border-b hover:bg-gray-50';
-                        tr.innerHTML = `<td class="px-6 py-3 font-medium">${p.nama}</td>
+                        tr.className = 'border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800';
+                        tr.innerHTML = `<td class="px-6 py-3 font-medium text-gray-900 dark:text-white">${p.nama}</td>
                                         <td class="px-6 py-3">${p.unit}</td>
                                         <td class="px-6 py-3 text-red-500 font-bold">${p.usia} Tahun</td>`;
                         tbody.appendChild(tr);
@@ -797,14 +915,7 @@
                             let matchedUnitObj = targetUnits.find(tu => tu.keywords.some(kw => unitName.includes(kw)));
                             if(matchedUnitObj) {
                                 unitDataGroup[matchedUnitObj.id][lamaStr] = (unitDataGroup[matchedUnitObj.id][lamaStr] || 0) + 1;
-                                mobilityList.push({ 
-                                    nama: row[idxNama], 
-                                    jabatan: row[idxJabatan], 
-                                    unit: row[COL_L], 
-                                    lama: lamaStr,
-                                    unitId: matchedUnitObj.id,
-                                    unitTitle: matchedUnitObj.title
-                                });
+                                mobilityList.push({ nama: row[idxNama], jabatan: row[idxJabatan], unit: row[COL_L], lama: lamaStr, unitId: matchedUnitObj.id, unitTitle: matchedUnitObj.title });
                             }
                         }
                     }
@@ -822,10 +933,10 @@
                         let values = labels.map(l => dataObj[l]);
 
                         let div = document.createElement('div');
-                        div.className = "bg-gray-50 p-4 rounded-xl border border-gray-200";
+                        div.className = "bg-gray-50 dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700";
                         
                         let title = document.createElement('h4');
-                        title.className = "text-sm font-bold text-center text-gray-700 mb-3 uppercase tracking-wide";
+                        title.className = "text-sm font-bold text-center text-gray-700 dark:text-gray-200 mb-3 uppercase tracking-wide";
                         title.innerText = u.title;
                         div.appendChild(title);
 
@@ -844,51 +955,107 @@
                         if(labels.length > 0) {
                             createMobilityChart(canvasId, 'bar', labels, values, 'Pegawai', '#F59E0B', u);
                         } else {
-                            canvasContainer.innerHTML = '<div class="flex h-full items-center justify-center"><p class="text-xs text-center text-gray-400 font-medium bg-gray-100 px-3 py-1 rounded-full">Data Manajerial Kosong</p></div>';
+                            canvasContainer.innerHTML = '<div class="flex h-full items-center justify-center"><p class="text-xs text-center text-gray-400 font-medium bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">Data Manajerial Kosong</p></div>';
                         }
                     });
                 }
 
                 renderMobilityTable(window.currentMobilityData);
+
             } catch (error) {
                 console.error("Error processing Mobility Data:", error);
             }
         }
 
+        function createMobilityChart(canvasId, type, labels, data, labelText = 'Data', color = '#00A2B9', unitObj) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#E5E7EB' : '#374151'; 
+            const gridColor = isDark ? '#374151' : '#E5E7EB'; 
+
+            let config = {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: labelText,
+                        data: data,
+                        backgroundColor: color,
+                        borderRadius: 4,
+                        hoverBackgroundColor: '#D97706',
+                        cursor: 'pointer'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    onClick: (event, elements, chart) => {
+                        if (elements.length > 0) {
+                            const firstPoint = elements[0];
+                            const label = chart.data.labels[firstPoint.index]; 
+                            window.currentMobilityData = allMobilityData.filter(item => item.unitId === unitObj.id && item.lama === label);
+                            renderMobilityTable(window.currentMobilityData);
+                            document.getElementById('mobilityTableTitle').innerText = `Filter: ${unitObj.title}`;
+                            document.getElementById('mobilityTableSubtitle').innerHTML = `Masa Jabatan: ${label} Tahun`;
+                            document.getElementById('btnResetMobility').classList.remove('hidden');
+                            document.getElementById('mobilityDetailSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    },
+                    onHover: (event, chartElement) => {
+                        event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        datalabels: { color: textColor, font: { weight: 'bold', size: 10 }, anchor: 'end', align: 'top', offset: 4 },
+                        tooltip: { callbacks: { title: function(context) { return context[0].label + ' Tahun'; } } }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor }, grace: '15%' },
+                        x: { grid: { display: false }, ticks: { color: textColor, maxRotation: 0, font: { size: 10 } }, title: {display: true, text: 'Tahun', font: {size: 10}, color: textColor} }
+                    }
+                }
+            };
+            chartInstances[canvasId] = new Chart(ctx, config);
+        }
+
         function renderMobilityTable(dataToRender) {
             let tbody = document.getElementById('tableMobilityBody');
             if (!tbody) return;
-            
             tbody.innerHTML = '';
+            
             if (dataToRender.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="text-center py-8 text-gray-500">Tidak ada data pegawai yang sesuai dengan filter.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-gray-500 font-medium">Tidak ada data pegawai yang sesuai.</td></tr>`;
                 return;
             }
-
+            
             dataToRender.forEach((m, index) => {
                 let pLama = parseFloat(m.lama);
                 let isWarning = pLama > 3;
-                let rowBg = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                let rowBg = index % 2 === 0 ? 'bg-white dark:bg-pln-cardDark' : 'bg-gray-50 dark:bg-gray-800/60';
                 
                 let tr = document.createElement('tr');
-                tr.className = `hover:bg-pln-green/5 transition-colors ${rowBg}`;
+                tr.className = `hover:bg-pln-green/5 dark:hover:bg-pln-cyan/10 transition-colors ${rowBg}`;
                 tr.innerHTML = `
-                    <td class="px-6 py-4 border-r border-gray-100">
+                    <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50">
                         <div class="flex items-center">
                             <div class="h-8 w-8 rounded-full bg-gradient-to-br from-pln-green to-pln-cyan flex items-center justify-center text-white font-bold mr-3 shadow-sm">
                                 ${m.nama.charAt(0).toUpperCase()}
                             </div>
-                            <span class="font-bold text-gray-800">${m.nama}</span>
+                            <span class="font-bold text-gray-800 dark:text-gray-200">${m.nama}</span>
                         </div>
                     </td>
-                    <td class="px-6 py-4 text-gray-600 font-medium border-r border-gray-100 whitespace-normal min-w-[200px]">${m.jabatan}</td>
-                    <td class="px-6 py-4 border-r border-gray-100">
-                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 border border-blue-200">
+                    <td class="px-6 py-4 text-gray-600 dark:text-gray-400 font-medium border-r border-gray-100 dark:border-gray-700/50 whitespace-normal min-w-[200px]">${m.jabatan}</td>
+                    <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50">
+                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50">
                             ${m.unit}
                         </span>
                     </td>
                     <td class="px-6 py-4 text-center">
-                        <div class="inline-flex items-center justify-center px-4 py-1.5 rounded-lg font-bold shadow-sm ${isWarning ? 'bg-red-100 text-red-700 border border-red-200' : 'bg-green-100 text-green-700 border border-green-200'}">
+                        <div class="inline-flex items-center justify-center px-4 py-1.5 rounded-lg font-bold shadow-sm ${isWarning ? 'bg-red-100 text-red-700 border border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-800/50' : 'bg-green-100 text-green-700 border border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800/50'}">
                             <i class="fas ${isWarning ? 'fa-exclamation-circle' : 'fa-check-circle'} mr-2"></i>
                             ${m.lama} Tahun
                         </div>
@@ -901,7 +1068,6 @@
         function resetMobilityFilter() {
             window.currentMobilityData = [...allMobilityData];
             renderMobilityTable(window.currentMobilityData);
-            
             document.getElementById('mobilityTableTitle').innerText = "Rincian Masa Jabatan Manajerial";
             document.getElementById('mobilityTableSubtitle').innerHTML = "Semua data pegawai manajerial";
             document.getElementById('btnResetMobility').classList.add('hidden');
@@ -909,16 +1075,11 @@
 
         function exportMobilityToExcel() {
             if (!window.currentMobilityData || window.currentMobilityData.length === 0) {
-                showToast("Data Mobility kosong atau belum selesai dimuat!");
-                return;
+                showToast("Data Mobility kosong!"); return;
             }
             showToast('Menyiapkan file Excel...');
-            let exportData = [];
-            exportData.push(['Nama Pegawai', 'Jabatan', 'Unit', 'Lama Menjabat (Tahun)']);
-            window.currentMobilityData.forEach(m => {
-                exportData.push([m.nama, m.jabatan, m.unit, m.lama]);
-            });
-
+            let exportData = [['Nama Pegawai', 'Jabatan', 'Unit', 'Lama Menjabat (Tahun)']];
+            window.currentMobilityData.forEach(m => exportData.push([m.nama, m.jabatan, m.unit, m.lama]));
             try {
                 const ws = XLSX.utils.aoa_to_sheet(exportData);
                 const wb = XLSX.utils.book_new();
@@ -926,8 +1087,7 @@
                 XLSX.writeFile(wb, "Data_Mobility_Masa_Jabatan.xlsx");
                 setTimeout(() => showToast('Berhasil mengunduh file Excel!'), 1000);
             } catch(e) {
-                console.error("Export Error:", e);
-                showToast("Terjadi kesalahan saat memproses file Excel.");
+                showToast("Terjadi kesalahan saat mengekspor Excel.");
             }
         }
 
@@ -937,8 +1097,7 @@
 
                 const getPct = (rowIdx, colIdx) => {
                     if (rowIdx < rawFTK.length && rawFTK[rowIdx][colIdx] !== undefined) {
-                        let val = rawFTK[rowIdx][colIdx];
-                        let valStr = String(val).trim().replace(',', '.'); 
+                        let valStr = String(rawFTK[rowIdx][colIdx]).trim().replace(',', '.'); 
                         let num = parseFloat(valStr);
                         if (isNaN(num)) return 0;
                         if (valStr.includes('%')) return num; 
@@ -957,12 +1116,8 @@
                     { label: 'UP2D Lampung', value: getPct(33, 3) },
                     { label: 'UP2K Lampung', value: getPct(34, 3) }
                 ];
-                
                 upCombined.sort((a, b) => a.value - b.value);
-                const upLabels = upCombined.map(item => item.label);
-                const upData = upCombined.map(item => item.value);
-
-                createChart('chartFTKUP', 'bar', upLabels, upData, 'Prosentase Pemenuhan FTK (%)', '#8B5CF6');
+                createChart('chartFTKUP', 'bar', upCombined.map(i => i.label), upCombined.map(i => i.value), 'Prosentase Pemenuhan FTK (%)', '#8B5CF6');
 
                 let ulpCombined = [];
                 for (let i = 1; i < rawFTK.length; i++) {
@@ -971,441 +1126,196 @@
                         ulpCombined.push({ label: namaKolomA, value: getPct(i, 3) });
                     }
                 }
-
                 ulpCombined.sort((a, b) => a.value - b.value);
-                const ulpLabels = ulpCombined.map(item => item.label);
-                const ulpData = ulpCombined.map(item => item.value);
+                createChart('chartFTKULP', 'bar', ulpCombined.map(i => i.label), ulpCombined.map(i => i.value), 'Prosentase Pemenuhan FTK (%)', '#EF4444');
 
-                createChart('chartFTKULP', 'bar', ulpLabels, ulpData, 'Prosentase Pemenuhan FTK (%)', '#EF4444');
+                const tableHead = document.getElementById('tableFTKHead');
+                if (tableHead) {
+                    tableHead.innerHTML = '';
+                    let trHead = document.createElement('tr');
+                    ['Nama Unit', 'Pagu', 'FTK', 'Prosentase', 'GAP'].forEach(col => {
+                        let th = document.createElement('th');
+                        th.className = 'px-6 py-4 font-bold text-center border-b-2 border-gray-200 dark:border-gray-600 tracking-wider';
+                        if(col === 'Nama Unit') th.classList.replace('text-center', 'text-left');
+                        th.innerText = col;
+                        trHead.appendChild(th);
+                    });
+                    tableHead.appendChild(trHead);
+                }
 
-                // Render tabel FTK awal tanpa filter (menampilkan semua)
-                window.renderFTKTable('all', 'all');
+                allFTKData = [];
+                for (let i = 1; i < rawFTK.length; i++) {
+                    if (!rawFTK[i]) continue;
+                    let unit = rawFTK[i][0] !== undefined ? rawFTK[i][0] : '';
+                    if(String(unit).trim() === '') continue;
+
+                    let pagu = rawFTK[i][1] !== undefined ? rawFTK[i][1] : '-';
+                    let ftk = rawFTK[i][2] !== undefined ? rawFTK[i][2] : '-';
+                    let pct = rawFTK[i][3] !== undefined ? rawFTK[i][3] : '-';
+                    let gap = rawFTK[i][4] !== undefined ? rawFTK[i][4] : '-';
+
+                    let pctNum = parseFloat(String(pct).replace('%', '').replace(',', '.'));
+                    if (!String(pct).includes('%') && pctNum <= 1.5) {
+                        pctNum = pctNum * 100;
+                    }
+                    
+                    allFTKData.push({ unit, pagu, ftk, pct, gap, pctNum });
+                }
+
+                currentFTKData = [...allFTKData];
+                renderFTKTable(currentFTKData);
 
             } catch (error) {
                 console.error("Error processing FTK Data:", error);
             }
         }
 
-        window.currentFTKData = []; // Array global untuk menyimpan data FTK yang sudah difilter (keperluan Excel)
-
         window.applyFTKFilter = function() {
-            const unitFilter = document.getElementById('filterFTKUnit').value;
-            const pctFilter = document.getElementById('filterFTKPct').value;
-            window.renderFTKTable(unitFilter, pctFilter);
-        };
-
-        window.renderFTKTable = function(unitFilter, pctFilter) {
-            const tableHead = document.getElementById('tableFTKHead');
-            const tableBody = document.getElementById('tableFTKBody');
+            let valUnit = document.getElementById('filterFTKUnit').value;
+            let valPct = document.getElementById('filterFTKPct').value;
             
-            if (!tableHead || !tableBody) return;
-
-            tableHead.innerHTML = '';
-            tableBody.innerHTML = '';
-            window.currentFTKData = [];
-
-            // 1. Mengatur Header Tabel
-            const customHeaders = ['Nama Unit', 'Pagu', 'FTK', 'Prosentase', 'GAP'];
-            let trHead = document.createElement('tr');
-            customHeaders.forEach(col => {
-                let th = document.createElement('th');
-                th.className = 'px-6 py-4 font-bold text-center border-b-2 border-gray-200 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 uppercase tracking-wider';
-                if(col === 'Nama Unit') th.classList.replace('text-center', 'text-left');
-                th.innerText = col;
-                trHead.appendChild(th);
-            });
-            tableHead.appendChild(trHead);
-
-            // Fungsi internal mem-parsing text persentase menjadi float yang akurat
-            const getNumericPct = (valStr) => {
-                if (!valStr) return 0;
-                let cleanStr = String(valStr).trim().replace(',', '.'); 
-                let num = parseFloat(cleanStr);
-                if (isNaN(num)) return 0;
-                if (cleanStr.includes('%')) return num; 
-                if (num <= 1.5) return num * 100; // Contoh desimal 0.89 -> 89%
-                return num; 
-            };
-
-            let displayedCount = 0;
-
-            // 2. Memasukkan Data Tabel dengan Logika Filter Logis
-            for (let i = 1; i < rawFTK.length; i++) {
-                if (!rawFTK[i]) continue;
+            currentFTKData = allFTKData.filter(item => {
+                let matchUnit = true;
+                let isULP = item.unit.toUpperCase().includes('ULP');
+                if (valUnit === 'up') matchUnit = !isULP;
+                else if (valUnit === 'ulp') matchUnit = isULP;
                 
-                let unit = rawFTK[i][0] !== undefined ? String(rawFTK[i][0]).trim() : '';
-                if(unit === '') continue; // Abaikan baris jika kolom unit kosong
-
-                let pagu = rawFTK[i][1] !== undefined ? rawFTK[i][1] : '-';
-                let ftk = rawFTK[i][2] !== undefined ? rawFTK[i][2] : '-';
-                let pctStr = rawFTK[i][3] !== undefined ? rawFTK[i][3] : '-';
-                let gap = rawFTK[i][4] !== undefined ? rawFTK[i][4] : '-';
-
-                let numPct = getNumericPct(pctStr);
-                let unitUpper = unit.toUpperCase();
-
-                // Pengecekan Filter 1: Unit
-                let passUnit = true;
-                if (unitFilter === 'UP') {
-                    // UP dianggap semua yang tidak memiliki tulisan "ULP" (UID, UP3, UP2D, UP2K, dll)
-                    if (unitUpper.includes('ULP')) passUnit = false;
-                } else if (unitFilter === 'ULP') {
-                    // Hanya yang spesifik memiliki string ULP
-                    if (!unitUpper.includes('ULP')) passUnit = false;
+                let matchPct = true;
+                if (valPct !== 'all') {
+                    if (valPct === '<75') matchPct = item.pctNum < 75;
+                    else if (valPct === '75-90') matchPct = item.pctNum >= 75 && item.pctNum <= 90;
+                    else if (valPct === '90-100') matchPct = item.pctNum >= 90 && item.pctNum <= 100;
+                    else if (valPct === '>100') matchPct = item.pctNum > 100;
                 }
-
-                // Pengecekan Filter 2: Prosentase
-                let passPct = true;
-                if (pctFilter === '<75') {
-                    if (numPct >= 75) passPct = false;
-                } else if (pctFilter === '75-90') {
-                    if (numPct < 75 || numPct > 90) passPct = false; // Rentang 75 <= x <= 90
-                } else if (pctFilter === '90-100') {
-                    if (numPct < 90 || numPct > 100) passPct = false; // Rentang 90 <= x <= 100
-                } else if (pctFilter === '>100') {
-                    if (numPct <= 100) passPct = false;
-                }
-
-                // Jika lolos kedua tes filter, render di tabel
-                if (passUnit && passPct) {
-                    displayedCount++;
-                    window.currentFTKData.push([unit, pagu, ftk, pctStr, gap]);
-
-                    let tr = document.createElement('tr');
-                    tr.className = 'border-b dark:border-gray-700 hover:bg-pln-green/5 dark:hover:bg-pln-cyan/10 transition-colors bg-white dark:bg-gray-800/40';
-                    
-                    tr.innerHTML = `
-                        <td class="px-6 py-4 text-left font-semibold text-gray-800 dark:text-gray-200">${unit}</td>
-                        <td class="px-6 py-4 text-center text-gray-600 dark:text-gray-400">${pagu}</td>
-                        <td class="px-6 py-4 text-center text-gray-600 dark:text-gray-400 font-medium">${ftk}</td>
-                        <td class="px-6 py-4 text-center font-bold text-pln-green dark:text-pln-cyan">${pctStr}</td>
-                        <td class="px-6 py-4 text-center font-bold text-gray-700 dark:text-gray-300">${gap}</td>
-                    `;
-                    tableBody.appendChild(tr);
-                }
-            }
-
-            // Pesan kosong jika tidak ada data yang cocok dengan kriteria pencarian
-            if (displayedCount === 0) {
-                tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-10 font-medium text-gray-500 bg-gray-50 dark:bg-gray-800/50">Tidak ada data FTK yang sesuai dengan kriteria pencarian.</td></tr>`;
-            }
+                return matchUnit && matchPct;
+            });
+            renderFTKTable(currentFTKData);
         };
 
-        // FUNGSI UNTUK EXPORT DATA FTK KE EXCEL
-        function exportFTKToExcel() {
-            if (!window.currentFTKData || window.currentFTKData.length === 0) {
-                showToast("Data FTK kosong atau tidak ada data yang sesuai pencarian!"); 
+        function renderFTKTable(dataToRender) {
+            const tableBody = document.getElementById('tableFTKBody');
+            if (!tableBody) return;
+            tableBody.innerHTML = '';
+
+            if (dataToRender.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-gray-500 font-medium bg-gray-50 dark:bg-gray-800/50">Tidak ada data FTK yang sesuai dengan filter.</td></tr>`;
                 return;
             }
-            
-            showToast('Menyiapkan file Excel...');
-            
-            // Siapkan Array 2D untuk SheetJS
-            let exportData = [];
-            exportData.push(['Nama Unit', 'Pagu', 'FTK', 'Prosentase', 'GAP']); // Header manual
-            
-            // Masukkan data yang sudah difilter
-            window.currentFTKData.forEach(row => {
-                exportData.push(row);
-            });
 
+            dataToRender.forEach(item => {
+                let tr = document.createElement('tr');
+                tr.className = 'border-b dark:border-gray-700 hover:bg-pln-green/5 dark:hover:bg-pln-cyan/10 transition-colors bg-white dark:bg-gray-800/40';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 text-left font-semibold text-gray-800 dark:text-gray-200">${item.unit}</td>
+                    <td class="px-6 py-4 text-center text-gray-600 dark:text-gray-400">${item.pagu}</td>
+                    <td class="px-6 py-4 text-center text-gray-600 dark:text-gray-400 font-medium">${item.ftk}</td>
+                    <td class="px-6 py-4 text-center font-bold text-pln-green dark:text-pln-cyan">${item.pct}</td>
+                    <td class="px-6 py-4 text-center font-bold text-gray-700 dark:text-gray-300">${item.gap}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function exportFTKToExcel() {
+            if (!currentFTKData || currentFTKData.length === 0) {
+                showToast("Data FTK kosong!"); return;
+            }
+            showToast('Menyiapkan file Excel...');
+            let exportData = [['Nama Unit', 'Pagu', 'FTK', 'Prosentase', 'GAP']];
+            currentFTKData.forEach(m => exportData.push([m.unit, m.pagu, m.ftk, m.pct, m.gap]));
             try {
-                // Buat Workbook dan Worksheet baru
                 const ws = XLSX.utils.aoa_to_sheet(exportData);
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "FTK_UID_Lampung");
-                
-                // Triger Download
                 XLSX.writeFile(wb, "Data_FTK_UID_Lampung.xlsx");
-                
-                setTimeout(() => showToast('Berhasil mengunduh file Excel!'), 1000);
+                setTimeout(() => showToast('Berhasil mengunduh Excel!'), 1000);
             } catch(e) {
-                console.error("Export Error:", e);
-                showToast("Terjadi kesalahan saat memproses file Excel.");
+                showToast("Terjadi kesalahan saat mengekspor Excel.");
             }
         }
 
-        // FUNGSI BUILDER KALI JABAT UI
-        function buildKalijabatUI(containerId, rawData, rawHistData, labelRole, tableVarPrefix) {
+        function processFnpData() {
             try {
-                const container = document.getElementById(containerId);
-                if(!container) return;
+                // 1. Ekstrak Data Talent Ready (Dari sheet "TALENT READY")
+                allFnpData = [];
+                if (rawTalentReady && rawTalentReady.length > 1) {
+                    for (let i = 1; i < rawTalentReady.length; i++) {
+                        let row = rawTalentReady[i];
+                        if (!row || !row[1]) continue; // Abaikan baris kosong
+                        allFnpData.push({
+                            nip: String(row[2] || '-').trim(),
+                            nama: String(row[1] || '-').trim(),
+                            jabatan: String(row[4] || '-').trim(),
+                            unit: String(row[5] || '-').trim(),
+                            jenjang: String(row[7] || '-').trim(),
+                            jabatanProyeksi: String(row[8] || '-').trim(),
+                            nilai: String(row[9] || '-').trim(),
+                            status: String(row[10] || '-').trim(),
+                            tanggal: String(row[11] || '-').trim()
+                        });
+                    }
+                }
+                window.currentFnpData = [...allFnpData];
+                renderFnpTable(window.currentFnpData);
 
-                if (!rawData || rawData.length < 2) {
-                    container.innerHTML = `<div class="p-4 bg-red-100 text-red-700 rounded-xl border border-red-200">Terjadi kesalahan: Data sheet tidak ditemukan atau kosong.</div>`;
-                    return;
+                // 2. Grafik Status FnP (Interaktif)
+                if (rawStatusFnp && rawStatusFnp.length > 1) {
+                    let labelsStatus = [];
+                    let dataStatus = [];
+                    let colorsStatus = [];
+                    
+                    for (let i = 1; i < rawStatusFnp.length; i++) {
+                        let row = rawStatusFnp[i];
+                        if (!row || String(row[0] || '').trim() === '') continue;
+                        
+                        let status = String(row[0]).trim();
+                        let val = parseFloat(String(row[1] || '0').replace(',', '.')) || 0; 
+                        
+                        labelsStatus.push(status);
+                        dataStatus.push(val);
+                        if(status.toUpperCase().includes('DIREKOMENDASIKAN')) {
+                            colorsStatus.push('#4285F4'); // Biru 
+                        } else {
+                            colorsStatus.push('#EA4335'); // Merah
+                        }
+                    }
+                    createFnpStatusChart('chartStatusFnp', 'bar', labelsStatus, dataStatus, 'Rata-rata Nilai', colorsStatus);
                 }
 
-                const rows = rawData.slice(1);
-                let idxNama = 2; // Kolom C 
-                let idxUnit = 1; // Kolom B 
-                let idxJabatan = 3; // Kolom D 
-                let idxKali = 4; // Kolom E 
-                let historyStartIdx = 5; // Kolom F dst
-
-                let uniqueKali = new Set();
-                rows.forEach(row => {
-                    let kjVal = parseInt(row[idxKali]);
-                    if(!isNaN(kjVal)) uniqueKali.add(kjVal);
-                });
-                let sortedKali = Array.from(uniqueKali).sort((a, b) => b - a);
-
-                window[`current${tableVarPrefix}Data`] = [];
-                window[`current${tableVarPrefix}HistoryData`] = [];
-                window[`current${tableVarPrefix}HistoryName`] = "";
-
-                window[`export${tableVarPrefix}ToExcel`] = function() {
-                    let curData = window[`current${tableVarPrefix}Data`];
-                    if (!curData || curData.length === 0) return showToast("Data tabel kosong!");
-                    showToast('Menyiapkan file Excel...');
-                    let exportData = [['No', 'Nama Pegawai', 'Nama Unit', 'Jabatan Saat Ini', 'Kali Jabat']].concat(curData);
-                    try {
-                        const ws = XLSX.utils.aoa_to_sheet(exportData);
-                        const wb = XLSX.utils.book_new();
-                        XLSX.utils.book_append_sheet(wb, ws, `Kali_Jabat_${labelRole.replace(/[^a-zA-Z0-9]/g, "_")}`);
-                        XLSX.writeFile(wb, `Data_Kali_Jabat_${labelRole.replace(/[^a-zA-Z0-9]/g, "_")}.xlsx`);
-                    } catch(e) {}
-                };
-
-                window[`export${tableVarPrefix}HistoryToExcel`] = function() {
-                    let curHistData = window[`current${tableVarPrefix}HistoryData`];
-                    if (!curHistData || curHistData.length === 0) return showToast("Data riwayat kosong!");
-                    showToast('Menyiapkan file Excel...');
-                    let exportData = [['Urutan', 'Nama Jabatan', 'Nama Unit', 'Start Date', 'End Date']];
-                    curHistData.forEach((item, idx) => exportData.push([idx + 1, item.jabatan, item.unit, item.startDate, item.endDate]));
-                    try {
-                        const ws = XLSX.utils.aoa_to_sheet(exportData);
-                        const wb = XLSX.utils.book_new();
-                        let safeName = (window[`current${tableVarPrefix}HistoryName`] || "Pegawai").replace(/[^a-zA-Z0-9 ]/g, "").trim();
-                        XLSX.utils.book_append_sheet(wb, ws, "Riwayat");
-                        XLSX.writeFile(wb, `Riwayat_${labelRole.replace(/[^a-zA-Z0-9]/g, "_")}_${safeName}.xlsx`);
-                    } catch(e) {}
-                };
-
-                container.innerHTML = `
-                    <div class="bg-pln-green/10 border border-pln-green/20 p-4 rounded-xl mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-                        <p class="text-sm text-pln-darkGreen flex-1"><i class="fas fa-info-circle mr-1"></i> Klik <b>Nama Pegawai</b> pada tabel untuk melihat detail history jabatan ${labelRole}.</p>
-                        <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto justify-start lg:justify-end">
-                            <button onclick="export${tableVarPrefix}ToExcel()" class="flex items-center gap-2 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm"><i class="fas fa-file-excel"></i> Unduh Data Filter</button>
-                            <div class="flex items-center gap-3 bg-white px-4 py-2.5 rounded-lg border border-gray-200">
-                                <label for="filter-${tableVarPrefix}" class="text-sm font-bold text-gray-700"><i class="fas fa-filter text-pln-green"></i> Filter:</label>
-                                <select id="filter-${tableVarPrefix}" class="bg-transparent border-0 text-sm font-semibold cursor-pointer outline-none">
-                                    <option value="all">Semua Data</option>
-                                    ${sortedKali.map(k => `<option value="${k}">${k} Kali Menjabat</option>`).join('')}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-6">
-                        <div class="overflow-x-auto custom-scrollbar" style="max-height: 500px;">
-                            <table class="w-full text-sm text-left text-gray-500 whitespace-nowrap">
-                                <thead class="text-xs uppercase bg-gray-100 sticky top-0 shadow-sm z-20">
-                                    <tr><th class="px-5 py-4 border-r border-gray-200 text-center w-16">No</th><th class="px-5 py-4 border-r border-gray-200 min-w-[250px]">Nama Pegawai</th><th class="px-5 py-4 border-r border-gray-200 min-w-[200px]">Nama Unit</th><th class="px-5 py-4 border-r border-gray-200 min-w-[300px]">Jabatan Saat Ini</th><th class="px-5 py-4 text-center">Kali Jabat</th></tr>
-                                </thead>
-                                <tbody id="tbody-${tableVarPrefix}"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div id="detail-${tableVarPrefix}" class="hidden bg-white rounded-2xl shadow-lg border border-pln-green/30 overflow-hidden mt-6">
-                        <div class="px-6 py-4 border-b border-gray-200 bg-gray-50 flex justify-between items-center">
-                            <div><h3 class="text-lg font-bold text-gray-800" id="title-${tableVarPrefix}">-</h3><p class="text-sm text-gray-500">Riwayat Jabatan ${labelRole}</p></div>
-                            <div class="flex gap-3">
-                                <button onclick="export${tableVarPrefix}HistoryToExcel()" class="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg text-sm"><i class="fas fa-file-excel"></i> Unduh Riwayat</button>
-                                <button onclick="document.getElementById('detail-${tableVarPrefix}').classList.add('hidden')" class="text-gray-400 hover:text-red-500"><i class="fas fa-times text-xl"></i></button>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <div class="overflow-x-auto border border-gray-200 rounded-xl">
-                                <table class="w-full text-sm text-left text-gray-500 whitespace-nowrap">
-                                    <thead class="text-xs uppercase bg-gray-100 border-b border-gray-200">
-                                        <tr><th class="px-5 py-4 border-r border-gray-200 text-center">Urutan</th><th class="px-5 py-4 border-r border-gray-200">Nama Jabatan</th><th class="px-5 py-4 border-r border-gray-200">Nama Unit</th><th class="px-5 py-4 border-r border-gray-200 text-center">Start Date</th><th class="px-5 py-4 text-center">End Date</th></tr>
-                                    </thead>
-                                    <tbody id="hist-${tableVarPrefix}"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                const tbody = document.getElementById(`tbody-${tableVarPrefix}`);
-                const filterSelect = document.getElementById(`filter-${tableVarPrefix}`);
-                const detailSection = document.getElementById(`detail-${tableVarPrefix}`);
-                const detailTbody = document.getElementById(`hist-${tableVarPrefix}`);
-                const detailTitle = document.getElementById(`title-${tableVarPrefix}`);
-
-                window[`showHist_${tableVarPrefix}`] = function(globalIndex) {
-                    const rowData = rows[globalIndex];
-                    if(!rowData) return;
-                    const namaPegawai = String(rowData[idxNama] || '-');
-                    detailTitle.innerText = `Riwayat: ${namaPegawai}`;
-                    window[`current${tableVarPrefix}HistoryName`] = namaPegawai;
-                    detailTbody.innerHTML = '';
-
-                    let historyData = [];
-                    for (let i = historyStartIdx; i < rowData.length; i++) {
-                        let val = String(rowData[i] || '').trim();
-                        if (val !== '' && val.toLowerCase() !== 'null' && val !== '-') historyData.push(val);
-                    }
-
-                    if (historyData.length === 0) {
-                        window[`current${tableVarPrefix}HistoryData`] = [];
-                        detailTbody.innerHTML = `<tr><td colspan="5" class="text-center py-6">Tidak ada data riwayat jabatan.</td></tr>`;
-                    } else {
-                        let employeeRjabRows = [];
-                        if (rawHistData && rawHistData.length > 0) {
-                            employeeRjabRows = rawHistData.filter(r => r.some(cell => String(cell).toLowerCase().includes(namaPegawai.toLowerCase())));
-                        }
-                        let detailData = [];
-                        historyData.forEach(jabatan => {
-                            let unit = '-', startDate = '-', endDate = '-';
-                            if (employeeRjabRows.length > 0) {
-                                let matchedRow = employeeRjabRows.find(r => r.some(cell => String(cell).trim() === jabatan.trim())) || 
-                                                 employeeRjabRows.find(r => r.some(cell => String(cell).toLowerCase().includes(jabatan.toLowerCase())));
-                                if (matchedRow) { unit = matchedRow[6]||'-'; startDate = matchedRow[10]||'-'; endDate = matchedRow[11]||'-'; }
-                            }
-                            detailData.push({ jabatan, unit, startDate, endDate });
-                        });
-
-                        detailData.sort((a, b) => {
-                            const parseDate = (d) => {
-                                if (!d || d === '-') return 0;
-                                let p = String(d).trim().split(/[-/]/);
-                                if (p.length === 3) {
-                                    if (p[2].length === 4) return new Date(`${p[2]}-${p[1]}-${p[0]}T00:00:00`).getTime();
-                                    else if (p[0].length === 4) return new Date(`${p[0]}-${p[1]}-${p[2]}T00:00:00`).getTime();
-                                }
-                                let parsed = Date.parse(d); return isNaN(parsed) ? 0 : parsed;
-                            };
-                            return parseDate(b.startDate) - parseDate(a.startDate);
-                        });
-
-                        window[`current${tableVarPrefix}HistoryData`] = detailData;
-                        detailData.forEach((item, idx) => {
-                            detailTbody.innerHTML += `<tr class="border-b bg-white hover:bg-gray-50">
-                                <td class="px-5 py-4 text-center font-bold border-r border-gray-100">${idx + 1}</td>
-                                <td class="px-5 py-4 font-medium border-r border-gray-100">${item.jabatan}</td>
-                                <td class="px-5 py-4 border-r border-gray-100">${item.unit}</td>
-                                <td class="px-5 py-4 border-r border-gray-100 text-center"><span class="bg-gray-100 px-3 py-1 rounded-md text-xs border border-gray-200">${item.startDate}</span></td>
-                                <td class="px-5 py-4 text-center"><span class="bg-gray-100 px-3 py-1 rounded-md text-xs border border-gray-200">${item.endDate}</span></td>
-                            </tr>`;
-                        });
-                    }
-                    detailSection.classList.remove('hidden');
-                    setTimeout(() => detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
-                };
-
-                window[`render_${tableVarPrefix}`] = function(filterVal) {
-                    tbody.innerHTML = '';
-                    detailSection.classList.add('hidden'); 
-                    window[`current${tableVarPrefix}Data`] = [];
-                    let rowsToRender = rows.map((row, index) => ({ data: row, originalIndex: index }));
-
-                    if (filterVal !== 'all') {
-                        rowsToRender = rowsToRender.filter(item => parseInt(item.data[idxKali]) === parseInt(filterVal));
-                    } else {
-                        rowsToRender.sort((a, b) => (parseInt(b.data[idxKali])||0) - (parseInt(a.data[idxKali])||0));
-                    }
-
-                    let displayedCount = 0;
-                    rowsToRender.forEach(item => {
-                        let nama = String(item.data[idxNama] || '').trim();
-                        if(!nama) return;
-                        displayedCount++;
-                        let unit = String(item.data[idxUnit] || '-'), jabatan = String(item.data[idxJabatan] || '-'), kjStr = String(item.data[idxKali] || '0');
-                        window[`current${tableVarPrefix}Data`].push([displayedCount, nama, unit, jabatan, kjStr]);
+                // 3. Grafik Jenjang FnP (Stacked Interaktif)
+                if (rawJenjangFnp && rawJenjangFnp.length > 1) {
+                    let labelsJenjang = [];
+                    let dataDirekomendasikan = [];
+                    let dataDipertimbangkan = [];
+                    
+                    let headers = rawJenjangFnp[0].map(h => String(h).toUpperCase());
+                    let idxRek = headers.findIndex(h => h.includes('DIREKOMENDASIKAN'));
+                    let idxPer = headers.findIndex(h => h.includes('DIPERTIMBANGKAN'));
+                    
+                    if (idxRek === -1) idxRek = 2; 
+                    if (idxPer === -1) idxPer = 1; 
+                    
+                    for (let i = 1; i < rawJenjangFnp.length; i++) {
+                        let row = rawJenjangFnp[i];
+                        if (!row || String(row[0] || '').trim() === '') continue;
                         
-                        tbody.innerHTML += `<tr class="border-b bg-white hover:bg-pln-green/5 group">
-                            <td class="px-5 py-4 border-r border-gray-100 text-center font-medium">${displayedCount}</td>
-                            <td class="px-5 py-4 border-r border-gray-100"><a href="javascript:void(0)" onclick="showHist_${tableVarPrefix}(${item.originalIndex})" class="font-bold text-blue-600 hover:underline flex justify-between">${nama} <i class="fas fa-chevron-down opacity-0 group-hover:opacity-100"></i></a></td>
-                            <td class="px-5 py-4 border-r border-gray-100"><span class="px-3 py-1 inline-flex text-xs font-bold rounded-full bg-blue-100 text-blue-800 border border-blue-200">${unit}</span></td>
-                            <td class="px-5 py-4 border-r border-gray-100 whitespace-normal min-w-[300px]">${jabatan}</td>
-                            <td class="px-5 py-4 text-center font-extrabold text-pln-green text-lg bg-pln-green/5">${kjStr}</td>
-                        </tr>`;
-                    });
-                    if (displayedCount === 0) tbody.innerHTML = `<tr><td colspan="5" class="text-center py-12">Tidak ada data pegawai pada filter ini.</td></tr>`;
-                };
-
-                filterSelect.addEventListener('change', e => window[`render_${tableVarPrefix}`](e.target.value));
-                window[`render_${tableVarPrefix}`]('all');
-            } catch (err) { console.error("Error UI Builder:", err); }
-        }
-
-        function processKalijabatData() { buildKalijabatUI('page-kalijabat', rawKalijabat, rawRjab, 'SPVD', 'Kalijabat'); }
-        function processKalijabatAData() { buildKalijabatUI('page-kalijabata', rawKalijabatA, rawRjabA, 'SPVA NPU', 'KalijabatA'); }
-        function processKalijabatPUData() { buildKalijabatUI('page-kalijabatpu', rawKalijabatMul, rawRjabMul, 'SPVA PU', 'KalijabatPU'); }
-        function processKalijabatMDNPUData() { buildKalijabatUI('page-kalijabatmdnpu', rawKalijabatMsb, rawRjabMsb, 'MDNPU', 'KalijabatMDNPU'); }
-
-        function processPegPogData() {
-            try {
-                const container = document.getElementById('page-pegpog');
-                if(!container) return;
-                if (!rawAnomali || rawAnomali.length < 2) return;
-
-                window.currentPegPogData = [];
-                window.exportPegPogToExcel = function() {
-                    if (!window.currentPegPogData || window.currentPegPogData.length === 0) return showToast("Data kosong!");
-                    let exportData = [['No', 'NIP', 'Nama Pegawai', 'PeG', 'PoG', 'Jabatan']].concat(window.currentPegPogData);
-                    try {
-                        const ws = XLSX.utils.aoa_to_sheet(exportData);
-                        const wb = XLSX.utils.book_new();
-                        XLSX.utils.book_append_sheet(wb, ws, "Daftar_Anomali");
-                        XLSX.writeFile(wb, "Data_Anomali_PeG_PoG.xlsx");
-                    } catch(e) {}
-                };
-
-                container.innerHTML = `
-                    <div class="bg-red-50 border border-red-200 p-4 rounded-xl mb-6 flex justify-between items-center gap-4">
-                        <div><h3 class="text-lg font-bold text-gray-800"><i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>Daftar Anomali PeG > PoG</h3><p class="text-sm mt-1 text-gray-600">Berdasarkan Sheet "anomali".</p></div>
-                        <button onclick="exportPegPogToExcel()" class="flex items-center gap-2 px-5 py-2.5 bg-green-600 text-white rounded-lg text-sm"><i class="fas fa-file-excel"></i> Unduh Data</button>
-                    </div>
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-6">
-                        <div class="overflow-x-auto custom-scrollbar" style="max-height: 500px;">
-                            <table class="w-full text-sm text-left text-gray-500 whitespace-nowrap">
-                                <thead class="text-xs uppercase sticky top-0 shadow-sm z-20">
-                                    <tr>
-                                        <th class="px-5 py-4 border-r border-gray-200 text-center">No</th>
-                                        <th class="px-5 py-4 border-r border-gray-200">NIP</th>
-                                        <th class="px-5 py-4 border-r border-gray-200">Nama Pegawai</th>
-                                        <th class="px-5 py-4 border-r border-gray-200 text-center">PeG</th>
-                                        <th class="px-5 py-4 border-r border-gray-200 text-center">PoG</th>
-                                        <th class="px-5 py-4">Jabatan</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="pegpog-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                `;
-
-                const tbody = document.getElementById('pegpog-tbody');
-                const headers = rawAnomali[0];
-                const rows = rawAnomali.slice(1);
-
-                const idxNip = getColIdx(headers, 'nip', 0), idxNama = getColIdx(headers, 'nama', 1), idxJabatan = getColIdx(headers, 'jabatan', 2);
-                const idxPeg = 3, idxPog = 4, idxFilter = 5; 
-
-                let displayedCount = 0;
-                rows.forEach(row => {
-                    if (String(row[idxFilter] || '').trim().toLowerCase() === 'true') {
-                        displayedCount++;
-                        let nip = String(row[idxNip] || '-'), nama = String(row[idxNama] || '-'), peg = String(row[idxPeg] || '-'), pog = String(row[idxPog] || '-'), jabatan = String(row[idxJabatan] || '-');
-                        window.currentPegPogData.push([displayedCount, nip, nama, peg, pog, jabatan]);
-
-                        tbody.innerHTML += `<tr class="border-b bg-white hover:bg-red-50">
-                            <td class="px-5 py-4 border-r border-gray-100 text-center">${displayedCount}</td>
-                            <td class="px-5 py-4 border-r border-gray-100"><span class="font-mono bg-gray-100 px-3 py-1.5 rounded-lg border border-gray-200">${nip}</span></td>
-                            <td class="px-5 py-4 border-r border-gray-100 font-bold text-gray-800">${nama}</td>
-                            <td class="px-5 py-4 border-r border-gray-100 text-center"><span class="px-4 py-1.5 rounded-lg font-extrabold text-red-700 bg-red-100 border border-red-200">${peg}</span></td>
-                            <td class="px-5 py-4 border-r border-gray-100 text-center"><span class="px-4 py-1.5 rounded-lg font-extrabold text-blue-700 bg-blue-100 border border-blue-200">${pog}</span></td>
-                            <td class="px-5 py-4 whitespace-normal min-w-[300px]">${jabatan}</td>
-                        </tr>`;
+                        let jenjang = String(row[0]).trim();
+                        let valRek = parseInt(row[idxRek]) || 0;
+                        let valPer = parseInt(row[idxPer]) || 0;
+                        
+                        labelsJenjang.push(jenjang);
+                        dataDirekomendasikan.push(valRek);
+                        dataDipertimbangkan.push(valPer);
                     }
-                });
-                if (displayedCount === 0) tbody.innerHTML = `<tr><td colspan="6" class="text-center py-12">Tidak ada data anomali (Tidak ada Kolom F bernilai True).</td></tr>`;
-            } catch (error) { console.error("Error PegPog:", error); }
+                    createFnpJenjangChart('chartJenjangFnp', labelsJenjang, dataDirekomendasikan, dataDipertimbangkan);
+                }
+            } catch (error) {
+                console.error("Error processing FnP Data:", error);
+            }
         }
 
-        function createChart(canvasId, type, labels, data, labelText = 'Data', color = '#00A2B9') {
+        // FUNGSI UNTUK MERENDER CHART STATUS (KLIK UNTUK FILTER)
+        function createFnpStatusChart(canvasId, type, labels, data, labelText, color) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
@@ -1422,7 +1332,482 @@
                     datasets: [{
                         label: labelText,
                         data: data,
-                        backgroundColor: type === 'pie' || type === 'doughnut' ? ['#00A2B9', '#007A8C', '#12B0A2', '#00C4CC', '#F59E0B', '#EF4444', '#8B5CF6', '#3B82F6', '#10B981'] : color,
+                        backgroundColor: color,
+                        borderRadius: 4,
+                        cursor: 'pointer'
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    onClick: (event, elements, chart) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const statusLabel = chart.data.labels[index];
+                            
+                            // Logika Filter
+                            window.currentFnpData = allFnpData.filter(item => 
+                                item.status.toUpperCase().includes(statusLabel.toUpperCase())
+                            );
+                            renderFnpTable(window.currentFnpData);
+                            document.getElementById('fnpTableTitle').innerText = `Filter Status: ${statusLabel}`;
+                            document.getElementById('fnpTableSubtitle').innerHTML = `Menampilkan data pegawai berstatus ${statusLabel}`;
+                            document.getElementById('btnResetFnp').classList.remove('hidden');
+                            document.getElementById('fnpDetailSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    },
+                    onHover: (event, chartElement) => {
+                        event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        datalabels: { color: textColor, font: { weight: 'bold', size: 10 }, anchor: 'end', align: 'top', offset: 4 },
+                        tooltip: { backgroundColor: isDark ? '#1F2937' : '#FFF', titleColor: isDark ? '#FFF' : '#000', bodyColor: isDark ? '#D1D5DB' : '#374151', borderColor: isDark ? '#374151' : '#E5E7EB', borderWidth: 1 }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor }, grace: '15%' },
+                        x: { grid: { display: false }, ticks: { color: textColor, maxRotation: 45, minRotation: 0, font: { size: 10 } } }
+                    }
+                }
+            };
+            chartInstances[canvasId] = new Chart(ctx, config);
+        }
+
+        // FUNGSI UNTUK MERENDER CHART JENJANG (KLIK UNTUK FILTER)
+        function createFnpJenjangChart(canvasId, labels, dataRek, dataPer) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#E5E7EB' : '#374151'; 
+            const gridColor = isDark ? '#374151' : '#E5E7EB'; 
+
+            let config = {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'DIREKOMENDASIKAN', data: dataRek, backgroundColor: '#4285F4', cursor: 'pointer' },
+                        { label: 'DIPERTIMBANGKAN', data: dataPer, backgroundColor: '#EA4335', cursor: 'pointer' }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    onClick: (event, elements, chart) => {
+                        if (elements.length > 0) {
+                            const datasetIndex = elements[0].datasetIndex;
+                            const index = elements[0].index;
+                            const statusLabel = chart.data.datasets[datasetIndex].label;
+                            const jenjangLabel = chart.data.labels[index];
+                            
+                            // Logika Filter Ganda (Status & Jenjang)
+                            window.currentFnpData = allFnpData.filter(item => 
+                                item.status.toUpperCase().includes(statusLabel.toUpperCase()) &&
+                                item.jenjang.toUpperCase() === jenjangLabel.toUpperCase()
+                            );
+                            renderFnpTable(window.currentFnpData);
+                            document.getElementById('fnpTableTitle').innerText = `Filter: Jenjang ${jenjangLabel}`;
+                            document.getElementById('fnpTableSubtitle').innerHTML = `Status: ${statusLabel}`;
+                            document.getElementById('btnResetFnp').classList.remove('hidden');
+                            document.getElementById('fnpDetailSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    },
+                    onHover: (event, chartElement) => {
+                        event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+                    },
+                    plugins: {
+                        legend: { display: true, position: 'top', labels: { color: textColor, font: { size: 11 } } },
+                        datalabels: { color: '#ffffff', font: { weight: 'bold', size: 10 }, anchor: 'center', align: 'center', formatter: (v) => v > 0 ? v : '' },
+                        tooltip: { backgroundColor: isDark ? '#1F2937' : '#FFF', titleColor: isDark ? '#FFF' : '#000', bodyColor: isDark ? '#D1D5DB' : '#374151' }
+                    },
+                    scales: {
+                        y: { stacked: true, beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor } },
+                        x: { stacked: true, grid: { display: false }, ticks: { color: textColor, maxRotation: 45, minRotation: 0, font: { size: 10 } } }
+                    }
+                }
+            };
+            chartInstances[canvasId] = new Chart(ctx, config);
+        }
+
+        // FUNGSI UNTUK MERENDER TABEL FNP
+        function renderFnpTable(dataToRender) {
+            let tbody = document.getElementById('tableFnpBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            
+            if (dataToRender.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="10" class="text-center py-8 text-gray-500 font-medium bg-gray-50 dark:bg-gray-800/50">Tidak ada data pegawai yang sesuai.</td></tr>`;
+                return;
+            }
+            
+            dataToRender.forEach((m, index) => {
+                let rowBg = index % 2 === 0 ? 'bg-white dark:bg-pln-cardDark' : 'bg-gray-50 dark:bg-gray-800/60';
+                let isRekomendasi = m.status.toUpperCase().includes('DIREKOMENDASIKAN');
+                let statusBadge = isRekomendasi ? 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400' : 'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-400';
+
+                let tr = document.createElement('tr');
+                tr.className = `hover:bg-pln-green/5 dark:hover:bg-pln-cyan/10 transition-colors ${rowBg}`;
+                tr.innerHTML = `
+                    <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50 text-center font-bold text-gray-900 dark:text-white">${index + 1}</td>
+                    <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50 font-mono text-xs font-bold text-gray-700 dark:text-gray-300">${m.nip}</td>
+                    <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50 font-bold text-gray-800 dark:text-gray-200">${m.nama}</td>
+                    <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50 whitespace-normal min-w-[200px] text-gray-600 dark:text-gray-400">${m.jabatan}</td>
+                    <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50 whitespace-normal min-w-[150px] font-semibold text-gray-600 dark:text-gray-400">${m.unit}</td>
+                    <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50 font-medium text-gray-700 dark:text-gray-300">${m.jenjang}</td>
+                    <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50 whitespace-normal min-w-[200px] text-gray-600 dark:text-gray-400">${m.jabatanProyeksi}</td>
+                    <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50 text-center font-bold text-gray-800 dark:text-gray-200">${m.nilai}</td>
+                    <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50 text-center">
+                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full border ${statusBadge}">
+                            ${m.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 font-medium text-gray-600 dark:text-gray-400">${m.tanggal}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // FUNGSI UNTUK RESET FILTER FNP
+        function resetFnpFilter() {
+            window.currentFnpData = [...allFnpData];
+            renderFnpTable(window.currentFnpData);
+            document.getElementById('fnpTableTitle').innerText = "Daftar Pegawai FnP";
+            document.getElementById('fnpTableSubtitle').innerHTML = "Semua data Talent Ready";
+            document.getElementById('btnResetFnp').classList.add('hidden');
+        }
+
+        // FUNGSI UNTUK EXPORT DATA FNP KE EXCEL
+        window.exportFnpToExcel = function() {
+            if (!window.currentFnpData || window.currentFnpData.length === 0) {
+                showToast("Data FnP kosong!"); return;
+            }
+            showToast('Menyiapkan file Excel...');
+            let exportData = [['No', 'NIP', 'Nama', 'Jabatan Saat Ini', 'Unit', 'Jenjang Proyeksi', 'Jabatan Proyeksi', 'Nilai', 'Status', 'Tanggal']];
+            window.currentFnpData.forEach((m, index) => {
+                exportData.push([index + 1, m.nip, m.nama, m.jabatan, m.unit, m.jenjang, m.jabatanProyeksi, m.nilai, m.status, m.tanggal]);
+            });
+            try {
+                const ws = XLSX.utils.aoa_to_sheet(exportData);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "Talent_Ready_FnP");
+                XLSX.writeFile(wb, "Data_Pegawai_FnP.xlsx");
+                setTimeout(() => showToast('Berhasil mengunduh Excel!'), 1000);
+            } catch(e) {
+                showToast("Terjadi kesalahan saat mengekspor Excel.");
+            }
+        };
+
+        function generateKalijabatHTML(idPrefix, titleFull, titleShort, filterLabel) {
+            return `
+                <div class="bg-pln-green/10 dark:bg-pln-green/5 border border-pln-green/20 p-4 rounded-xl mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                    <p class="text-sm text-pln-darkGreen dark:text-pln-cyan flex-1">
+                        <i class="fas fa-info-circle mr-1"></i> Klik <b>Nama Pegawai</b> pada tabel untuk melihat detail history jabatan ${titleShort} di bagian bawah.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto justify-start lg:justify-end">
+                        <button onclick="export${idPrefix}ToExcel()" class="flex items-center justify-center gap-2 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium shadow-sm transition-transform transform hover:-translate-y-0.5 text-sm whitespace-nowrap">
+                            <i class="fas fa-file-excel text-lg"></i> Unduh Data Filter
+                        </button>
+                        <div class="flex items-center gap-3 bg-white dark:bg-gray-800 px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm flex-1 sm:flex-none">
+                            <label for="filter${idPrefix}" class="text-sm font-bold text-gray-700 dark:text-gray-300 whitespace-nowrap"><i class="fas fa-filter mr-1 text-pln-green"></i> Filter ${filterLabel}:</label>
+                            <select id="filter${idPrefix}" class="bg-transparent border-0 text-gray-900 text-sm focus:ring-0 block w-full sm:w-40 p-0.5 dark:text-white font-semibold cursor-pointer outline-none"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-pln-cardDark rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden flex flex-col mb-6">
+                    <div class="overflow-x-auto overflow-y-auto custom-scrollbar" style="max-height: 500px;">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                            <thead class="text-xs uppercase sticky top-0 shadow-sm z-20">
+                                <tr>
+                                    <th class="px-5 py-4 font-bold border-r border-gray-200 dark:border-gray-600 w-16 text-center">No</th>
+                                    <th class="px-5 py-4 font-bold border-r border-gray-200 dark:border-gray-600 min-w-[250px]">Nama Pegawai ${titleShort}</th>
+                                    <th class="px-5 py-4 font-bold border-r border-gray-200 dark:border-gray-600 min-w-[200px]">Nama Unit</th>
+                                    <th class="px-5 py-4 font-bold border-r border-gray-200 dark:border-gray-600 min-w-[300px]">Jabatan Saat Ini</th>
+                                    <th class="px-5 py-4 font-bold text-center">Kali Jabat (E)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-${idPrefix}" class="divide-y divide-gray-100 dark:divide-gray-700/50"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="detail-section-${idPrefix}" class="hidden bg-white dark:bg-pln-cardDark rounded-2xl shadow-lg border border-pln-green/30 dark:border-pln-cyan/30 overflow-hidden transform transition-all duration-300">
+                    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-white" id="detail-title-${idPrefix}">-</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Riwayat Jabatan Pegawai ${titleShort}</p>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-auto">
+                            <button onclick="export${idPrefix}HistoryToExcel()" class="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium shadow-sm transition-transform transform hover:-translate-y-0.5 text-sm whitespace-nowrap">
+                                <i class="fas fa-file-excel text-lg"></i> Unduh Riwayat
+                            </button>
+                            <button onclick="document.getElementById('detail-section-${idPrefix}').classList.add('hidden')" class="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+                                <i class="fas fa-times text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-0 sm:p-6">
+                        <div class="overflow-x-auto sm:rounded-xl border-t sm:border border-gray-200 dark:border-gray-700">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                                <thead class="text-xs uppercase sticky top-0 shadow-sm z-10">
+                                    <tr>
+                                        <th class="px-5 py-4 w-20 text-center font-bold border-r border-gray-200 dark:border-gray-600">Urutan</th>
+                                        <th class="px-5 py-4 font-bold border-r border-gray-200 dark:border-gray-600">Nama Jabatan (Kolom F dst)</th>
+                                        <th class="px-5 py-4 font-bold border-r border-gray-200 dark:border-gray-600">Nama Unit (Kolom G)</th>
+                                        <th class="px-5 py-4 font-bold text-center border-r border-gray-200 dark:border-gray-600">Start Date (Kolom K)</th>
+                                        <th class="px-5 py-4 font-bold text-center">End Date (Kolom L)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="detail-tbody-${idPrefix}" class="divide-y divide-gray-100 dark:divide-gray-700/50"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createKalijabatLogic(containerId, idPrefix, rawDataKalijabat, rawDataRjab, sheetNameSuffix) {
+            const container = document.getElementById(containerId);
+            if(!container) return;
+            if (!rawDataKalijabat || rawDataKalijabat.length < 2) {
+                container.innerHTML = `<div class="p-4 bg-red-100 text-red-700 rounded-xl">Terjadi kesalahan: Data tidak ditemukan.</div>`;
+                return;
+            }
+
+            const rows = rawDataKalijabat.slice(1);
+            let idxNama = 2, idxUnit = 1, idxJabatan = 3, idxKali = 4, historyStartIdx = 5;
+
+            let uniqueKali = new Set();
+            rows.forEach(r => { let k = parseInt(r[idxKali]); if(!isNaN(k)) uniqueKali.add(k); });
+            let sortedKali = Array.from(uniqueKali).sort((a, b) => b - a);
+
+            container.innerHTML = generateKalijabatHTML(idPrefix, `Kali Jabat ${sheetNameSuffix}`, sheetNameSuffix, sheetNameSuffix);
+
+            const filterSelect = document.getElementById(`filter${idPrefix}`);
+            filterSelect.innerHTML = `<option value="all">Semua Data</option>` + sortedKali.map(k => `<option value="${k}">${k} Kali Menjabat</option>`).join('');
+
+            window[`current${idPrefix}Data`] = [];
+            window[`current${idPrefix}HistoryData`] = [];
+            window[`current${idPrefix}HistoryName`] = "";
+
+            window[`export${idPrefix}ToExcel`] = function() {
+                if (window[`current${idPrefix}Data`].length === 0) { showToast("Data kosong!"); return; }
+                let exportData = [['No', 'Nama Pegawai', 'Nama Unit', 'Jabatan Saat Ini', 'Kali Jabat']].concat(window[`current${idPrefix}Data`]);
+                try {
+                    const wb = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(exportData), "Data");
+                    XLSX.writeFile(wb, `Data_Kali_Jabat_${sheetNameSuffix}.xlsx`);
+                    showToast('Berhasil mengunduh Excel!');
+                } catch(e) { showToast("Error ekspor Excel."); }
+            };
+
+            window[`export${idPrefix}HistoryToExcel`] = function() {
+                if (window[`current${idPrefix}HistoryData`].length === 0) { showToast("Riwayat kosong!"); return; }
+                let exportData = [['Urutan', 'Nama Jabatan', 'Nama Unit', 'Start Date', 'End Date']];
+                window[`current${idPrefix}HistoryData`].forEach((item, idx) => exportData.push([idx + 1, item.jabatan, item.unit, item.startDate, item.endDate]));
+                try {
+                    const wb = XLSX.utils.book_new();
+                    let safeName = window[`current${idPrefix}HistoryName`].replace(/[^a-zA-Z0-9 ]/g, "").trim();
+                    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(exportData), "Riwayat");
+                    XLSX.writeFile(wb, `Riwayat_${sheetNameSuffix}_${safeName}.xlsx`);
+                    showToast('Berhasil mengunduh Excel!');
+                } catch(e) { showToast("Error ekspor Excel."); }
+            };
+
+            window[`show${idPrefix}History`] = function(globalIndex) {
+                const rowData = rows[globalIndex];
+                if(!rowData) return;
+                const namaPegawai = String(rowData[idxNama] || 'Unknown');
+                document.getElementById(`detail-title-${idPrefix}`).innerText = `Riwayat: ${namaPegawai}`;
+                window[`current${idPrefix}HistoryName`] = namaPegawai;
+                const detailTbody = document.getElementById(`detail-tbody-${idPrefix}`);
+                detailTbody.innerHTML = '';
+
+                let historyData = [];
+                for (let i = historyStartIdx; i < rowData.length; i++) {
+                    let val = String(rowData[i] || '').trim();
+                    if (val && val.toLowerCase() !== 'null' && val !== '-') historyData.push(val);
+                }
+
+                if (historyData.length === 0) {
+                    window[`current${idPrefix}HistoryData`] = [];
+                    detailTbody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-gray-500 font-medium">Tidak ada data riwayat.</td></tr>`;
+                } else {
+                    let rjabRows = rawDataRjab.filter(r => r.some(c => String(c).toLowerCase().includes(namaPegawai.toLowerCase())));
+                    let detailData = [];
+                    historyData.forEach((jabatan) => {
+                        let unit = '-', startDate = '-', endDate = '-';
+                        let matched = rjabRows.find(r => r.some(c => String(c).trim() === jabatan.trim())) || 
+                                      rjabRows.find(r => r.some(c => String(c).toLowerCase().includes(jabatan.toLowerCase())));
+                        if(matched) { unit = matched[6]||'-'; startDate = matched[10]||'-'; endDate = matched[11]||'-'; }
+                        detailData.push({jabatan, unit, startDate, endDate});
+                    });
+
+                    detailData.sort((a, b) => {
+                        const parseDate = (d) => {
+                            if (!d || d === '-') return 0;
+                            let p = String(d).trim().split(/[-/]/);
+                            if (p.length === 3) {
+                                if (p[2].length === 4) return new Date(`${p[2]}-${p[1]}-${p[0]}T00:00:00`).getTime();
+                                if (p[0].length === 4) return new Date(`${p[0]}-${p[1]}-${p[2]}T00:00:00`).getTime();
+                            }
+                            let parsed = Date.parse(d);
+                            return isNaN(parsed) ? 0 : parsed;
+                        };
+                        return parseDate(b.startDate) - parseDate(a.startDate);
+                    });
+
+                    window[`current${idPrefix}HistoryData`] = detailData;
+                    detailData.forEach((item, idx) => {
+                        let tr = document.createElement('tr');
+                        tr.className = 'bg-white dark:bg-gray-800/40 hover:bg-pln-green/5 transition-colors';
+                        tr.innerHTML = `<td class="px-5 py-4 text-center font-bold border-r border-gray-100 dark:border-gray-700/50">${idx+1}</td>
+                                        <td class="px-5 py-4 whitespace-normal border-r border-gray-100 dark:border-gray-700/50">${item.jabatan}</td>
+                                        <td class="px-5 py-4 border-r border-gray-100 dark:border-gray-700/50">${item.unit}</td>
+                                        <td class="px-5 py-4 text-center border-r border-gray-100 dark:border-gray-700/50">${item.startDate}</td>
+                                        <td class="px-5 py-4 text-center">${item.endDate}</td>`;
+                        detailTbody.appendChild(tr);
+                    });
+                }
+                document.getElementById(`detail-section-${idPrefix}`).classList.remove('hidden');
+                setTimeout(() => document.getElementById(`detail-section-${idPrefix}`).scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+            };
+
+            window[`render${idPrefix}Table`] = function(filterVal) {
+                const tbody = document.getElementById(`tbody-${idPrefix}`);
+                tbody.innerHTML = '';
+                document.getElementById(`detail-section-${idPrefix}`).classList.add('hidden');
+                window[`current${idPrefix}Data`] = [];
+
+                let rowsToRender = rows.map((r, i) => ({ data: r, originalIndex: i }));
+                if (filterVal !== 'all') {
+                    rowsToRender = rowsToRender.filter(item => parseInt(item.data[idxKali]) === parseInt(filterVal));
+                } else {
+                    rowsToRender.sort((a, b) => (parseInt(b.data[idxKali])||0) - (parseInt(a.data[idxKali])||0));
+                }
+
+                let count = 0;
+                rowsToRender.forEach(item => {
+                    let r = item.data;
+                    let nama = String(r[idxNama]||'').trim();
+                    if(!nama) return;
+                    count++;
+                    let unit = String(r[idxUnit]||'-'), jabatan = String(r[idxJabatan]||'-'), kjStr = String(r[idxKali]||'0');
+                    window[`current${idPrefix}Data`].push([count, nama, unit, jabatan, kjStr]);
+
+                    let tr = document.createElement('tr');
+                    tr.className = 'group bg-white dark:bg-gray-800/40 hover:bg-pln-green/5 transition-colors border-b dark:border-gray-700';
+                    tr.innerHTML = `<td class="px-5 py-4 text-center border-r dark:border-gray-700/50">${count}</td>
+                                    <td class="px-5 py-4 border-r dark:border-gray-700/50">
+                                        <a href="javascript:void(0)" onclick="show${idPrefix}History(${item.originalIndex})" class="font-bold text-blue-600 hover:underline">
+                                            ${nama} <i class="fas fa-chevron-circle-down opacity-0 group-hover:opacity-100"></i>
+                                        </a>
+                                    </td>
+                                    <td class="px-5 py-4 border-r dark:border-gray-700/50">${unit}</td>
+                                    <td class="px-5 py-4 border-r dark:border-gray-700/50 whitespace-normal min-w-[250px]">${jabatan}</td>
+                                    <td class="px-5 py-4 text-center font-bold text-pln-green bg-pln-green/5">${kjStr} Kali</td>`;
+                    tbody.appendChild(tr);
+                });
+                if(count === 0) tbody.innerHTML = `<tr><td colspan="5" class="text-center py-6">Tidak ada data.</td></tr>`;
+            };
+
+            filterSelect.addEventListener('change', e => window[`render${idPrefix}Table`](e.target.value));
+            window[`render${idPrefix}Table`]('all');
+        }
+
+        function processKalijabatData() { createKalijabatLogic('page-kalijabat', 'Kalijabat', rawKalijabat, rawRjab, 'SPVD'); }
+        function processKalijabatAData() { createKalijabatLogic('page-kalijabata', 'KalijabatA', rawKalijabatA, rawRjabA, 'SPVA NPU'); }
+        function processKalijabatPUData() { createKalijabatLogic('page-kalijabatpu', 'KalijabatPU', rawKalijabatMul, rawRjabMul, 'SPVA PU'); }
+        function processKalijabatMDNPUData() { createKalijabatLogic('page-kalijabatmdnpu', 'KalijabatMDNPU', rawKalijabatMsb, rawRjabMsb, 'MDNPU'); }
+
+        function processPegPogData() {
+            const container = document.getElementById('page-pegpog');
+            if(!container || !rawAnomali || rawAnomali.length < 2) return;
+            
+            window.currentPegPogData = [];
+            window.exportPegPogToExcel = function() {
+                if (window.currentPegPogData.length === 0) return;
+                let exportData = [['No', 'NIP', 'Nama Pegawai', 'PeG', 'PoG', 'Jabatan']].concat(window.currentPegPogData);
+                try {
+                    const wb = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(exportData), "Anomali");
+                    XLSX.writeFile(wb, "Data_Anomali.xlsx");
+                } catch(e) {}
+            };
+
+            container.innerHTML = `
+                <div class="bg-red-50 border border-red-200 p-4 rounded-xl mb-6 flex justify-between items-center dark:bg-red-900/10 dark:border-red-900/30">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-white"><i class="fas fa-exclamation-triangle text-red-500"></i> Daftar Anomali PeG > PoG</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Menampilkan pegawai dengan Grade Pegawai lebih besar dari Posisi Grade (Kolom Filter = True).</p>
+                    </div>
+                    <button onclick="exportPegPogToExcel()" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-bold"><i class="fas fa-file-excel"></i> Unduh</button>
+                </div>
+                <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 max-h-[500px]">
+                    <table class="w-full text-sm text-left whitespace-nowrap">
+                        <thead class="text-xs uppercase sticky top-0 shadow-sm z-10">
+                            <tr><th class="px-5 py-4">No</th><th class="px-5 py-4">NIP</th><th class="px-5 py-4">Nama Pegawai</th><th class="px-5 py-4">PeG</th><th class="px-5 py-4">PoG</th><th class="px-5 py-4">Jabatan</th></tr>
+                        </thead>
+                        <tbody id="pegpog-tbody" class="bg-white dark:bg-gray-800"></tbody>
+                    </table>
+                </div>
+            `;
+
+            const tbody = document.getElementById('pegpog-tbody');
+            const headers = rawAnomali[0], rows = rawAnomali.slice(1);
+            let idxNip = getColIdx(headers, 'nip', 0), idxNama = getColIdx(headers, 'nama', 1), idxJabatan = getColIdx(headers, 'jabatan', 2), idxPeg = 3, idxPog = 4, idxFilter = 5;
+
+            let count = 0;
+            rows.forEach(r => {
+                if (String(r[idxFilter]||'').trim().toLowerCase() === 'true') {
+                    count++;
+                    let nip = r[idxNip]||'-', nama = r[idxNama]||'-', peg = r[idxPeg]||'-', pog = r[idxPog]||'-', jabatan = r[idxJabatan]||'-';
+                    window.currentPegPogData.push([count, nip, nama, peg, pog, jabatan]);
+                    let tr = document.createElement('tr');
+                    tr.className = 'border-b dark:border-gray-700';
+                    tr.innerHTML = `<td class="px-5 py-4 text-center">${count}</td><td class="px-5 py-4 font-bold">${nip}</td><td class="px-5 py-4 font-bold text-blue-600">${nama}</td><td class="px-5 py-4 text-center font-bold text-red-600">${peg}</td><td class="px-5 py-4 text-center font-bold text-blue-600">${pog}</td><td class="px-5 py-4 whitespace-normal min-w-[250px]">${jabatan}</td>`;
+                    tbody.appendChild(tr);
+                }
+            });
+            if (count === 0) tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6">Tidak ada anomali.</td></tr>`;
+        }
+
+        function createChart(canvasId, type, labels, data, labelText = 'Data', color = '#00A2B9') {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#E5E7EB' : '#374151'; 
+            const gridColor = isDark ? '#374151' : '#E5E7EB'; 
+
+            let datalabelsConfig = {
+                color: type === 'pie' || type === 'doughnut' ? '#ffffff' : textColor,
+                font: { weight: 'bold', size: 10 },
+                formatter: (value, ctx) => {
+                    if(type === 'pie' || type === 'doughnut') {
+                        let sum = ctx.chart._metasets[ctx.datasetIndex].total;
+                        if(sum === 0) return null;
+                        return (value * 100 / sum) > 3 ? (value * 100 / sum).toFixed(1) + "%" : null;
+                    }
+                    return value;
+                },
+                anchor: type === 'pie' ? 'center' : 'end',
+                align: type === 'pie' ? 'center' : 'top',
+                offset: type === 'pie' ? 0 : 4
+            };
+
+            let config = {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: labelText,
+                        data: data,
+                        backgroundColor: type === 'pie' || type === 'doughnut' ? 
+                            ['#00A2B9', '#007A8C', '#12B0A2', '#00C4CC', '#F59E0B', '#EF4444', '#8B5CF6', '#3B82F6', '#10B981'] : color,
                         borderRadius: type === 'bar' ? 4 : 0,
                     }]
                 },
@@ -1430,69 +1815,51 @@
                     responsive: true, maintainAspectRatio: false,
                     plugins: {
                         legend: { display: type === 'pie' || type === 'doughnut', position: 'right', labels: { color: textColor, font: { size: 11 } } },
-                        datalabels: {
-                            color: type === 'pie' || type === 'doughnut' ? '#ffffff' : textColor,
-                            font: { weight: 'bold', size: 10 },
-                            formatter: (value, ctx) => {
-                                if(type === 'pie' || type === 'doughnut') {
-                                    let sum = ctx.chart._metasets[ctx.datasetIndex].total;
-                                    if(sum === 0) return null;
-                                    let percentage = (value * 100 / sum).toFixed(1) + "%";
-                                    return (value * 100 / sum) > 3 ? percentage : null; 
-                                }
-                                return value;
-                            },
-                            anchor: type === 'pie' ? 'center' : 'end',
-                            align: type === 'pie' ? 'center' : 'top',
-                            offset: type === 'pie' ? 0 : 4
-                        }
+                        datalabels: datalabelsConfig,
+                        tooltip: { backgroundColor: isDark ? '#1F2937' : '#FFF', titleColor: isDark ? '#FFF' : '#000', bodyColor: isDark ? '#D1D5DB' : '#374151', borderColor: isDark ? '#374151' : '#E5E7EB', borderWidth: 1 }
                     }
                 }
             };
+
             if (type === 'bar' || type === 'line') {
                 config.options.scales = {
                     y: { beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor }, grace: '15%' },
                     x: { grid: { display: false }, ticks: { color: textColor, maxRotation: 45, minRotation: 0, font: { size: 10 } } }
                 };
             }
+
             chartInstances[canvasId] = new Chart(ctx, config);
         }
 
-        function createMobilityChart(canvasId, type, labels, data, labelText = 'Data', color = '#00A2B9', unitObj) {
+        function createStackedBarChart(canvasId, labels, dataRek, dataPer) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
             if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
 
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#E5E7EB' : '#374151'; 
+            const gridColor = isDark ? '#374151' : '#E5E7EB'; 
+
             let config = {
-                type: type,
+                type: 'bar',
                 data: {
                     labels: labels,
-                    datasets: [{
-                        label: labelText, data: data, backgroundColor: color, borderRadius: 4, hoverBackgroundColor: '#D97706', cursor: 'pointer'
-                    }]
+                    datasets: [
+                        { label: 'DIREKOMENDASIKAN', data: dataRek, backgroundColor: '#4285F4' },
+                        { label: 'DIPERTIMBANGKAN', data: dataPer, backgroundColor: '#EA4335' }
+                    ]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false,
-                    onClick: (event, elements, chart) => {
-                        if (elements.length > 0) {
-                            const label = chart.data.labels[elements[0].index]; 
-                            window.currentMobilityData = allMobilityData.filter(item => item.unitId === unitObj.id && item.lama === label);
-                            renderMobilityTable(window.currentMobilityData);
-                            document.getElementById('mobilityTableTitle').innerText = `Filter: ${unitObj.title}`;
-                            document.getElementById('mobilityTableSubtitle').innerHTML = `Masa Jabatan: <strong class="text-pln-green">${label} Tahun</strong>`;
-                            document.getElementById('btnResetMobility').classList.remove('hidden');
-                            document.getElementById('mobilityDetailSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                    },
-                    onHover: (event, chartElement) => event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default',
                     plugins: {
-                        legend: { display: false },
-                        datalabels: { color: '#374151', font: { weight: 'bold', size: 10 }, anchor: 'end', align: 'top', offset: 4 }
+                        legend: { display: true, position: 'top', labels: { color: textColor, font: { size: 11 } } },
+                        datalabels: { color: '#ffffff', font: { weight: 'bold', size: 10 }, anchor: 'center', align: 'center', formatter: (v) => v > 0 ? v : '' },
+                        tooltip: { backgroundColor: isDark ? '#1F2937' : '#FFF', titleColor: isDark ? '#FFF' : '#000', bodyColor: isDark ? '#D1D5DB' : '#374151' }
                     },
                     scales: {
-                        y: { beginAtZero: true, grace: '15%' },
-                        x: { grid: { display: false }, title: {display: true, text: 'Tahun', font: {size: 10}} }
+                        y: { stacked: true, beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor } },
+                        x: { stacked: true, grid: { display: false }, ticks: { color: textColor, maxRotation: 45, minRotation: 0, font: { size: 10 } } }
                     }
                 }
             };
@@ -1500,17 +1867,14 @@
         }
 
         function navigate(pageId) {
-            if (pageId === 'setting' && sessionStorage.getItem('username')?.toLowerCase() !== 'admin') {
-                return showToast('Akses ditolak: Hanya Admin yang dapat mengakses Pengaturan.');
-            }
-
-            ['dashboard', 'mobility', 'ftk', 'kalijabat', 'kalijabata', 'kalijabatpu', 'kalijabatmdnpu', 'pegpog', 'setting'].forEach(id => {
+            ['dashboard', 'mobility', 'ftk', 'fnp', 'kalijabat', 'kalijabata', 'kalijabatpu', 'kalijabatmdnpu', 'pegpog', 'setting'].forEach(id => {
                 const pageEl = document.getElementById(`page-${id}`);
                 const navEl = document.getElementById(`nav-${id}`);
+                
                 if (pageEl) pageEl.classList.add('hidden');
                 if (navEl) {
-                    navEl.classList.remove('bg-pln-green/10', 'text-pln-darkGreen', 'font-bold');
-                    navEl.classList.add('text-gray-600', 'font-semibold');
+                    navEl.classList.remove('bg-pln-green/10', 'text-pln-darkGreen', 'dark:bg-pln-green/20', 'dark:text-pln-cyan', 'font-bold');
+                    navEl.classList.add('text-gray-600', 'dark:text-gray-400', 'font-semibold');
                 }
             });
             
@@ -1519,22 +1883,30 @@
             
             if (targetPageEl) targetPageEl.classList.remove('hidden');
             if (targetNavEl) {
-                targetNavEl.classList.remove('text-gray-600', 'font-semibold');
-                targetNavEl.classList.add('bg-pln-green/10', 'text-pln-darkGreen', 'font-bold');
+                targetNavEl.classList.remove('text-gray-600', 'dark:text-gray-400', 'font-semibold');
+                targetNavEl.classList.add('bg-pln-green/10', 'text-pln-darkGreen', 'dark:bg-pln-green/20', 'dark:text-pln-cyan', 'font-bold');
             }
             
             const titles = { 
-                'dashboard': 'Dashboard Utama', 'mobility': 'Monev Mobility', 'ftk': 'Monev Pemenuhan FTK', 
-                'kalijabat': 'Monev Kali Jabat SPVD', 'kalijabata': 'Monev Kali Jabat SPVA NPU', 
-                'kalijabatpu': 'Monev Kali Jabat SPVA PU', 'kalijabatmdnpu': 'Monev Kali Jabat MDNPU',
-                'pegpog': 'Daftar Anomali PeG > PoG', 'setting': 'Pengaturan Sistem' 
+                'dashboard': 'Dashboard Utama', 'mobility': 'Monev Mobility', 'ftk': 'Monev Pemenuhan FTK', 'fnp': 'Monev Fit and Proper (FnP)',
+                'kalijabat': 'Monev Kali Jabat SPVD', 'kalijabata': 'Monev Kali Jabat SPVA NPU', 'kalijabatpu': 'Monev Kali Jabat SPVA PU',
+                'kalijabatmdnpu': 'Monev Kali Jabat MDNPU', 'pegpog': 'Daftar Anomali PeG > PoG', 'setting': 'Pengaturan Sistem' 
             };
             const titleEl = document.getElementById('page-title');
             if (titleEl) titleEl.innerText = titles[pageId] || 'Dashboard Utama';
 
-            if(window.innerWidth < 1024) toggleSidebar();
+            if(window.innerWidth < 1024) {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+                if(sidebar) sidebar.classList.add('-translate-x-full');
+                if(overlay) overlay.classList.add('hidden');
+            }
             
-            setTimeout(() => { for (let key in chartInstances) { if (chartInstances[key]) chartInstances[key].resize(); } }, 100);
+            setTimeout(() => {
+                for (let key in chartInstances) {
+                    if (chartInstances[key]) chartInstances[key].resize();
+                }
+            }, 100);
         }
 
         function toggleSidebar() {
@@ -1557,6 +1929,7 @@
         function initTheme() {
             const themeToggleBtn = document.getElementById('theme-toggle');
             const themeIcon = document.getElementById('theme-icon');
+            
             if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
                 if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
@@ -1575,6 +1948,16 @@
                         localStorage.theme = 'light';
                         if (themeIcon) themeIcon.classList.replace('fa-sun', 'fa-moon');
                     }
+                    
+                    if(typeof processDashboardData === 'function') processDashboardData();
+                    if(typeof processMobilityData === 'function') processMobilityData();
+                    if(typeof processFTKData === 'function') processFTKData();
+                    if(typeof processKalijabatData === 'function') processKalijabatData();
+                    if(typeof processKalijabatAData === 'function') processKalijabatAData();
+                    if(typeof processKalijabatPUData === 'function') processKalijabatPUData();
+                    if(typeof processKalijabatMDNPUData === 'function') processKalijabatMDNPUData();
+                    if(typeof processPegPogData === 'function') processPegPogData();
+                    if(typeof processFnpData === 'function') processFnpData();
                 });
             }
         }
