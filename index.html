@@ -30,7 +30,6 @@
     </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
@@ -80,7 +79,7 @@
         }
         
         table thead{background:linear-gradient(90deg,var(--pln-blue),#0074C8)!important;color:#fff!important}
-        table thead th{color:#fff!important;border-color:rgba(255,255,255,.18)!important;font-size:11px!important;letter-spacing:.06em!important; background-color: transparent !important;} /* Force transparent bg to fix readability */
+        table thead th{color:#fff!important;border-color:rgba(255,255,255,.18)!important;font-size:11px!important;letter-spacing:.06em!important; background-color: transparent !important;}
         table tbody tr:hover{background:rgba(0,91,172,.045)!important}
         button{transition:all .2s ease}
         .bg-green-600{background:linear-gradient(90deg,#008F45,var(--pln-green))!important}
@@ -103,11 +102,11 @@
             <form id="login-form" onsubmit="handleLogin(event)" class="space-y-5">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
-                    <input type="text" id="login-username" required autocomplete="username" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] focus:border-[#00A2B9] outline-none transition-all">
+                    <input type="text" id="login-username" required autocomplete="username" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] outline-none transition-all">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
-                    <input type="password" id="login-password" required autocomplete="current-password" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] focus:border-[#00A2B9] outline-none transition-all">
+                    <input type="password" id="login-password" required autocomplete="current-password" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] outline-none transition-all">
                 </div>
                 <button type="submit" id="btn-login" class="w-full bg-[#00A2B9] hover:bg-[#007A8C] text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-transform transform hover:-translate-y-0.5 active:translate-y-0 flex justify-center items-center gap-2">
                     <i class="fas fa-sign-in-alt"></i>
@@ -118,7 +117,6 @@
     </div>
 
     <div id="main-app" class="hidden">
-        
         <!-- Loader Screen -->
         <div id="loader" class="fixed inset-0 z-[120] flex flex-col items-center justify-center bg-white dark:bg-pln-dark">
             <img src="https://lh3.googleusercontent.com/d/1cbMrh6uqQMaK8Xk7REsf9PRdN6qbmMQJ" alt="PLN Logo" class="h-20 mb-6 animate-pulse">
@@ -126,15 +124,12 @@
             <p class="mt-4 text-lg font-medium text-pln-green">Mensinkronisasi Data Human Capital...</p>
         </div>
 
-        <!-- Kerangka Flex Layout (Responsif & Rapi) -->
         <div class="flex h-screen bg-gray-50 dark:bg-pln-dark overflow-hidden w-full relative">
             
-            <!-- Mobile Overlay -->
             <div id="sidebar-overlay" class="fixed inset-0 bg-gray-900/50 dark:bg-black/60 z-30 hidden lg:hidden backdrop-blur-sm transition-opacity" onclick="toggleSidebar()"></div>
 
             <!-- Sidebar -->
             <aside id="sidebar" class="w-72 flex-shrink-0 bg-white dark:bg-pln-cardDark shadow-xl border-r border-gray-200 dark:border-gray-800 flex flex-col transition-transform duration-300 transform -translate-x-full lg:translate-x-0 absolute lg:relative z-40 h-full">
-                <!-- Brand Logo -->
                 <div class="h-20 flex flex-shrink-0 items-center justify-center border-b border-gray-100 dark:border-gray-800 bg-white/50 dark:bg-gray-800/20 backdrop-blur-sm">
                     <img src="https://lh3.googleusercontent.com/d/1cbMrh6uqQMaK8Xk7REsf9PRdN6qbmMQJ" alt="PLN Logo" class="h-10 mr-3 drop-shadow-sm">
                     <div>
@@ -143,7 +138,6 @@
                     </div>
                 </div>
                 
-                <!-- Navigation Menu -->
                 <nav class="flex-1 overflow-y-auto px-4 py-6 space-y-1 custom-scrollbar">
                     <p class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-4 first:mt-0">Monitoring Utama</p>
                     <button onclick="navigate('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-3 bg-pln-green/10 text-pln-darkGreen dark:bg-pln-green/20 dark:text-pln-cyan rounded-xl font-bold transition-all border border-transparent">
@@ -183,7 +177,6 @@
                     </button>
                 </nav>
 
-                <!-- Logout Button at bottom -->
                 <div class="p-4 border-t border-gray-100 dark:border-gray-800 flex-shrink-0 bg-gray-50/50 dark:bg-gray-800/20">
                     <button onclick="handleLogout()" class="w-full flex justify-center items-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-900/20 dark:hover:bg-red-900/40 dark:text-red-400 py-3 rounded-xl font-bold transition-colors shadow-sm border border-red-100 dark:border-red-800/30">
                         <i class="fas fa-sign-out-alt"></i> Logout
@@ -263,7 +256,7 @@
                         </div>
                         <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 max-h-96">
                             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                <thead class="text-xs uppercase sticky top-0">
+                                <thead class="text-xs uppercase sticky top-0 bg-white dark:bg-gray-800">
                                     <tr>
                                         <th class="px-6 py-3">Nama Pegawai</th>
                                         <th class="px-6 py-3">Unit</th>
@@ -304,7 +297,7 @@
                         </div>
                         <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 max-h-[500px] custom-scrollbar shadow-inner">
                             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                                <thead class="text-xs uppercase sticky top-0 shadow-md z-10">
+                                <thead class="text-xs uppercase sticky top-0 shadow-md z-10 bg-white dark:bg-gray-800">
                                     <tr>
                                         <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600 tracking-wider">Nama Pegawai</th>
                                         <th class="px-6 py-4 font-bold border-r border-gray-200 dark:border-gray-600 tracking-wider">Jabatan</th>
@@ -370,7 +363,7 @@
 
                         <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 max-h-[500px] custom-scrollbar">
                             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                            <thead id="tableFTKHead" class="text-xs uppercase sticky top-0 shadow-sm z-10">
+                            <thead id="tableFTKHead" class="text-xs uppercase sticky top-0 shadow-sm z-10 bg-white dark:bg-gray-800">
                             </thead>
                             <tbody id="tableFTKBody"></tbody>
                         </table>
@@ -395,7 +388,7 @@
                         </div>
                     </div>
 
-                    <!-- Tabel Daftar Pegawai FnP (Tampil berdasarkan filter grafik) -->
+                    <!-- Tabel Daftar Pegawai FnP -->
                     <div id="fnpDetailSection" class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 mt-6">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                             <div>
@@ -433,30 +426,12 @@
                     </div>
                 </div>
 
-                <!-- Kali Jabat SPVD Page -->
-                <div id="page-kalijabat" class="hidden space-y-6">
-                    <!-- Konten digenerate oleh proses JS -->
-                </div>
-                
-                <!-- Kali Jabat SPVA NPU Page -->
-                <div id="page-kalijabata" class="hidden space-y-6">
-                    <!-- Konten digenerate oleh proses JS -->
-                </div>
-                
-                <!-- Kali Jabat SPVA PU Page -->
-                <div id="page-kalijabatpu" class="hidden space-y-6">
-                    <!-- Konten digenerate oleh proses JS -->
-                </div>
-                
-                <!-- Kali Jabat MDNPU Page -->
-                <div id="page-kalijabatmdnpu" class="hidden space-y-6">
-                    <!-- Konten digenerate oleh proses JS -->
-                </div>
-
-                <!-- PeG > PoG Page -->
-                <div id="page-pegpog" class="hidden space-y-6">
-                    <!-- Konten digenerate oleh proses JS -->
-                </div>
+                <!-- 5 MENU ANALISA JABATAN (DIRESTORASI) -->
+                <div id="page-kalijabat" class="hidden space-y-6"></div>
+                <div id="page-kalijabata" class="hidden space-y-6"></div>
+                <div id="page-kalijabatpu" class="hidden space-y-6"></div>
+                <div id="page-kalijabatmdnpu" class="hidden space-y-6"></div>
+                <div id="page-pegpog" class="hidden space-y-6"></div>
 
                 <div id="page-setting" class="hidden max-w-4xl mx-auto space-y-6">
                     <div class="bg-white dark:bg-pln-cardDark rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
@@ -509,29 +484,14 @@
 
     <script>
         const SHEET_ID = '1YIp30Qn6lugeDEDUvf3ZwPQTtVcYk7LJisUBfHtaFI8';
-        let rawPegawai = [];
-        let rawFTK = [];
-        let rawKalijabat = [];
-        let rawKalijabatA = [];
-        let rawRjab = [];
-        let rawRjabA = [];
-        let rawKalijabatMul = [];
-        let rawRjabMul = [];
-        let rawKalijabatMsb = [];
-        let rawRjabMsb = [];
-        let rawAnomali = [];
-        let rawStatusFnp = [];
-        let rawJenjangFnp = [];
-        let rawTalentReady = [];
+        let rawPegawai = [], rawFTK = [], rawKalijabat = [], rawKalijabatA = [], rawRjab = [], rawRjabA = [];
+        let rawKalijabatMul = [], rawRjabMul = [], rawKalijabatMsb = [], rawRjabMsb = [], rawAnomali = [];
+        let rawStatusFnp = [], rawJenjangFnp = [], rawTalentReady = [];
         let chartInstances = {};
 
-        // Variabel global untuk FTK dan Mobility
-        let allFTKData = [];
-        let currentFTKData = [];
+        let allFTKData = [], currentFTKData = [];
         let allMobilityData = [];
         window.currentMobilityData = [];
-        
-        // Variabel global untuk FnP
         let allFnpData = [];
         window.currentFnpData = [];
 
@@ -551,12 +511,10 @@
             }
         }
 
-        // Membatasi Akses Menu Pengaturan
         function applyRolePermissions() {
             const currentUser = sessionStorage.getItem('username');
             const settingNav = document.getElementById('nav-setting');
             const sysHeading = document.getElementById('nav-heading-system');
-
             if (currentUser !== 'admin') {
                 if(settingNav) settingNav.style.display = 'none';
                 if(sysHeading) sysHeading.style.display = 'none';
@@ -578,7 +536,6 @@
             const btn = document.getElementById('btn-login');
             const user = document.getElementById('login-username').value.trim();
             const pass = document.getElementById('login-password').value;
-            
             if(!user || !pass) return;
 
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memeriksa...';
@@ -586,7 +543,6 @@
 
             try {
                 const userData = await fetchSheetJSON('user');
-                
                 if (!userData || userData.length === 0) {
                     showToast('Gagal memuat! Pastikan sheet bernama persis "user".');
                     btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> <span>Login</span>';
@@ -600,7 +556,6 @@
                 for (let i = 0; i < userData.length; i++) {
                     let sheetUser = String(userData[i][0] || '').trim().toLowerCase();
                     let sheetPass = String(userData[i][1] || '').trim().toLowerCase();
-                    
                     if (sheetUser === user.toLowerCase() && sheetPass === hashedInput.toLowerCase()) {
                         isValid = true;
                         break;
@@ -641,17 +596,13 @@
             const btn = document.getElementById('btn-add-user');
             const user = document.getElementById('new-username').value.trim();
             const pass = document.getElementById('new-password').value;
-            
             if(!user || !pass) return;
             
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
             btn.disabled = true;
-            
             try {
                 const hashedPassword = await hashPassword(pass);
-                // URL API Google Apps Script untuk POST
                 const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxlA1I4vj3jHmv7JgGEiBML0mwzWKDIxXvrjIqZl90gu0cN6qz1gFWgil4pegWVA1rN1w/exec"; 
-                
                 const formData = new FormData();
                 formData.append('username', user);
                 formData.append('password', hashedPassword);
@@ -668,7 +619,6 @@
                     })
                     .catch(err => {
                         showToast('Gagal memanggil API. Web Apps Script mungkin belum di-deploy Anyone.');
-                        console.error(err);
                     })
                     .finally(() => {
                         btn.innerHTML = '<i class="fas fa-user-plus"></i> Simpan';
@@ -691,7 +641,6 @@
                     const json = JSON.parse(match[1]);
                     const rows = [];
                     const numCols = json.table.cols.length;
-                    
                     json.table.rows.forEach(r => {
                         const rowData = [];
                         for (let i = 0; i < numCols; i++) {
@@ -711,65 +660,28 @@
         async function loadAllData() {
             try {
                 const [pegawaiData, ftkData, kalijabatData, kalijabatAData, rjabData, rjabAData, kalijabatMulData, rjabMulData, kalijabatMsbData, rjabMsbData, anomaliData, statusFnpData, jenjangFnpData, talentReadyData] = await Promise.all([
-                    fetchSheetJSON('data pegawai'),
-                    fetchSheetJSON('up'),
-                    fetchSheetJSON('kalijabat'),
-                    fetchSheetJSON('kalijabatA'),
-                    fetchSheetJSON('rjab'),
-                    fetchSheetJSON('rjabA'),
-                    fetchSheetJSON('kalijabatmul'),
-                    fetchSheetJSON('rjabmul'),
-                    fetchSheetJSON('kalijabatmsb'),
-                    fetchSheetJSON('rjabmsb'),
-                    fetchSheetJSON('anomali'),
-                    fetchSheetJSON('Statusfnp'),
-                    fetchSheetJSON('Jenjangfnp'),
-                    fetchSheetJSON('TALENT READY')
+                    fetchSheetJSON('data pegawai'), fetchSheetJSON('up'),
+                    fetchSheetJSON('kalijabat'), fetchSheetJSON('kalijabatA'), fetchSheetJSON('rjab'), fetchSheetJSON('rjabA'),
+                    fetchSheetJSON('kalijabatmul'), fetchSheetJSON('rjabmul'), fetchSheetJSON('kalijabatmsb'), fetchSheetJSON('rjabmsb'),
+                    fetchSheetJSON('anomali'), fetchSheetJSON('Statusfnp'), fetchSheetJSON('Jenjangfnp'), fetchSheetJSON('TALENT READY')
                 ]);
                 
-                rawPegawai = pegawaiData || [];
-                rawFTK = ftkData || [];
-                rawKalijabat = kalijabatData || [];
-                rawKalijabatA = kalijabatAData || [];
-                rawRjab = rjabData || [];
-                rawRjabA = rjabAData || [];
-                rawKalijabatMul = kalijabatMulData || [];
-                rawRjabMul = rjabMulData || [];
-                rawKalijabatMsb = kalijabatMsbData || [];
-                rawRjabMsb = rjabMsbData || [];
-                rawAnomali = anomaliData || [];
-                rawStatusFnp = statusFnpData || [];
-                rawJenjangFnp = jenjangFnpData || [];
-                rawTalentReady = talentReadyData || [];
+                rawPegawai = pegawaiData || []; rawFTK = ftkData || [];
+                rawKalijabat = kalijabatData || []; rawKalijabatA = kalijabatAData || []; rawRjab = rjabData || []; rawRjabA = rjabAData || [];
+                rawKalijabatMul = kalijabatMulData || []; rawRjabMul = rjabMulData || []; rawKalijabatMsb = kalijabatMsbData || []; rawRjabMsb = rjabMsbData || [];
+                rawAnomali = anomaliData || []; rawStatusFnp = statusFnpData || []; rawJenjangFnp = jenjangFnpData || []; rawTalentReady = talentReadyData || [];
                 
                 document.getElementById('loader').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('loader').style.display = 'none';
-                    if(rawPegawai.length > 0) {
-                        processDashboardData();
-                        processMobilityData();
-                    }
-                    if(rawFTK.length > 0) {
-                        processFTKData();
-                    }
-                    if(rawKalijabat.length > 0) {
-                        processKalijabatData();
-                    }
-                    if(rawKalijabatA.length > 0) {
-                        processKalijabatAData();
-                    }
-                    if(rawKalijabatMul.length > 0) {
-                        processKalijabatPUData();
-                    }
-                    if(rawKalijabatMsb.length > 0) {
-                        processKalijabatMDNPUData();
-                    }
-                    if(rawAnomali.length > 0) {
-                        processPegPogData();
-                    }
-                    if(rawStatusFnp.length > 0 || rawJenjangFnp.length > 0) {
-                        processFnpData();
-                    }
+                    if(rawPegawai.length > 0) { processDashboardData(); processMobilityData(); }
+                    if(rawFTK.length > 0) processFTKData();
+                    if(rawKalijabat.length > 0) processKalijabatData();
+                    if(rawKalijabatA.length > 0) processKalijabatAData();
+                    if(rawKalijabatMul.length > 0) processKalijabatPUData();
+                    if(rawKalijabatMsb.length > 0) processKalijabatMDNPUData();
+                    if(rawAnomali.length > 0) processPegPogData();
+                    if(rawStatusFnp.length > 0 || rawJenjangFnp.length > 0) processFnpData();
                 }, 300);
             } catch (error) {
                 console.error("Terjadi error saat load data utama:", error);
@@ -814,9 +726,7 @@
                     let kelUsia = String(row[idxKelUsia] || 'Unknown');
                     
                     let gender = String(row[COL_P] || '').trim();
-                    if (gender !== '') {
-                        genderCount[gender] = (genderCount[gender] || 0) + 1;
-                    }
+                    if (gender !== '') genderCount[gender] = (genderCount[gender] || 0) + 1;
 
                     let masa = row[COL_AQ];
                     if (masa !== null && masa !== undefined && masa !== '') {
@@ -827,9 +737,7 @@
                     }
 
                     let usia = parseInt(row[COL_AL]) || 0;
-                    if(usia === 55) {
-                        pensiunList.push({ nama: nama, unit: unit, usia: usia });
-                    }
+                    if(usia === 55) pensiunList.push({ nama: nama, unit: unit, usia: usia });
 
                     unitCount[unit] = (unitCount[unit] || 0) + 1;
                     pendCount[pend] = (pendCount[pend] || 0) + 1;
@@ -863,9 +771,7 @@
                         tbody.appendChild(tr);
                     });
                 }
-            } catch (error) {
-                console.error("Error processing Dashboard Data:", error);
-            }
+            } catch (error) { console.error("Error processing Dashboard:", error); }
         }
 
         function processMobilityData() {
@@ -888,12 +794,7 @@
                     { id: 'uid lampung', title: 'UID LAMPUNG', keywords: ['uid lampung', 'induk', 'wilayah'] }
                 ];
 
-                const targetJabatans = [
-                    'general manager', 'senior manager', 
-                    'manager', 'manajer', 
-                    'assistant manager', 'asisten manajer', 
-                    'unit pelaksana', 'unit layanan', 'team leader'
-                ];
+                const targetJabatans = ['general manager', 'senior manager', 'manager', 'manajer', 'assistant manager', 'asisten manajer', 'unit pelaksana', 'unit layanan', 'team leader'];
 
                 let unitDataGroup = {};
                 targetUnits.forEach(u => unitDataGroup[u.id] = {});
@@ -907,8 +808,7 @@
                     let jabatan = String(row[idxJabatan] || '').toLowerCase();
                     let lama = row[COL_AQ];
                     
-                    let isTargetJabatan = targetJabatans.some(tj => jabatan.includes(tj));
-                    if(!isTargetJabatan) return;
+                    if(!targetJabatans.some(tj => jabatan.includes(tj))) return;
 
                     if (lama !== null && lama !== undefined && lama !== '') {
                         let lamaStr = String(lama).trim();
@@ -960,12 +860,8 @@
                         }
                     });
                 }
-
                 renderMobilityTable(window.currentMobilityData);
-
-            } catch (error) {
-                console.error("Error processing Mobility Data:", error);
-            }
+            } catch (error) { console.error("Error processing Mobility Data:", error); }
         }
 
         function createMobilityChart(canvasId, type, labels, data, labelText = 'Data', color = '#00A2B9', unitObj) {
@@ -973,7 +869,6 @@
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
             if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
-
             const isDark = document.documentElement.classList.contains('dark');
             const textColor = isDark ? '#E5E7EB' : '#374151'; 
             const gridColor = isDark ? '#374151' : '#E5E7EB'; 
@@ -982,18 +877,10 @@
                 type: type,
                 data: {
                     labels: labels,
-                    datasets: [{
-                        label: labelText,
-                        data: data,
-                        backgroundColor: color,
-                        borderRadius: 4,
-                        hoverBackgroundColor: '#D97706',
-                        cursor: 'pointer'
-                    }]
+                    datasets: [{ label: labelText, data: data, backgroundColor: color, borderRadius: 4, hoverBackgroundColor: '#D97706', cursor: 'pointer' }]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
+                    responsive: true, maintainAspectRatio: false,
                     onClick: (event, elements, chart) => {
                         if (elements.length > 0) {
                             const firstPoint = elements[0];
@@ -1006,9 +893,7 @@
                             document.getElementById('mobilityDetailSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
                     },
-                    onHover: (event, chartElement) => {
-                        event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
-                    },
+                    onHover: (event, chartElement) => { event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default'; },
                     plugins: {
                         legend: { display: false },
                         datalabels: { color: textColor, font: { weight: 'bold', size: 10 }, anchor: 'end', align: 'top', offset: 4 },
@@ -1075,9 +960,7 @@
         }
 
         function exportMobilityToExcel() {
-            if (!window.currentMobilityData || window.currentMobilityData.length === 0) {
-                showToast("Data Mobility kosong!"); return;
-            }
+            if (!window.currentMobilityData || window.currentMobilityData.length === 0) { showToast("Data Mobility kosong!"); return; }
             showToast('Menyiapkan file Excel...');
             let exportData = [['Nama Pegawai', 'Jabatan', 'Unit', 'Lama Menjabat (Tahun)']];
             window.currentMobilityData.forEach(m => exportData.push([m.nama, m.jabatan, m.unit, m.lama]));
@@ -1086,16 +969,12 @@
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "Masa_Jabatan_Manajerial");
                 XLSX.writeFile(wb, "Data_Mobility_Masa_Jabatan.xlsx");
-                setTimeout(() => showToast('Berhasil mengunduh file Excel!'), 1000);
-            } catch(e) {
-                showToast("Terjadi kesalahan saat mengekspor Excel.");
-            }
+            } catch(e) { showToast("Terjadi kesalahan saat mengekspor Excel."); }
         }
 
         function processFTKData() {
             try {
                 if (!rawFTK || rawFTK.length < 2) return;
-
                 const getPct = (rowIdx, colIdx) => {
                     if (rowIdx < rawFTK.length && rawFTK[rowIdx][colIdx] !== undefined) {
                         let valStr = String(rawFTK[rowIdx][colIdx]).trim().replace(',', '.'); 
@@ -1109,12 +988,8 @@
                 };
 
                 let upCombined = [
-                    { label: 'UID Lampung', value: getPct(1, 3) },
-                    { label: 'UP3 Kotabumi', value: getPct(2, 3) },
-                    { label: 'UP3 Metro', value: getPct(10, 3) },
-                    { label: 'UP3 Tanjung Karang', value: getPct(17, 3) },
-                    { label: 'UP3 Pringsewu', value: getPct(26, 3) },
-                    { label: 'UP2D Lampung', value: getPct(33, 3) },
+                    { label: 'UID Lampung', value: getPct(1, 3) }, { label: 'UP3 Kotabumi', value: getPct(2, 3) }, { label: 'UP3 Metro', value: getPct(10, 3) },
+                    { label: 'UP3 Tanjung Karang', value: getPct(17, 3) }, { label: 'UP3 Pringsewu', value: getPct(26, 3) }, { label: 'UP2D Lampung', value: getPct(33, 3) },
                     { label: 'UP2K Lampung', value: getPct(34, 3) }
                 ];
                 upCombined.sort((a, b) => a.value - b.value);
@@ -1123,9 +998,7 @@
                 let ulpCombined = [];
                 for (let i = 1; i < rawFTK.length; i++) {
                     let namaKolomA = String(rawFTK[i][0] || '').trim();
-                    if (namaKolomA.toUpperCase().startsWith('ULP')) {
-                        ulpCombined.push({ label: namaKolomA, value: getPct(i, 3) });
-                    }
+                    if (namaKolomA.toUpperCase().startsWith('ULP')) ulpCombined.push({ label: namaKolomA, value: getPct(i, 3) });
                 }
                 ulpCombined.sort((a, b) => a.value - b.value);
                 createChart('chartFTKULP', 'bar', ulpCombined.map(i => i.label), ulpCombined.map(i => i.value), 'Prosentase Pemenuhan FTK (%)', '#EF4444');
@@ -1156,19 +1029,14 @@
                     let gap = rawFTK[i][4] !== undefined ? rawFTK[i][4] : '-';
 
                     let pctNum = parseFloat(String(pct).replace('%', '').replace(',', '.'));
-                    if (!String(pct).includes('%') && pctNum <= 1.5) {
-                        pctNum = pctNum * 100;
-                    }
+                    if (!String(pct).includes('%') && pctNum <= 1.5) pctNum = pctNum * 100;
                     
                     allFTKData.push({ unit, pagu, ftk, pct, gap, pctNum });
                 }
 
                 currentFTKData = [...allFTKData];
                 renderFTKTable(currentFTKData);
-
-            } catch (error) {
-                console.error("Error processing FTK Data:", error);
-            }
+            } catch (error) { console.error("Error processing FTK Data:", error); }
         }
 
         window.applyFTKFilter = function() {
@@ -1197,31 +1065,24 @@
             const tableBody = document.getElementById('tableFTKBody');
             if (!tableBody) return;
             tableBody.innerHTML = '';
-
             if (dataToRender.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-gray-500 font-medium bg-gray-50 dark:bg-gray-800/50">Tidak ada data FTK yang sesuai dengan filter.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-gray-500 font-medium bg-gray-50 dark:bg-gray-800/50">Tidak ada data FTK.</td></tr>`;
                 return;
             }
-
             dataToRender.forEach(item => {
                 let tr = document.createElement('tr');
                 tr.className = 'border-b dark:border-gray-700 hover:bg-pln-green/5 dark:hover:bg-pln-cyan/10 transition-colors bg-white dark:bg-gray-800/40';
-                tr.innerHTML = `
-                    <td class="px-6 py-4 text-left font-semibold text-gray-800 dark:text-gray-200">${item.unit}</td>
-                    <td class="px-6 py-4 text-center text-gray-600 dark:text-gray-400">${item.pagu}</td>
-                    <td class="px-6 py-4 text-center text-gray-600 dark:text-gray-400 font-medium">${item.ftk}</td>
-                    <td class="px-6 py-4 text-center font-bold text-pln-green dark:text-pln-cyan">${item.pct}</td>
-                    <td class="px-6 py-4 text-center font-bold text-gray-700 dark:text-gray-300">${item.gap}</td>
-                `;
+                tr.innerHTML = `<td class="px-6 py-4 text-left font-semibold text-gray-800 dark:text-gray-200">${item.unit}</td>
+                                <td class="px-6 py-4 text-center text-gray-600 dark:text-gray-400">${item.pagu}</td>
+                                <td class="px-6 py-4 text-center text-gray-600 dark:text-gray-400 font-medium">${item.ftk}</td>
+                                <td class="px-6 py-4 text-center font-bold text-pln-green dark:text-pln-cyan">${item.pct}</td>
+                                <td class="px-6 py-4 text-center font-bold text-gray-700 dark:text-gray-300">${item.gap}</td>`;
                 tableBody.appendChild(tr);
             });
         }
 
         function exportFTKToExcel() {
-            if (!currentFTKData || currentFTKData.length === 0) {
-                showToast("Data FTK kosong!"); return;
-            }
-            showToast('Menyiapkan file Excel...');
+            if (!currentFTKData || currentFTKData.length === 0) { showToast("Data FTK kosong!"); return; }
             let exportData = [['Nama Unit', 'Pagu', 'FTK', 'Prosentase', 'GAP']];
             currentFTKData.forEach(m => exportData.push([m.unit, m.pagu, m.ftk, m.pct, m.gap]));
             try {
@@ -1229,20 +1090,18 @@
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "FTK_UID_Lampung");
                 XLSX.writeFile(wb, "Data_FTK_UID_Lampung.xlsx");
-                setTimeout(() => showToast('Berhasil mengunduh Excel!'), 1000);
-            } catch(e) {
-                showToast("Terjadi kesalahan saat mengekspor Excel.");
-            }
+            } catch(e) { showToast("Terjadi kesalahan."); }
         }
 
+        // ================= PERBAIKAN FITUR FNP =================
         function processFnpData() {
             try {
-                // 1. Ekstrak Data Talent Ready (Dari sheet "TALENT READY")
+                // 1. Ekstrak Data Talent Ready
                 allFnpData = [];
                 if (rawTalentReady && rawTalentReady.length > 1) {
                     for (let i = 1; i < rawTalentReady.length; i++) {
                         let row = rawTalentReady[i];
-                        if (!row || !row[1]) continue; // Abaikan baris kosong
+                        if (!row || !row[1]) continue;
                         allFnpData.push({
                             nip: String(row[2] || '-').trim(),
                             nama: String(row[1] || '-').trim(),
@@ -1259,48 +1118,57 @@
                 window.currentFnpData = [...allFnpData];
                 renderFnpTable(window.currentFnpData);
 
-                // 2. Grafik Status FnP (Interaktif)
+                // 2. Grafik Status FnP
                 if (rawStatusFnp && rawStatusFnp.length > 1) {
-                    let labelsStatus = [];
-                    let dataStatus = [];
-                    let colorsStatus = [];
-                    
+                    let labelsStatus = [], dataStatus = [], colorsStatus = [];
                     for (let i = 1; i < rawStatusFnp.length; i++) {
                         let row = rawStatusFnp[i];
                         if (!row || String(row[0] || '').trim() === '') continue;
-                        
                         let status = String(row[0]).trim();
                         let val = parseFloat(String(row[1] || '0').replace(',', '.')) || 0; 
                         
                         labelsStatus.push(status);
                         dataStatus.push(val);
+                        // Perbaikan Warna: Hijau untuk Rekomendasi, Merah untuk Dipertimbangkan
                         if(status.toUpperCase().includes('DIREKOMENDASIKAN')) {
-                            colorsStatus.push('#4285F4'); // Biru 
+                            colorsStatus.push('#10B981'); // Hijau 
                         } else {
-                            colorsStatus.push('#EA4335'); // Merah
+                            colorsStatus.push('#EF4444'); // Merah
                         }
                     }
                     createFnpStatusChart('chartStatusFnp', 'bar', labelsStatus, dataStatus, 'Rata-rata Nilai', colorsStatus);
                 }
 
-                // 3. Grafik Jenjang FnP (Stacked Interaktif)
+                // 3. Grafik Jenjang FnP
                 if (rawJenjangFnp && rawJenjangFnp.length > 1) {
-                    let labelsJenjang = [];
-                    let dataDirekomendasikan = [];
-                    let dataDipertimbangkan = [];
+                    let labelsJenjang = [], dataDirekomendasikan = [], dataDipertimbangkan = [];
                     
-                    let headers = rawJenjangFnp[0].map(h => String(h).toUpperCase());
-                    let idxRek = headers.findIndex(h => h.includes('DIREKOMENDASIKAN'));
-                    let idxPer = headers.findIndex(h => h.includes('DIPERTIMBANGKAN'));
+                    // Deteksi Header Cerdas
+                    let headers0 = rawJenjangFnp[0] ? rawJenjangFnp[0].map(h => String(h).toUpperCase()) : [];
+                    let headers1 = rawJenjangFnp[1] ? rawJenjangFnp[1].map(h => String(h).toUpperCase()) : [];
                     
-                    if (idxRek === -1) idxRek = 2; 
-                    if (idxPer === -1) idxPer = 1; 
+                    let idxRek = headers0.findIndex(h => h.includes('DIREKOMENDASIKAN') && !h.includes('TIDAK'));
+                    if (idxRek === -1) idxRek = headers1.findIndex(h => h.includes('DIREKOMENDASIKAN') && !h.includes('TIDAK'));
+
+                    let idxPer = headers0.findIndex(h => h.includes('DIPERTIMBANGKAN'));
+                    if (idxPer === -1) idxPer = headers1.findIndex(h => h.includes('DIPERTIMBANGKAN'));
+                    
+                    // Fallback tidak terbalik
+                    if (idxRek === -1) idxRek = 1; 
+                    if (idxPer === -1) idxPer = 2; 
                     
                     for (let i = 1; i < rawJenjangFnp.length; i++) {
                         let row = rawJenjangFnp[i];
                         if (!row || String(row[0] || '').trim() === '') continue;
+                        let rawJenjang = String(row[0]).trim();
+                        if (rawJenjang.toUpperCase() === 'GRAND TOTAL' || rawJenjang.toUpperCase() === 'JENJANG' || rawJenjang.toUpperCase().includes('STATUS')) continue;
+
+                        // Simplifikasi Label (MDNPU, SPV A)
+                        let jenjang = rawJenjang;
+                        if (rawJenjang.toUpperCase().includes('MDNPU')) jenjang = 'MDNPU';
+                        else if (rawJenjang.toUpperCase().includes('SPV A')) jenjang = 'SPV A';
+                        else if (rawJenjang.toUpperCase().includes('SPV D')) jenjang = 'SPV D';
                         
-                        let jenjang = String(row[0]).trim();
                         let valRek = parseInt(row[idxRek]) || 0;
                         let valPer = parseInt(row[idxPer]) || 0;
                         
@@ -1310,76 +1178,47 @@
                     }
                     createFnpJenjangChart('chartJenjangFnp', labelsJenjang, dataDirekomendasikan, dataDipertimbangkan);
                 }
-            } catch (error) {
-                console.error("Error processing FnP Data:", error);
-            }
+            } catch (error) { console.error("Error processing FnP Data:", error); }
         }
 
-        // FUNGSI UNTUK MERENDER CHART STATUS (KLIK UNTUK FILTER)
         function createFnpStatusChart(canvasId, type, labels, data, labelText, color) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
             if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
-
             const isDark = document.documentElement.classList.contains('dark');
             const textColor = isDark ? '#E5E7EB' : '#374151'; 
             const gridColor = isDark ? '#374151' : '#E5E7EB'; 
 
             let config = {
                 type: type,
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: labelText,
-                        data: data,
-                        backgroundColor: color,
-                        borderRadius: 4,
-                        cursor: 'pointer'
-                    }]
-                },
+                data: { labels: labels, datasets: [{ label: labelText, data: data, backgroundColor: color, borderRadius: 4, cursor: 'pointer' }] },
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     onClick: (event, elements, chart) => {
                         if (elements.length > 0) {
                             const index = elements[0].index;
                             const statusLabel = chart.data.labels[index];
-                            
-                            // Logika Filter
-                            window.currentFnpData = allFnpData.filter(item => 
-                                item.status.toUpperCase().includes(statusLabel.toUpperCase())
-                            );
+                            window.currentFnpData = allFnpData.filter(item => item.status.toUpperCase().includes(statusLabel.toUpperCase()));
                             renderFnpTable(window.currentFnpData);
                             document.getElementById('fnpTableTitle').innerText = `Filter Status: ${statusLabel}`;
-                            document.getElementById('fnpTableSubtitle').innerHTML = `Menampilkan data pegawai berstatus ${statusLabel}`;
                             document.getElementById('btnResetFnp').classList.remove('hidden');
                             document.getElementById('fnpDetailSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
                     },
-                    onHover: (event, chartElement) => {
-                        event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
-                    },
-                    plugins: {
-                        legend: { display: false },
-                        datalabels: { color: textColor, font: { weight: 'bold', size: 10 }, anchor: 'end', align: 'top', offset: 4 },
-                        tooltip: { backgroundColor: isDark ? '#1F2937' : '#FFF', titleColor: isDark ? '#FFF' : '#000', bodyColor: isDark ? '#D1D5DB' : '#374151', borderColor: isDark ? '#374151' : '#E5E7EB', borderWidth: 1 }
-                    },
-                    scales: {
-                        y: { beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor }, grace: '15%' },
-                        x: { grid: { display: false }, ticks: { color: textColor, maxRotation: 45, minRotation: 0, font: { size: 10 } } }
-                    }
+                    onHover: (e, el) => { e.native.target.style.cursor = el[0] ? 'pointer' : 'default'; },
+                    plugins: { legend: { display: false }, datalabels: { color: textColor, font: { weight: 'bold', size: 10 }, anchor: 'end', align: 'top', offset: 4 } },
+                    scales: { y: { beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor }, grace: '15%' }, x: { grid: { display: false }, ticks: { color: textColor, maxRotation: 45, minRotation: 0, font: { size: 10 } } } }
                 }
             };
             chartInstances[canvasId] = new Chart(ctx, config);
         }
 
-        // FUNGSI UNTUK MERENDER CHART JENJANG (KLIK UNTUK FILTER)
         function createFnpJenjangChart(canvasId, labels, dataRek, dataPer) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
             if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
-
             const isDark = document.documentElement.classList.contains('dark');
             const textColor = isDark ? '#E5E7EB' : '#374151'; 
             const gridColor = isDark ? '#374151' : '#E5E7EB'; 
@@ -1389,8 +1228,8 @@
                 data: {
                     labels: labels,
                     datasets: [
-                        { label: 'DIREKOMENDASIKAN', data: dataRek, backgroundColor: '#4285F4', cursor: 'pointer' },
-                        { label: 'DIPERTIMBANGKAN', data: dataPer, backgroundColor: '#EA4335', cursor: 'pointer' }
+                        { label: 'DIREKOMENDASIKAN', data: dataRek, backgroundColor: '#10B981', cursor: 'pointer' },
+                        { label: 'DIPERTIMBANGKAN', data: dataPer, backgroundColor: '#EF4444', cursor: 'pointer' }
                     ]
                 },
                 options: {
@@ -1399,53 +1238,50 @@
                         if (elements.length > 0) {
                             const datasetIndex = elements[0].datasetIndex;
                             const index = elements[0].index;
-                            const statusLabel = chart.data.datasets[datasetIndex].label;
-                            const jenjangLabel = chart.data.labels[index];
+                            const statusClicked = chart.data.datasets[datasetIndex].label;
+                            const jenjangClicked = chart.data.labels[index];
                             
-                            // Logika Filter Ganda (Status & Jenjang)
-                            window.currentFnpData = allFnpData.filter(item => 
-                                item.status.toUpperCase().includes(statusLabel.toUpperCase()) &&
-                                item.jenjang.toUpperCase() === jenjangLabel.toUpperCase()
-                            );
+                            window.currentFnpData = allFnpData.filter(item => {
+                                let matchJenjang = false;
+                                let j = String(item.jenjang).toUpperCase();
+                                let clickJ = jenjangClicked.toUpperCase();
+                                
+                                if (clickJ.includes("MDNPU") && j.includes("MDNPU")) matchJenjang = true;
+                                else if (clickJ.includes("SPV A") && (j.includes("SPV A"))) matchJenjang = true;
+                                else if (clickJ.includes("SPV D") && (j.includes("SPV D") || j.includes("SPVD"))) matchJenjang = true;
+                                else if (j.includes(clickJ) || clickJ.includes(j)) matchJenjang = true;
+
+                                let matchStatus = String(item.status).toUpperCase().includes(statusClicked.toUpperCase());
+                                return matchJenjang && matchStatus;
+                            });
                             renderFnpTable(window.currentFnpData);
-                            document.getElementById('fnpTableTitle').innerText = `Filter: Jenjang ${jenjangLabel}`;
-                            document.getElementById('fnpTableSubtitle').innerHTML = `Status: ${statusLabel}`;
+                            document.getElementById('fnpTableTitle').innerText = `Filter: Jenjang ${jenjangClicked} (${statusClicked})`;
                             document.getElementById('btnResetFnp').classList.remove('hidden');
                             document.getElementById('fnpDetailSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
                     },
-                    onHover: (event, chartElement) => {
-                        event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
-                    },
-                    plugins: {
-                        legend: { display: true, position: 'top', labels: { color: textColor, font: { size: 11 } } },
-                        datalabels: { color: '#ffffff', font: { weight: 'bold', size: 10 }, anchor: 'center', align: 'center', formatter: (v) => v > 0 ? v : '' },
-                        tooltip: { backgroundColor: isDark ? '#1F2937' : '#FFF', titleColor: isDark ? '#FFF' : '#000', bodyColor: isDark ? '#D1D5DB' : '#374151' }
-                    },
-                    scales: {
-                        y: { stacked: true, beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor } },
-                        x: { stacked: true, grid: { display: false }, ticks: { color: textColor, maxRotation: 45, minRotation: 0, font: { size: 10 } } }
-                    }
+                    onHover: (e, el) => { e.native.target.style.cursor = el[0] ? 'pointer' : 'default'; },
+                    plugins: { legend: { display: true, position: 'top', labels: { color: textColor, font: { size: 11 } } }, datalabels: { color: '#ffffff', font: { weight: 'bold', size: 10 }, anchor: 'center', align: 'center', formatter: (v) => v > 0 ? v : '' } },
+                    scales: { y: { stacked: true, beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor } }, x: { stacked: true, grid: { display: false }, ticks: { color: textColor, maxRotation: 45, minRotation: 0, font: { size: 10 } } } }
                 }
             };
             chartInstances[canvasId] = new Chart(ctx, config);
         }
 
-        // FUNGSI UNTUK MERENDER TABEL FNP
         function renderFnpTable(dataToRender) {
             let tbody = document.getElementById('tableFnpBody');
             if (!tbody) return;
             tbody.innerHTML = '';
             
             if (dataToRender.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="10" class="text-center py-8 text-gray-500 font-medium bg-gray-50 dark:bg-gray-800/50">Tidak ada data pegawai yang sesuai.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="10" class="text-center py-8 text-gray-500 font-medium bg-gray-50 dark:bg-gray-800/50">Tidak ada data pegawai.</td></tr>`;
                 return;
             }
             
             dataToRender.forEach((m, index) => {
                 let rowBg = index % 2 === 0 ? 'bg-white dark:bg-pln-cardDark' : 'bg-gray-50 dark:bg-gray-800/60';
                 let isRekomendasi = m.status.toUpperCase().includes('DIREKOMENDASIKAN');
-                let statusBadge = isRekomendasi ? 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400' : 'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-400';
+                let statusBadge = isRekomendasi ? 'bg-green-100 text-green-800 border-green-200 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-400';
 
                 let tr = document.createElement('tr');
                 tr.className = `hover:bg-pln-green/5 dark:hover:bg-pln-cyan/10 transition-colors ${rowBg}`;
@@ -1459,9 +1295,7 @@
                     <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50 whitespace-normal min-w-[200px] text-gray-600 dark:text-gray-400">${m.jabatanProyeksi}</td>
                     <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50 text-center font-bold text-gray-800 dark:text-gray-200">${m.nilai}</td>
                     <td class="px-6 py-4 border-r border-gray-100 dark:border-gray-700/50 text-center">
-                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full border ${statusBadge}">
-                            ${m.status}
-                        </span>
+                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full border ${statusBadge}">${m.status}</span>
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-600 dark:text-gray-400">${m.tanggal}</td>
                 `;
@@ -1469,21 +1303,15 @@
             });
         }
 
-        // FUNGSI UNTUK RESET FILTER FNP
         function resetFnpFilter() {
             window.currentFnpData = [...allFnpData];
             renderFnpTable(window.currentFnpData);
             document.getElementById('fnpTableTitle').innerText = "Daftar Pegawai FnP";
-            document.getElementById('fnpTableSubtitle').innerHTML = "Semua data Talent Ready";
             document.getElementById('btnResetFnp').classList.add('hidden');
         }
 
-        // FUNGSI UNTUK EXPORT DATA FNP KE EXCEL
         window.exportFnpToExcel = function() {
-            if (!window.currentFnpData || window.currentFnpData.length === 0) {
-                showToast("Data FnP kosong!"); return;
-            }
-            showToast('Menyiapkan file Excel...');
+            if (!window.currentFnpData || window.currentFnpData.length === 0) return;
             let exportData = [['No', 'NIP', 'Nama', 'Jabatan Saat Ini', 'Unit', 'Jenjang Proyeksi', 'Jabatan Proyeksi', 'Nilai', 'Status', 'Tanggal']];
             window.currentFnpData.forEach((m, index) => {
                 exportData.push([index + 1, m.nip, m.nama, m.jabatan, m.unit, m.jenjang, m.jabatanProyeksi, m.nilai, m.status, m.tanggal]);
@@ -1493,12 +1321,10 @@
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "Talent_Ready_FnP");
                 XLSX.writeFile(wb, "Data_Pegawai_FnP.xlsx");
-                setTimeout(() => showToast('Berhasil mengunduh Excel!'), 1000);
-            } catch(e) {
-                showToast("Terjadi kesalahan saat mengekspor Excel.");
-            }
+            } catch(e) {}
         };
 
+        // ================= 5 MENU ANALISA JABATAN (DIRESTORASI) =================
         function generateKalijabatHTML(idPrefix, titleFull, titleShort, filterLabel) {
             return `
                 <div class="bg-pln-green/10 dark:bg-pln-green/5 border border-pln-green/20 p-4 rounded-xl mb-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
@@ -1519,7 +1345,7 @@
                 <div class="bg-white dark:bg-pln-cardDark rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden flex flex-col mb-6">
                     <div class="overflow-x-auto overflow-y-auto custom-scrollbar" style="max-height: 500px;">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                            <thead class="text-xs uppercase sticky top-0 shadow-sm z-20">
+                            <thead class="text-xs uppercase sticky top-0 shadow-sm z-20 bg-white dark:bg-gray-800">
                                 <tr>
                                     <th class="px-5 py-4 font-bold border-r border-gray-200 dark:border-gray-600 w-16 text-center">No</th>
                                     <th class="px-5 py-4 font-bold border-r border-gray-200 dark:border-gray-600 min-w-[250px]">Nama Pegawai ${titleShort}</th>
@@ -1551,7 +1377,7 @@
                     <div class="p-0 sm:p-6">
                         <div class="overflow-x-auto sm:rounded-xl border-t sm:border border-gray-200 dark:border-gray-700">
                             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                                <thead class="text-xs uppercase sticky top-0 shadow-sm z-10">
+                                <thead class="text-xs uppercase sticky top-0 shadow-sm z-10 bg-white dark:bg-gray-800">
                                     <tr>
                                         <th class="px-5 py-4 w-20 text-center font-bold border-r border-gray-200 dark:border-gray-600">Urutan</th>
                                         <th class="px-5 py-4 font-bold border-r border-gray-200 dark:border-gray-600">Nama Jabatan (Kolom F dst)</th>
@@ -1571,14 +1397,10 @@
         function createKalijabatLogic(containerId, idPrefix, rawDataKalijabat, rawDataRjab, sheetNameSuffix) {
             const container = document.getElementById(containerId);
             if(!container) return;
-            if (!rawDataKalijabat || rawDataKalijabat.length < 2) {
-                container.innerHTML = `<div class="p-4 bg-red-100 text-red-700 rounded-xl">Terjadi kesalahan: Data tidak ditemukan.</div>`;
-                return;
-            }
+            if (!rawDataKalijabat || rawDataKalijabat.length < 2) return;
 
             const rows = rawDataKalijabat.slice(1);
             let idxNama = 2, idxUnit = 1, idxJabatan = 3, idxKali = 4, historyStartIdx = 5;
-
             let uniqueKali = new Set();
             rows.forEach(r => { let k = parseInt(r[idxKali]); if(!isNaN(k)) uniqueKali.add(k); });
             let sortedKali = Array.from(uniqueKali).sort((a, b) => b - a);
@@ -1593,18 +1415,17 @@
             window[`current${idPrefix}HistoryName`] = "";
 
             window[`export${idPrefix}ToExcel`] = function() {
-                if (window[`current${idPrefix}Data`].length === 0) { showToast("Data kosong!"); return; }
+                if (window[`current${idPrefix}Data`].length === 0) return;
                 let exportData = [['No', 'Nama Pegawai', 'Nama Unit', 'Jabatan Saat Ini', 'Kali Jabat']].concat(window[`current${idPrefix}Data`]);
                 try {
                     const wb = XLSX.utils.book_new();
                     XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(exportData), "Data");
                     XLSX.writeFile(wb, `Data_Kali_Jabat_${sheetNameSuffix}.xlsx`);
-                    showToast('Berhasil mengunduh Excel!');
-                } catch(e) { showToast("Error ekspor Excel."); }
+                } catch(e) {}
             };
 
             window[`export${idPrefix}HistoryToExcel`] = function() {
-                if (window[`current${idPrefix}HistoryData`].length === 0) { showToast("Riwayat kosong!"); return; }
+                if (window[`current${idPrefix}HistoryData`].length === 0) return;
                 let exportData = [['Urutan', 'Nama Jabatan', 'Nama Unit', 'Start Date', 'End Date']];
                 window[`current${idPrefix}HistoryData`].forEach((item, idx) => exportData.push([idx + 1, item.jabatan, item.unit, item.startDate, item.endDate]));
                 try {
@@ -1612,8 +1433,7 @@
                     let safeName = window[`current${idPrefix}HistoryName`].replace(/[^a-zA-Z0-9 ]/g, "").trim();
                     XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(exportData), "Riwayat");
                     XLSX.writeFile(wb, `Riwayat_${sheetNameSuffix}_${safeName}.xlsx`);
-                    showToast('Berhasil mengunduh Excel!');
-                } catch(e) { showToast("Error ekspor Excel."); }
+                } catch(e) {}
             };
 
             window[`show${idPrefix}History`] = function(globalIndex) {
@@ -1710,9 +1530,7 @@
                                     <td class="px-5 py-4 text-center font-bold text-pln-green bg-pln-green/5">${kjStr} Kali</td>`;
                     tbody.appendChild(tr);
                 });
-                if(count === 0) tbody.innerHTML = `<tr><td colspan="5" class="text-center py-6">Tidak ada data.</td></tr>`;
             };
-
             filterSelect.addEventListener('change', e => window[`render${idPrefix}Table`](e.target.value));
             window[`render${idPrefix}Table`]('all');
         }
@@ -1747,7 +1565,7 @@
                 </div>
                 <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700 max-h-[500px]">
                     <table class="w-full text-sm text-left whitespace-nowrap">
-                        <thead class="text-xs uppercase sticky top-0 shadow-sm z-10">
+                        <thead class="text-xs uppercase sticky top-0 shadow-sm z-10 bg-white dark:bg-gray-800">
                             <tr><th class="px-5 py-4">No</th><th class="px-5 py-4">NIP</th><th class="px-5 py-4">Nama Pegawai</th><th class="px-5 py-4">PeG</th><th class="px-5 py-4">PoG</th><th class="px-5 py-4">Jabatan</th></tr>
                         </thead>
                         <tbody id="pegpog-tbody" class="bg-white dark:bg-gray-800"></tbody>
@@ -1771,7 +1589,6 @@
                     tbody.appendChild(tr);
                 }
             });
-            if (count === 0) tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6">Tidak ada anomali.</td></tr>`;
         }
 
         function createChart(canvasId, type, labels, data, labelText = 'Data', color = '#00A2B9') {
@@ -1821,49 +1638,12 @@
                     }
                 }
             };
-
             if (type === 'bar' || type === 'line') {
                 config.options.scales = {
                     y: { beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor }, grace: '15%' },
                     x: { grid: { display: false }, ticks: { color: textColor, maxRotation: 45, minRotation: 0, font: { size: 10 } } }
                 };
             }
-
-            chartInstances[canvasId] = new Chart(ctx, config);
-        }
-
-        function createStackedBarChart(canvasId, labels, dataRek, dataPer) {
-            const canvas = document.getElementById(canvasId);
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
-
-            const isDark = document.documentElement.classList.contains('dark');
-            const textColor = isDark ? '#E5E7EB' : '#374151'; 
-            const gridColor = isDark ? '#374151' : '#E5E7EB'; 
-
-            let config = {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        { label: 'DIREKOMENDASIKAN', data: dataRek, backgroundColor: '#4285F4' },
-                        { label: 'DIPERTIMBANGKAN', data: dataPer, backgroundColor: '#EA4335' }
-                    ]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: true, position: 'top', labels: { color: textColor, font: { size: 11 } } },
-                        datalabels: { color: '#ffffff', font: { weight: 'bold', size: 10 }, anchor: 'center', align: 'center', formatter: (v) => v > 0 ? v : '' },
-                        tooltip: { backgroundColor: isDark ? '#1F2937' : '#FFF', titleColor: isDark ? '#FFF' : '#000', bodyColor: isDark ? '#D1D5DB' : '#374151' }
-                    },
-                    scales: {
-                        y: { stacked: true, beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor } },
-                        x: { stacked: true, grid: { display: false }, ticks: { color: textColor, maxRotation: 45, minRotation: 0, font: { size: 10 } } }
-                    }
-                }
-            };
             chartInstances[canvasId] = new Chart(ctx, config);
         }
 
@@ -1871,7 +1651,6 @@
             ['dashboard', 'mobility', 'ftk', 'fnp', 'kalijabat', 'kalijabata', 'kalijabatpu', 'kalijabatmdnpu', 'pegpog', 'setting'].forEach(id => {
                 const pageEl = document.getElementById(`page-${id}`);
                 const navEl = document.getElementById(`nav-${id}`);
-                
                 if (pageEl) pageEl.classList.add('hidden');
                 if (navEl) {
                     navEl.classList.remove('bg-pln-green/10', 'text-pln-darkGreen', 'dark:bg-pln-green/20', 'dark:text-pln-cyan', 'font-bold');
@@ -1949,16 +1728,6 @@
                         localStorage.theme = 'light';
                         if (themeIcon) themeIcon.classList.replace('fa-sun', 'fa-moon');
                     }
-                    
-                    if(typeof processDashboardData === 'function') processDashboardData();
-                    if(typeof processMobilityData === 'function') processMobilityData();
-                    if(typeof processFTKData === 'function') processFTKData();
-                    if(typeof processKalijabatData === 'function') processKalijabatData();
-                    if(typeof processKalijabatAData === 'function') processKalijabatAData();
-                    if(typeof processKalijabatPUData === 'function') processKalijabatPUData();
-                    if(typeof processKalijabatMDNPUData === 'function') processKalijabatMDNPUData();
-                    if(typeof processPegPogData === 'function') processPegPogData();
-                    if(typeof processFnpData === 'function') processFnpData();
                 });
             }
         }
