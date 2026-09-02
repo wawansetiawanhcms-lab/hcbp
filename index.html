@@ -88,6 +88,9 @@
         #loader p{color:var(--pln-blue)!important}
         @media(max-width:1024px){#main-app .flex-1.overflow-y-auto{padding:20px!important}}
         @media(max-width:640px){#main-app .flex-1.overflow-y-auto{padding:14px!important}#page-title{font-size:18px!important}}
+        
+        /* Tambahan untuk mencegah teks bertumpuk di header transpose pivot */
+        #gradePivotHead th { white-space: nowrap; padding-left: 0.5rem; padding-right: 0.5rem; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-pln-dark dark:text-gray-200">
@@ -156,6 +159,9 @@
                     </button>
                     <button onclick="navigate('fnp')" id="nav-fnp" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white rounded-xl font-semibold transition-all border border-transparent">
                         <i class="fas fa-balance-scale w-5 text-center"></i> <span>Monev FnP</span>
+                    </button>
+                    <button onclick="navigate('grade')" id="nav-grade" class="nav-btn w-full flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white rounded-xl font-semibold transition-all border border-transparent">
+                        <i class="fas fa-table w-5 text-center"></i> <span>Monev Grade</span>
                     </button>
 
                     <p class="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-6">Analisa Jabatan</p>
@@ -441,30 +447,53 @@
                     </div>
                 </div>
 
-                <!-- Kali Jabat SPVD Page -->
-                <div id="page-kalijabat" class="hidden space-y-6">
-                    <!-- Konten digenerate oleh proses JS -->
-                </div>
-                
-                <!-- Kali Jabat SPVA NPU Page -->
-                <div id="page-kalijabata" class="hidden space-y-6">
-                    <!-- Konten digenerate oleh proses JS -->
-                </div>
-                
-                <!-- Kali Jabat SPVA PU Page -->
-                <div id="page-kalijabatpu" class="hidden space-y-6">
-                    <!-- Konten digenerate oleh proses JS -->
-                </div>
-                
-                <!-- Kali Jabat MDNPU Page -->
-                <div id="page-kalijabatmdnpu" class="hidden space-y-6">
-                    <!-- Konten digenerate oleh proses JS -->
+                <div id="page-grade" class="hidden space-y-6">
+                    <div class="bg-white dark:bg-pln-cardDark p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                        
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 dark:text-white"><i class="fas fa-table text-pln-cyan mr-2"></i>Pivot Table Monev Grade</h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Analisa jumlah pegawai (Count) berdasarkan kategori jabatan dan level/grade.</p>
+                            </div>
+                            <div class="flex items-center gap-3 bg-gray-50 dark:bg-gray-800 px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm w-full sm:w-auto">
+                                <label for="filterGrade" class="text-sm font-bold text-gray-700 dark:text-gray-300 whitespace-nowrap"><i class="fas fa-filter mr-1 text-pln-green"></i> Filter Kategori:</label>
+                                <select id="filterGrade" onchange="renderGradePivot()" class="bg-transparent border-0 text-gray-900 text-sm focus:ring-0 block w-full p-0.5 dark:text-white font-semibold cursor-pointer outline-none">
+                                    <option value="all">Memuat Filter...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="border-b border-gray-200 dark:border-gray-700 mb-5">
+                            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400" id="gradeTabs">
+                                <li class="mr-2">
+                                    <a href="javascript:void(0)" onclick="switchGradeTab('Generalis')" id="tab-Generalis" class="inline-block p-4 text-pln-blue border-b-2 border-pln-blue rounded-t-lg active dark:text-pln-cyan dark:border-pln-cyan font-bold transition-all">Generalis</a>
+                                </li>
+                                <li class="mr-2">
+                                    <a href="javascript:void(0)" onclick="switchGradeTab('Fungsional')" id="tab-Fungsional" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 transition-all font-medium">Fungsional</a>
+                                </li>
+                                <li class="mr-2">
+                                    <a href="javascript:void(0)" onclick="switchGradeTab('Struktural')" id="tab-Struktural" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 transition-all font-medium">Struktural</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="overflow-x-auto overflow-y-auto border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm bg-white dark:bg-gray-800 custom-scrollbar" style="max-height: 600px;">
+                            <table class="w-full text-sm text-left text-gray-800 dark:text-gray-200 border-collapse" style="font-family: Arial, sans-serif;">
+                                <thead id="gradePivotHead" class="text-xs uppercase sticky top-0 shadow-md z-10 bg-gray-200 dark:bg-gray-700">
+                                </thead>
+                                <tbody id="gradePivotBody" class="divide-y divide-gray-300 dark:divide-gray-600">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- PeG > PoG Page -->
-                <div id="page-pegpog" class="hidden space-y-6">
-                    <!-- Konten digenerate oleh proses JS -->
-                </div>
+                <!-- 5 MENU ANALISA JABATAN (DIRESTORASI) -->
+                <div id="page-kalijabat" class="hidden space-y-6"></div>
+                <div id="page-kalijabata" class="hidden space-y-6"></div>
+                <div id="page-kalijabatpu" class="hidden space-y-6"></div>
+                <div id="page-kalijabatmdnpu" class="hidden space-y-6"></div>
+                <div id="page-pegpog" class="hidden space-y-6"></div>
 
                 <div id="page-setting" class="hidden max-w-4xl mx-auto space-y-6">
                     <div class="bg-white dark:bg-pln-cardDark rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
@@ -485,28 +514,15 @@
                                         <label class="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-2">Password Baru</label>
                                         <input type="password" id="new-password" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#00A2B9] outline-none">
                                     </div>
-                                    <button type="submit" id="btn-add-user" class="w-full sm:w-auto whitespace-nowrap bg-[#00A2B9] hover:bg-[#007A8C] text-white font-bold py-2.5 px-6 rounded-lg shadow-sm transition-transform transform hover:-translate-y-0.5">
+                                    <button type="submit" id="btn-add-user" class="w-full sm:w-auto px-6 py-2.5 bg-[#00A2B9] hover:bg-[#007A8C] text-white font-bold rounded-lg shadow-md transition-transform transform hover:-translate-y-0.5 whitespace-nowrap flex items-center justify-center gap-2">
                                         <i class="fas fa-user-plus"></i> Simpan
                                     </button>
                                 </form>
-                                <p class="text-xs text-gray-500 mt-3">*User yang ditambahkan akan disinkronisasikan ke Sheet "user".</p>
-                            </div>
-
-                            <hr class="border-gray-200 dark:border-gray-700">
-
-                            <div>
-                                <h4 class="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider mb-3">Ekspor Data & Sistem</h4>
-                                <div class="flex flex-wrap gap-4">
-                                    <button onclick="showToast('Mengunduh Excel Data Pegawai...')" class="flex items-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium shadow-sm"><i class="fas fa-file-excel"></i> Simpan Data Excel</button>
-                                    <button onclick="showToast('Menyiapkan Laporan Analisis Mendalam...')" class="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium shadow-sm"><i class="fas fa-file-pdf"></i> Cetak Laporan Analisis</button>
-                                    <button onclick="showToast('Membuat file Backup .sql...')" class="flex items-center gap-2 px-5 py-2.5 bg-gray-800 hover:bg-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 text-white rounded-lg font-medium shadow-sm"><i class="fas fa-database"></i> Backup Sistem</button>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                </div>
                 <div id="toast" class="fixed bottom-4 right-4 bg-gray-900 text-white px-6 py-3 rounded-xl shadow-2xl transform transition-transform translate-y-20 opacity-0 z-[110] flex items-center gap-3 font-medium">
                     <i class="fas fa-info-circle text-pln-cyan"></i>
                     <span id="toastMsg">Pesan di sini</span>
@@ -542,6 +558,7 @@
         // Variabel global untuk FnP
         let allFnpData = [];
         window.currentFnpData = [];
+        let currentGradeTab = 'Generalis';
 
         Chart.register(ChartDataLabels);
 
@@ -658,7 +675,7 @@
             try {
                 const hashedPassword = await hashPassword(pass);
                 // URL API Google Apps Script untuk POST
-                const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxlA1I4vj3jHmv7JgGEiBML0mwzWKDIxXvrjIqZl90gu0cN6qz1gFWgil4pegWVA1rN1w/exec"; 
+                const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyGrTu74105mJxJ0_IfOdRBcuLVnUK4NBE05XBuG2khw5RI5JGWL-m8gJqGhc67UHJ5xg/exec"; 
                 
                 const formData = new FormData();
                 formData.append('username', user);
@@ -753,31 +770,17 @@
                 document.getElementById('loader').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('loader').style.display = 'none';
-                    if(rawPegawai.length > 0) {
-                        processDashboardData();
-                        processMobilityData();
-                    }
-                    if(rawFTK.length > 0) {
-                        processFTKData();
-                    }
-                    if(rawKalijabat.length > 0) {
-                        processKalijabatData();
-                    }
-                    if(rawKalijabatA.length > 0) {
-                        processKalijabatAData();
-                    }
-                    if(rawKalijabatMul.length > 0) {
-                        processKalijabatPUData();
-                    }
-                    if(rawKalijabatMsb.length > 0) {
-                        processKalijabatMDNPUData();
-                    }
+                    if(rawPegawai.length > 0) { processDashboardData(); processMobilityData(); }
+                    if(rawFTK.length > 0) processFTKData();
+                    if(rawKalijabat.length > 0) processKalijabatData();
+                    if(rawKalijabatA.length > 0) processKalijabatAData();
+                    if(rawKalijabatMul.length > 0) processKalijabatPUData();
+                    if(rawKalijabatMsb.length > 0) processKalijabatMDNPUData();
                     if(rawAnomali.length > 0) {
                         processPegPogData();
+                        processGradeData();
                     }
-                    if(rawStatusFnp.length > 0 || rawJenjangFnp.length > 0) {
-                        processFnpData();
-                    }
+                    if(rawStatusFnp.length > 0 || rawJenjangFnp.length > 0) processFnpData();
                 }, 300);
             } catch (error) {
                 console.error("Terjadi error saat load data utama:", error);
@@ -1428,7 +1431,7 @@
                                 let clickJ = jenjangClicked.toUpperCase();
                                 
                                 if (clickJ.includes("MDNPU") && j.includes("MDNPU")) matchJenjang = true;
-                                else if (clickJ.includes("SPV A") && (j.includes("SPV A") || j.includes("SPVA"))) matchJenjang = true;
+                                else if (clickJ.includes("SPV A") && (j.includes("SPV A"))) matchJenjang = true;
                                 else if (clickJ.includes("SPV D") && (j.includes("SPV D") || j.includes("SPVD"))) matchJenjang = true;
                                 else if (j.includes(clickJ) || clickJ.includes(j)) matchJenjang = true;
 
@@ -1824,6 +1827,174 @@
             if (count === 0) tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6">Tidak ada anomali.</td></tr>`;
         }
 
+        // ================= PERBAIKAN FITUR MONEV GRADE =================
+        function processGradeData() {
+            if (!rawAnomali || rawAnomali.length < 2) return;
+            
+            // Ekstraksi nilai unik untuk Dropdown Filter dari Kolom H (Indeks 7)
+            const rows = rawAnomali.slice(1);
+            let uniqueFilterH = new Set();
+            rows.forEach(r => {
+                let valH = String(r[7] || '').trim();
+                if(valH) uniqueFilterH.add(valH);
+            });
+            
+            let filterSelect = document.getElementById('filterGrade');
+            if (filterSelect) {
+                let optionsHtml = `<option value="all">Semua Kategori (Kolom H)</option>`;
+                Array.from(uniqueFilterH).sort().forEach(val => {
+                    optionsHtml += `<option value="${val}">${val}</option>`;
+                });
+                filterSelect.innerHTML = optionsHtml;
+            }
+            
+            renderGradePivot();
+        }
+        
+        window.switchGradeTab = function(tabName) {
+            currentGradeTab = tabName;
+            ['Generalis', 'Fungsional', 'Struktural'].forEach(t => {
+                const el = document.getElementById(`tab-${t}`);
+                if (el) {
+                    if (t === tabName) {
+                        el.className = "inline-block p-4 text-pln-blue border-b-2 border-pln-blue rounded-t-lg active dark:text-pln-cyan dark:border-pln-cyan font-bold transition-all";
+                    } else {
+                        el.className = "inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 font-medium transition-all";
+                    }
+                }
+            });
+            renderGradePivot();
+        };
+        
+        window.renderGradePivot = function() {
+            if (!rawAnomali || rawAnomali.length < 2) return;
+            const filterH = document.getElementById('filterGrade').value;
+            const rows = rawAnomali.slice(1);
+            
+            // INDEKS YANG DIGUNAKAN (Sesuai Konfirmasi):
+            // Count Val      = Kolom B (Indeks 1)
+            // Kolom Transpose = Kolom E (Indeks 4)
+            // Filter Dropdown= Kolom H (Indeks 7)
+            // Tab Filter     = Kolom L (Indeks 11) - SEBELUMNYA INDEKS 2
+            // Row 1          = Kolom M (Indeks 12)
+            // Row 2          = Kolom D (Indeks 3)
+            
+            let filteredRows = rows.filter(r => {
+                // Filter Tab (Kolom L)
+                let valL = String(r[11] || '').trim();
+                if (!valL.toUpperCase().includes(currentGradeTab.toUpperCase())) return false;
+                
+                // Filter Dropdown (Kolom H)
+                if (filterH !== 'all') {
+                    let valH = String(r[7] || '').trim();
+                    if (valH !== filterH) return false;
+                }
+                return true;
+            });
+            
+            let colsSet = new Set();
+            let pivotData = {}; 
+            
+            filteredRows.forEach(r => {
+                let valM = String(r[12] || '(Kosong)').trim();
+                let valD = String(r[3] || '(Kosong)').trim();
+                let valE = String(r[4] || '(Kosong)').trim();
+                let valB = String(r[1] || '').trim();
+                
+                colsSet.add(valE);
+                
+                if(!pivotData[valM]) pivotData[valM] = {};
+                if(!pivotData[valM][valD]) pivotData[valM][valD] = {};
+                if(!pivotData[valM][valD][valE]) pivotData[valM][valD][valE] = 0;
+                
+                // Count jika Kolom B ada isinya
+                if(valB !== '') {
+                    pivotData[valM][valD][valE]++;
+                }
+            });
+            
+            let cols = Array.from(colsSet).sort();
+            
+            // Render Table Head
+            let headHtml = `
+                <tr>
+                    <th class="px-4 py-3 border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 min-w-[150px] font-bold text-center">Grade Level<br>(Kolom M)</th>
+                    <th class="px-4 py-3 border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 min-w-[200px] font-bold text-center">Kategori/Profesi<br>(Kolom D)</th>
+                    ${cols.map(c => `<th class="px-4 py-3 border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 text-center font-bold">${c}</th>`).join('')}
+                    <th class="px-4 py-3 border border-gray-300 dark:border-gray-600 bg-gray-300 dark:bg-gray-600 text-center font-extrabold text-pln-blue dark:text-pln-cyan">Grand Total</th>
+                </tr>
+            `;
+            document.getElementById('gradePivotHead').innerHTML = headHtml;
+            
+            // Render Table Body
+            let bodyHtml = '';
+            let sortedM = Object.keys(pivotData).sort();
+            
+            let grandTotalCols = {};
+            cols.forEach(c => grandTotalCols[c] = 0);
+            let absoluteTotal = 0;
+            
+            if (sortedM.length === 0) {
+                bodyHtml = `<tr><td colspan="${cols.length + 3}" class="px-4 py-8 text-center text-gray-500 font-medium bg-white dark:bg-gray-800">Tidak ada data untuk Kategori ${currentGradeTab}.</td></tr>`;
+            } else {
+                sortedM.forEach(m => {
+                    let sortedD = Object.keys(pivotData[m]).sort();
+                    sortedD.forEach((d, idx) => {
+                        let rowTotal = 0;
+                        let cellsHtml = cols.map(c => {
+                            let count = pivotData[m][d][c] || 0;
+                            rowTotal += count;
+                            grandTotalCols[c] += count;
+                            
+                            // Logika Anomali Grade: Merah jika (Kolom D) > (Kolom E)
+                            let valD = parseInt(d);
+                            let valE = parseInt(c);
+                            let isAnomaly = (!isNaN(valD) && !isNaN(valE) && valD > valE);
+                            
+                            let cellClasses = 'text-gray-400 dark:text-gray-500';
+                            if (count > 0) {
+                                if (isAnomaly) {
+                                    cellClasses = 'bg-red-100 text-red-800 font-bold dark:bg-red-900/50 dark:text-red-400 shadow-inner';
+                                } else {
+                                    cellClasses = 'font-semibold text-gray-900 dark:text-white';
+                                }
+                            }
+                            
+                            return `<td class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-center ${cellClasses}">${count > 0 ? count : '-'}</td>`;
+                        }).join('');
+                        
+                        absoluteTotal += rowTotal;
+                        
+                        // Logika Rowspan untuk Kolom M
+                        let mCell = '';
+                        if (idx === 0) {
+                            mCell = `<td rowspan="${sortedD.length}" class="px-4 py-2 border border-gray-300 dark:border-gray-600 font-bold bg-white dark:bg-gray-800 align-top text-center">${m}</td>`;
+                        }
+                        
+                        bodyHtml += `
+                            <tr class="hover:bg-pln-green/5 dark:hover:bg-pln-cyan/10 transition-colors bg-white dark:bg-gray-800/80">
+                                ${mCell}
+                                <td class="px-4 py-2 border border-gray-300 dark:border-gray-600 font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">${d}</td>
+                                ${cellsHtml}
+                                <td class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-center font-bold bg-gray-50 dark:bg-gray-700">${rowTotal}</td>
+                            </tr>
+                        `;
+                    });
+                });
+                
+                // Add Grand Total Bottom Row
+                bodyHtml += `
+                    <tr class="font-bold bg-gray-200 dark:bg-gray-700 uppercase text-xs tracking-wider">
+                        <td colspan="2" class="px-4 py-4 border border-gray-300 dark:border-gray-600 text-right text-gray-800 dark:text-gray-200">Total Keseluruhan</td>
+                        ${cols.map(c => `<td class="px-4 py-4 border border-gray-300 dark:border-gray-600 text-center text-pln-blue dark:text-pln-cyan">${grandTotalCols[c]}</td>`).join('')}
+                        <td class="px-4 py-4 border border-gray-300 dark:border-gray-600 text-center bg-gray-300 dark:bg-gray-600 text-lg text-pln-blue dark:text-pln-cyan">${absoluteTotal}</td>
+                    </tr>
+                `;
+            }
+            
+            document.getElementById('gradePivotBody').innerHTML = bodyHtml;
+        };
+
         function createChart(canvasId, type, labels, data, labelText = 'Data', color = '#00A2B9') {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
@@ -1881,10 +2052,9 @@
         }
 
         function navigate(pageId) {
-            ['dashboard', 'mobility', 'ftk', 'fnp', 'kalijabat', 'kalijabata', 'kalijabatpu', 'kalijabatmdnpu', 'pegpog', 'setting'].forEach(id => {
+            ['dashboard', 'mobility', 'ftk', 'fnp', 'grade', 'kalijabat', 'kalijabata', 'kalijabatpu', 'kalijabatmdnpu', 'pegpog', 'setting'].forEach(id => {
                 const pageEl = document.getElementById(`page-${id}`);
                 const navEl = document.getElementById(`nav-${id}`);
-                
                 if (pageEl) pageEl.classList.add('hidden');
                 if (navEl) {
                     navEl.classList.remove('bg-pln-green/10', 'text-pln-darkGreen', 'dark:bg-pln-green/20', 'dark:text-pln-cyan', 'font-bold');
@@ -1902,7 +2072,7 @@
             }
             
             const titles = { 
-                'dashboard': 'Dashboard Utama', 'mobility': 'Monev Mobility', 'ftk': 'Monev Pemenuhan FTK', 'fnp': 'Monev Fit and Proper (FnP)',
+                'dashboard': 'Dashboard Utama', 'mobility': 'Monev Mobility', 'ftk': 'Monev Pemenuhan FTK', 'fnp': 'Monev Fit and Proper (FnP)', 'grade': 'Pivot Table Monev Grade',
                 'kalijabat': 'Monev Kali Jabat SPVD', 'kalijabata': 'Monev Kali Jabat SPVA NPU', 'kalijabatpu': 'Monev Kali Jabat SPVA PU',
                 'kalijabatmdnpu': 'Monev Kali Jabat MDNPU', 'pegpog': 'Daftar Anomali PeG > PoG', 'setting': 'Pengaturan Sistem' 
             };
